@@ -67,9 +67,7 @@
 <script>
   var player;
   player = new MediaElementPlayer('audio', {alwaysShowControls: true});
-  player.setCurrentTime(100);
+  player.setCurrentTime(0);
   player.pause();
-  setTimeout(function(){
-    console.log(player.currentTime);
-  }, 2000);
+  console.log(player.currentTime);
 </script>

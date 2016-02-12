@@ -2,7 +2,6 @@ class Comment < ActiveRecord::Base
   belongs_to :message
   belongs_to :user
 
-
   before_create :resolve
   after_commit { CommentRelayJob.perform_later(self) }
 
