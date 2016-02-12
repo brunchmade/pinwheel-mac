@@ -3,5 +3,6 @@
 
 wells   = User.create! name: 'Wells Riley'
 baldwin = User.create! name: 'Alex Baldwin'
+abby = User.create! name: 'Abby Culin'
 
 Message.create! title: 'Simple Casual', content: 'Keep it simple, keep it casual', user: baldwin
