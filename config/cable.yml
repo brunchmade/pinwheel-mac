@@ -1,8 +1,8 @@
-production:
+production: &production
+  adapter: redis
   url: redis://h:p5451c9bsv7b4k3oqkg17ekft76@ec2-54-227-246-40.compute-1.amazonaws.com:21569
-
 local: &local
+  adapter: redis
   url: redis://localhost:6379
-
 development: *local
 test: *local
