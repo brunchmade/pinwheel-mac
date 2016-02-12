@@ -1,2 +1,2 @@
-$('#comments').append('<%=j render @comment %>');
+$('#comments').prepend('<%=j render @comment %>');
 $('#new_comment').replaceWith('<%=j render 'comments/new', message: @message %>');
