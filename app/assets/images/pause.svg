@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="29px" height="38px" viewBox="0 0 29 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.5.2 (25235) - http://www.bohemiancoding.com/sketch -->
+    <title>pause</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Artboard-1" sketch:type="MSArtboardGroup" transform="translate(-1866.000000, -1090.000000)" fill="#000000">
+            <g id="Light-Vibrant-Blur" sketch:type="MSLayerGroup" transform="translate(1480.000000, 360.000000)">
+                <path d="M386,731.501349 C386,730.672177 386.668345,730 387.508126,730 L395.176085,730 C396.009,730 396.684211,730.675689 396.684211,731.501349 L396.684211,766.498651 C396.684211,767.327823 396.015865,768 395.176085,768 L387.508126,768 C386.675211,768 386,767.324311 386,766.498651 L386,731.501349 Z M404.315789,731.501349 C404.315789,730.672177 404.984135,730 405.823915,730 L413.491874,730 C414.324789,730 415,730.675689 415,731.501349 L415,766.498651 C415,767.327823 414.331655,768 413.491874,768 L405.823915,768 C404.991,768 404.315789,767.324311 404.315789,766.498651 L404.315789,731.501349 Z" id="pause" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

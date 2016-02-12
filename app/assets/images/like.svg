@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="31px" height="28px" viewBox="0 0 31 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.5.2 (25235) - http://www.bohemiancoding.com/sketch -->
+    <title>like</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Artboard-1" sketch:type="MSArtboardGroup" transform="translate(-1757.000000, -1095.000000)" stroke="#000000" stroke-width="1.5">
+            <g id="Light-Vibrant-Blur" sketch:type="MSLayerGroup" transform="translate(1480.000000, 360.000000)">
+                <path d="M291.886364,740.846618 C290.819114,738.576351 288.472829,737 285.75,737 C282.022078,737 279,739.954921 279,743.6 C279,743.740044 279.004461,743.879069 279.013251,744.016947 C279.004448,744.170559 279,744.331481 279,744.5 C279,750.71211 291.509133,761 292.5,761 C292.677415,761 306,751.032716 306,744.5 C306,744.347753 305.994463,744.202799 305.983518,744.064835 C305.994445,743.911277 306,743.756273 306,743.6 C306,739.954921 302.977922,737 299.25,737 C296.527171,737 294.180886,738.576351 293.113636,740.846618 L293.113636,740.6 L291.886364,740.6 L291.886364,740.846618 Z" id="like" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

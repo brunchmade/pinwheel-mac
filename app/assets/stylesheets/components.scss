@@ -1,0 +1,178 @@
+body {
+  font-family: '-apple-system', 'San Francisco Display', 'San Francisco Text', 'SF UI Display', 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+* { box-sizing: border-box; }
+
+.nowPlayingBackground {
+  position: absolute;
+  top: -80px;
+  right: 220px;
+  bottom: -80px;
+  left: -80px;
+  background: #cf8b9d;
+/*      background: image-url('art.jpg');
+  background-size: cover;
+  -webkit-filter: blur(60px);
+  -moz-filter: blur(60px);
+  -o-filter: blur(60px);
+  -ms-filter: blur(60px);
+  filter: blur(60px);*/
+  z-index: -1;
+}
+
+.nowPlaying {
+  width: calc(90vw - 330px);
+  max-width: 320px;
+}
+
+.nowPlayingAlbumArt {
+  width: calc(90vw - 330px);
+  max-width: 320px;
+  max-height: 320px;
+  box-shadow: 0 7px 15px rgba(0,0,0,.5);
+}
+
+.onDeck {
+  width: 330px;
+  background: #dbdde4;
+  height: 100%;
+}
+
+.progressBar {
+  height: 3px;
+  width: 100%;
+  background: rgba(0,0,0,.5);
+  position: relative;
+  z-index: 3;
+}
+
+.progress {
+  background: pink;
+  height: 3px;
+}
+
+.progressCountEnd {
+  right: 0;
+}
+
+h1 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: .15rem;
+}
+
+h2 {
+  font-size: .9rem;
+  font-weight: 300;
+  margin: 0 auto 1.4rem;
+}
+
+.actions {
+
+}
+
+.opacity {
+  opacity: .4;
+}
+
+.btn {
+  opacity: .6;
+  -webkit-transition: all .2s;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+
+.btnLike {
+  width: 30px;
+  height: 22px;
+  background: image-url('like.svg') no-repeat center;
+  background-size: contain;
+  display: inline-block;
+}
+
+.btnPlay {
+  width: 24px;
+  height: 30px;
+  background: image-url('play.svg') no-repeat center;
+  background-size: contain;
+  display: inline-block;
+  margin: 0 4rem;
+}
+
+.btnFf {
+  width: 30px;
+  height: 20px;
+  background: image-url('ff.svg') no-repeat center;
+  background-size: contain;
+  display: inline-block;
+}
+
+input[type="text"] {
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  padding: .25rem;
+  padding-left: 26px;
+  -webkit-appearance: none;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.15);
+  -webkit-transition: all .25s;
+  background: white image-url('search.svg') no-repeat;
+  background-size: 13px;
+  background-position: 10px 7px;
+  transform: translateZ(0);
+}
+
+input[type="text"]:placeholder-shown {
+  padding-left: calc(23px + 30%);
+  background-position: calc(10px + 30%) 7px;
+}
+
+input[type="text"]:focus {
+  padding-left: 26px;
+  background-position: 10px 7px;
+  outline: none;
+  box-shadow: 0 0 1px 1px #0068d9;
+}
+
+.onDeckSong .remove {
+  -webkit-transition: all .15s;
+  display: none;
+  background: rgba(0,0,0,.33);
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  line-height: 15px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #dbdde4;
+  text-align: center;
+  letter-spacing: -1;
+  cursor: pointer;
+}
+
+.onDeckSong .remove:hover {
+  background: rgba(0,0,0,.5);
+}
+
+.onDeckSong:hover .remove {
+  display: block;
+}
+
+.onDeckAlbumArt {
+  width: 46px;
+  height: 46px;
+  box-shadow: 0 0 1px 0 rgba(0,0,0,.5);
+}
+
+h3 {
+  font-size: .9rem;
+}

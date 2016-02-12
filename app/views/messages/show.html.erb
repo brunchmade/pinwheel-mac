@@ -1,10 +1,68 @@
-<h1><%= @message.title %></h1>
+<div class="nowPlayingBackground"></div>
 
-<p><%= @message.content %></p>
+<div class="flex-auto flex justify-center items-center">
+  <div class="nowPlaying center">
+    <%= image_tag("art.jpg", class: "nowPlayingAlbumArt") %>
+    <div class="progressBar">
+      <div class="progress" style="width: 40%"></div>
+      <audio src="/demo.mp3" class="player" ></audio>
+    </div>
+    <div class="flex justify-between opacity" style=";margin-top:.25rem">
+      <div class="h6">1:22</div>
+      <div class="h6">-4:32</div>
+    </div>
+    <h1>Never Ending Circles</h1>
+    <h2 class="opacity">CHVRCHES &mdash; Every Open Eye</h2>
+    <div class="actions flex items-center justify-center">
+      <a class="btn btnLike" href="#"></a>
+      <a class="btn btnPlay" href="#"></a>
+      <a class="btn btnFf" href="#"></a>
+    </div>
+  </div>
+</div>
 
-<audio src="/demo.mp3" class="player" ></audio>
+<div class="onDeck p3 flex-none">
+  <input type="text" placeholder="Add a song">
+  <div class="h6 opacity" style="margin:1rem 0;font-weight:700;text-transform:uppercase">On deck:</div>
+  <ul class="list-reset onDeckSongs">
+    <li>
+      <%= render 'comments/comments', message: @message %>
+    </li>
+    <li class="onDeckSong flex items-center mb2">
+      <%= image_tag("art.jpg", class: "onDeckAlbumArt") %>
+      <div class="flex-auto ml1">
+        <h3 class="m0">Montana</h3>
+        <p class="m0 h6 opacity">Tycho &ndash; Awake</p>
+      </div>
+      <a class="block flex-none remove">&times;</a>
+    </li>
+    <li class="onDeckSong flex items-center mb2">
+      <%= image_tag("art.jpg", class: "onDeckAlbumArt") %>
+      <div class="flex-auto ml1">
+        <h3 class="m0">Montana</h3>
+        <p class="m0 h6 opacity">Tycho &ndash; Awake</p>
+      </div>
+      <a class="block flex-none remove">&times;</a>
+    </li>
+    <li class="onDeckSong flex items-center mb2">
+      <%= image_tag("art.jpg", class: "onDeckAlbumArt") %>
+      <div class="flex-auto ml1">
+        <h3 class="m0">Montana</h3>
+        <p class="m0 h6 opacity">Tycho &ndash; Awake</p>
+      </div>
+      <a class="block flex-none remove">&times;</a>
+    </li>
+    <li class="onDeckSong flex items-center mb2">
+      <%= image_tag("art.jpg", class: "onDeckAlbumArt") %>
+      <div class="flex-auto ml1">
+        <h3 class="m0">Montana</h3>
+        <p class="m0 h6 opacity">Tycho &ndash; Awake</p>
+      </div>
+      <a class="block flex-none remove">&times;</a>
+    </li>
 
-<%= render 'comments/comments', message: @message %>
+  </ul>
+</div>
 
 <script>
   var player;
@@ -15,4 +73,3 @@
     console.log(player.currentTime);
   }, 2000);
 </script>
-
