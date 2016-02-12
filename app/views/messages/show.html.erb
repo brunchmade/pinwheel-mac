@@ -2,4 +2,17 @@
 
 <p><%= @message.content %></p>
 
+<audio src="/demo.mp3" class="player" ></audio>
+
 <%= render 'comments/comments', message: @message %>
+
+<script>
+  var player;
+  player = new MediaElementPlayer('audio', {alwaysShowControls: true});
+  player.setCurrentTime(100);
+  player.pause();
+  setTimeout(function(){
+    console.log(player.currentTime);
+  }, 2000);
+</script>
+
