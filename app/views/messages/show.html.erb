@@ -2,16 +2,16 @@
 
 <div class="flex-auto flex justify-center items-center">
   <div class="nowPlaying center">
-    <%= image_tag("art.jpg", class: "nowPlayingAlbumArt") %>
+    <%= image_tag(@now_playing.responses['artwork_url'], class: "nowPlayingAlbumArt") %>
     <div class="progressBar">
       <div class="progress" style="width: 40%"></div>
-      <audio src="/demo.mp3" class="player" ></audio>
+      <audio src="/demo.mp3" class="player"></audio>
     </div>
     <div class="flex justify-between opacity" style=";margin-top:.25rem">
       <div class="h6">1:22</div>
       <div class="h6">-4:32</div>
     </div>
-    <h1>Never Ending Circles</h1>
+    <h1><%= @now_playing.responses['title'] %></h1>
     <h2 class="opacity">CHVRCHES &mdash; Every Open Eye</h2>
     <div class="actions flex items-center justify-center">
       <a class="btn btnLike" href="#"></a>
@@ -34,7 +34,11 @@
 <script>
   var player;
   player = new MediaElementPlayer('audio', {alwaysShowControls: true});
-  player.setCurrentTime(0);
-  player.pause();
-  console.log(player.currentTime);
+  //player.setCurrentTime(0);
+  //player.pause();
+  player.setSrc('<%= @now_playing.responses['stream_url'].to_s + '?client_id=b59d1f4b68bbc8f2b0064188f210117d' %>');
+  player.load();
+  player.play();
+  //player.pause();
+  //console.log(player.currentTime);
 </script>
