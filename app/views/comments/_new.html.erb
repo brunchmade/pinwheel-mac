@@ -1,4 +1,3 @@
 <%= form_for [ message, Comment.new ], remote: true do |form| %>
-  <%= form.text_area :content, size: '63x1', placeholder: 'https://soundcloud.com/ARTIST/TRACK' %><br>
-  <%= form.submit 'Post comment' %>
+  <%= form.text_field :content, placeholder: 'Add a song' %><br>
 <% end %>

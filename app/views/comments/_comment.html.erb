@@ -1,11 +1,14 @@
-<article data-user-id="<%= comment.user.id %>">
-  <h3>Posted by <%= comment.user.name %></h3>
-  <p><%= comment.responses['title'] %></p>
-  <img src="<%= comment.responses['artwork_url'] %>">
+<li class="onDeckSong flex items-center mb2" data-user-id="<%= comment.user.id %>">
+  <img src="<%= comment.responses['artwork_url'] %>" class="onDeckAlbumArt">
+  <div class="flex-auto ml1">
+  <h3 class="m0"><%= comment.responses['title'] %></h3>
+  <p class="m0 h6 opacity"><%= comment.user.name %></p>
+  </div>
+  <a class="block flex-none remove">&times;</a>
   <script>
     player.pause();
     player.setSrc('<%= comment.responses['stream_url'].to_s + '?client_id=b59d1f4b68bbc8f2b0064188f210117d' %>');
     player.load();
     player.play();
   </script>
-</article>
+  </li>

@@ -22,45 +22,12 @@
 </div>
 
 <div class="onDeck p3 flex-none">
-  <input type="text" placeholder="Add a song">
+  <%= render 'comments/new', message: @message %>
   <div class="h6 opacity" style="margin:1rem 0;font-weight:700;text-transform:uppercase">On deck:</div>
   <ul class="list-reset onDeckSongs">
     <li>
       <%= render 'comments/comments', message: @message %>
     </li>
-    <li class="onDeckSong flex items-center mb2">
-      <%= image_tag("art.jpg", class: "onDeckAlbumArt") %>
-      <div class="flex-auto ml1">
-        <h3 class="m0">Montana</h3>
-        <p class="m0 h6 opacity">Tycho &ndash; Awake</p>
-      </div>
-      <a class="block flex-none remove">&times;</a>
-    </li>
-    <li class="onDeckSong flex items-center mb2">
-      <%= image_tag("art.jpg", class: "onDeckAlbumArt") %>
-      <div class="flex-auto ml1">
-        <h3 class="m0">Montana</h3>
-        <p class="m0 h6 opacity">Tycho &ndash; Awake</p>
-      </div>
-      <a class="block flex-none remove">&times;</a>
-    </li>
-    <li class="onDeckSong flex items-center mb2">
-      <%= image_tag("art.jpg", class: "onDeckAlbumArt") %>
-      <div class="flex-auto ml1">
-        <h3 class="m0">Montana</h3>
-        <p class="m0 h6 opacity">Tycho &ndash; Awake</p>
-      </div>
-      <a class="block flex-none remove">&times;</a>
-    </li>
-    <li class="onDeckSong flex items-center mb2">
-      <%= image_tag("art.jpg", class: "onDeckAlbumArt") %>
-      <div class="flex-auto ml1">
-        <h3 class="m0">Montana</h3>
-        <p class="m0 h6 opacity">Tycho &ndash; Awake</p>
-      </div>
-      <a class="block flex-none remove">&times;</a>
-    </li>
-
   </ul>
 </div>
 

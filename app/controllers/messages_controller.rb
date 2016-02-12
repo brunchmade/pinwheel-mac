@@ -5,5 +5,6 @@ class MessagesController < ApplicationController
 
   def show
     @message = Message.find(params[:id])
+    @now_playing = Comment.last
   end
 end
