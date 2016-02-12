@@ -77,5 +77,5 @@ Rails.application.configure do
 
   # Set Action Cable server url for consumer connection
   # config.action_cable.url = 'ws://cable.example.com:28080'
-  config.action_cable.url = 'wss://turncable.herokuapp.com/'
+  # config.action_cable.url = 'wss://turncable.herokuapp.com/'
 end
