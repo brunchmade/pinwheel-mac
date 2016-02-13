@@ -29,7 +29,19 @@ You must have redis installed and running on the default port:6379 (or configure
 
 ## Live comments example
 
-1. Open two browsers with separate cookie spaces (like a regular session and an incognito session). 
-2. Login as different people in each browser. 
+1. Open two browsers with separate cookie spaces (like a regular session and an incognito session).
+2. Login as different people in each browser.
 3. Go to the same message.
 4. Add comments in either browser and see them appear real-time on the counterpart screen.
+
+## Building the Electron apps
+
+We use [Electron](https://github.com/atom/electron) to build the Mac app wrapper. To compile your own binaries, run the following scripts from the project root:
+
+**Production app**
+`cd electron && npm run pack && cd ..`
+
+**Development app**
+`cd electron && npm run pack:beta && cd ..`
+
+Your binary will be created at `electron/dist/Turntable-darwin-x64/Turntable.app`.

@@ -1,5 +1,9 @@
 {
   "name"    : "Tumtable",
   "version" : "0.1.0",
-  "main"    : "main.js"
+  "main"    : "main.js",
+  "scripts" : {
+    "pack": "electron-packager . \"Tumtable\" --platform=darwin --arch=x64 --version=0.36.7 --icon=tumtable.icns --out=dist --ignore=dist",
+    "pack:beta": "electron-packager . \"Tumtable Beta\" --platform=darwin --arch=x64 --version=0.36.7 --icon=tumtable-beta.icns --out=dist --ignore=dist"
+  }
 }

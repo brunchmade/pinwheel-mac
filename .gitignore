@@ -18,3 +18,4 @@
 !/tmp/.keep
 
 .ruby-version
+/electron/dist
