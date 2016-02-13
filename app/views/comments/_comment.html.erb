@@ -1,10 +1,11 @@
 <li class="onDeckSong flex items-center mb2" data-user-id="<%= comment.user.id %>">
   <img src="<%= comment.responses['artwork_url'] %>" class="onDeckAlbumArt">
-  <div class="flex-auto ml1">
-  <h3 class="m0"><%= comment.responses['title'] %></h3>
-  <p class="m0 h6 opacity"><%= comment.user.name %></p>
+  <div class="ml1" style="width:226px;overflow:hidden">
+    <h3 class="m0"><%= comment.responses['title'] %></h3>
+    <p class="m0 h6 opacity">Artist &ndash; Album</p>
+    <p class="m0 h6 opacity">Added by <%= comment.user.name %></p>
   </div>
-  <a class="block flex-none remove">&times;</a>
+  <a class="flex-none remove">&times;</a>
   <script>
     $('.nowPlaying h1').text('<%= comment.responses['title'].to_s %>');
     $('.nowPlaying h2').text('<%= comment.responses['user']['username'].to_s %>');
@@ -14,4 +15,4 @@
     player.load();
     player.play();
   </script>
-  </li>
+</li>

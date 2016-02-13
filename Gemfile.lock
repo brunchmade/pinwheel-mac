@@ -74,6 +74,9 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.0.0)
+    autoprefixer-rails (6.3.2)
+      execjs
+      json
     builder (3.2.2)
     byebug (8.2.1)
     coffee-script (2.4.1)
@@ -182,6 +185,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autoprefixer-rails
   byebug
   coffee-rails!
   jbuilder (~> 2.0)
@@ -197,3 +201,6 @@ DEPENDENCIES
   turbolinks!
   uglifier (>= 1.3.0)
   web-console!
+
+BUNDLED WITH
+   1.11.2

@@ -7,57 +7,8 @@ body {
 
 * { box-sizing: border-box; }
 
-.nowPlayingBackground {
-  position: absolute;
-  top: -80px;
-  right: 220px;
-  bottom: -80px;
-  left: -80px;
-  background: #cf8b9d;
-/*      background: image-url('art.jpg');
-  background-size: cover;
-  -webkit-filter: blur(60px);
-  -moz-filter: blur(60px);
-  -o-filter: blur(60px);
-  -ms-filter: blur(60px);
-  filter: blur(60px);*/
-  z-index: -1;
-}
-
-.nowPlaying {
-  width: calc(90vw - 330px);
-  max-width: 320px;
-}
-
-.nowPlayingAlbumArt {
-  width: calc(90vw - 330px);
-  max-width: 320px;
-  max-height: 320px;
-  box-shadow: 0 7px 15px rgba(0,0,0,.5);
-}
-
-.onDeck {
-  width: 330px;
-  background: #dbdde4;
-  height: 100%;
-}
-
-.progressBar {
-  height: 3px;
-  width: 100%;
-  background: rgba(0,0,0,.5);
-  position: relative;
-  z-index: 3;
-}
-
-.progress {
-  background: pink;
-  height: 3px;
-}
-
-.progressCountEnd {
-  right: 0;
-}
+$osx-blue: #0068d9;
+$black: #000000;
 
 h1 {
   font-size: 1.2rem;
@@ -72,8 +23,50 @@ h2 {
   margin: 0 auto 1.4rem;
 }
 
-.actions {
+h3 {
+  font-size: .9rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
+.nowPlayingBackground {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #cf8b9d;
+  z-index: -1;
+}
+
+.nowPlaying {
+  width: calc(90vw - 330px);
+  max-width: 320px;
+}
+
+.nowPlayingAlbumArt {
+  width: calc(90vw - 330px);
+  max-width: 320px;
+  max-height: 320px;
+  box-shadow: 0 7px 15px rgba($black,.5);
+}
+
+.progressBar {
+  height: 3px;
+  width: 100%;
+  background: rgba($black,.5);
+  position: relative;
+  z-index: 3;
+}
+
+.progress {
+  background: pink;
+  height: 3px;
+}
+
+.progressCountEnd {
+  right: 0;
 }
 
 .opacity {
@@ -123,30 +116,41 @@ input[type="text"] {
   -webkit-appearance: none;
   border: none;
   border-radius: 4px;
-  box-shadow: 0 1px 1px 0 rgba(0,0,0,.15);
+  box-shadow: 0 1px 1px 0 rgba($black,.15);
   -webkit-transition: all .25s;
   background: white image-url('search.svg') no-repeat;
   background-size: 13px;
   background-position: 10px 7px;
   transform: translateZ(0);
+
+  &:placeholder-shown {
+    padding-left: calc(23px + 30%);
+    background-position: calc(10px + 30%) 7px;
+  }
+
+  &:focus {
+    padding-left: 26px;
+    background-position: 10px 7px;
+    outline: none;
+    box-shadow: 0 0 1px 1px $osx-blue;
+  }
 }
 
-input[type="text"]:placeholder-shown {
-  padding-left: calc(23px + 30%);
-  background-position: calc(10px + 30%) 7px;
+.onDeck {
+  width: 330px;
+  background: #dbdde4;
+  height: 100vh;
 }
 
-input[type="text"]:focus {
-  padding-left: 26px;
-  background-position: 10px 7px;
-  outline: none;
-  box-shadow: 0 0 1px 1px #0068d9;
+.onDeckSongs {
+  overflow-y: scroll;
+  height: calc(100vh - 110px);
 }
 
 .onDeckSong .remove {
   -webkit-transition: all .15s;
   display: none;
-  background: rgba(0,0,0,.33);
+  background: rgba($black,.33);
   border-radius: 50%;
   width: 18px;
   height: 18px;
@@ -157,23 +161,26 @@ input[type="text"]:focus {
   text-align: center;
   letter-spacing: -1;
   cursor: pointer;
+
+  &:hover {
+    background: rgba($black,.5);
+  }
 }
 
-.onDeckSong .remove:hover {
-  background: rgba(0,0,0,.5);
-}
+.onDeckSong {
 
-.onDeckSong:hover .remove {
-  display: block;
+  &:hover {
+    cursor: default;
+
+    .remove {
+      display: block;
+    }
+  }
 }
 
 .onDeckAlbumArt {
-  background-color: rgba(0,0,0,.2);
+  background-color: rgba($black,.2);
   width: 46px;
   height: 46px;
-  box-shadow: 0 0 1px 0 rgba(0,0,0,.5);
-}
-
-h3 {
-  font-size: .9rem;
+  box-shadow: 0 0 1px 0 rgba($black,.5);
 }

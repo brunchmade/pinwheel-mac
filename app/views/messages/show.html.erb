@@ -21,13 +21,11 @@
   </div>
 </div>
 
-<div class="onDeck p3 flex-none">
+<div class="onDeck p2 flex-none">
   <%= render 'comments/new', message: @message %>
   <div class="h6 opacity" style="margin:1rem 0;font-weight:700;text-transform:uppercase">On deck:</div>
   <ul class="list-reset onDeckSongs">
-    <li>
-      <%= render 'comments/comments', message: @message %>
-    </li>
+    <%= render 'comments/comments', message: @message %>
   </ul>
 </div>
 
