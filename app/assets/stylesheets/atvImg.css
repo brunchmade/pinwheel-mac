@@ -15,7 +15,7 @@
 }
 
 .atvImg-container.over .atvImg-shadow {
-	box-shadow: 0 45px 100px rgba(14,21,47,0.4), 0 16px 40px rgba(14,21,47,0.4);
+	box-shadow: 0 45px 100px rgba(14,21,47,0.8), 0 16px 40px rgba(14,21,47,0.8);
 }
 
 .atvImg-layers {
@@ -24,6 +24,7 @@
 	height: 100%;
 	overflow: hidden;
 	transform-style: preserve-3d;
+	box-shadow: 0 8px 30px rgba(14,21,47,.5);
 }
 
 .atvImg-rendered-layer {
@@ -37,16 +38,6 @@
 	background-color: transparent;
 	background-size: cover;
 	transition: all 0.1s ease-out;
-}
-
-.atvImg-shadow {
-	position: absolute;
-	top: 5%;
-	left: 5%;
-	width: 90%;
-	height: 90%;
-	transition: all 0.2s ease-out;
-	box-shadow: 0 8px 30px rgba(14,21,47,0.6);
 }
 
 .atvImg-shine {

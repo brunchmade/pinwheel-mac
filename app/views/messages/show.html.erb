@@ -1,9 +1,9 @@
-<div class="nowPlayingBackground"></div>
+<div class="nowPlayingBackground" style="background-image: url(<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500').gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?blur=200') %>)"></div>
 
 <div class="flex-auto flex justify-center items-center">
   <div class="nowPlaying center">
     <div class="atvImg nowPlayingAlbumArt">
-      <div class="atvImg-layer" data-img="<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500')) %>"></div>
+      <div class="atvImg-layer" data-img="<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500').gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net')) %>"></div>
     </div>
     <div class="progressBar">
       <div class="progress" style="width: 0"></div>
