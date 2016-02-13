@@ -75,7 +75,7 @@ h3 {
 
 .btn {
   opacity: .6;
-  -webkit-transition: all .2s;
+  transition: all .2s;
 }
 
 .btn:hover {
@@ -117,7 +117,7 @@ input[type="text"] {
   border: none;
   border-radius: 4px;
   box-shadow: 0 1px 1px 0 rgba($black,.15);
-  -webkit-transition: all .25s;
+  transition: all .25s;
   background: white image-url('search.svg') no-repeat;
   background-size: 13px;
   background-position: 10px 7px;
@@ -148,7 +148,7 @@ input[type="text"] {
 }
 
 .onDeckSong .remove {
-  -webkit-transition: all .15s;
+  transition: all .15s;
   display: none;
   background: rgba($black,.33);
   border-radius: 50%;
