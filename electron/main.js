@@ -25,12 +25,12 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({width: 1000, height: 600, 'node-integration': false, 'title-bar-style': 'hidden-inset'});
 
   // and load the index.html of the app.
-  mainWindow.loadURL('https://turncable.herokuapp.com');
+  mainWindow.loadURL('http://localhost:3000');
 
   // open _blank links in same window
   mainWindow.webContents.on('new-window', function(e, url) {
     e.preventDefault();
-    mainWindow.loadURL(url);
+    require('shell').openExternal(url);
   });
 
   // Open the DevTools.
