@@ -3,9 +3,14 @@ body {
   height: 100vh;
   overflow: hidden;
   min-height: 300px;
+  background: transparent;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+  font-family: '-apple-system', 'San Francisco Display', 'San Francisco Text', 'SF UI Display', 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  user-select: none;
+}
 
 $osx-blue: #0068d9;
 $black: #000000;
@@ -19,7 +24,7 @@ h1 {
 
 h2 {
   font-size: .9rem;
-  font-weight: 300;
+  font-weight: 400;
   margin: 0 auto 1.4rem;
 }
 
@@ -40,8 +45,8 @@ img {
   right: 0;
   bottom: 0;
   left: 0;
-  background: #cf8b9d;
   z-index: -1;
+  background-color: rgba($black,.9);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -62,13 +67,12 @@ img {
   height: 3px;
   margin-top: 1rem;
   width: 100%;
-  background: rgba($black,.5);
+  background: rgba($black,.15);
   position: relative;
   z-index: 3;
 }
 
 .progress {
-  background: pink;
   height: 3px;
 }
 
@@ -129,6 +133,7 @@ input[type="text"] {
   background-size: 13px;
   background-position: 10px 7px;
   transform: translateZ(0);
+  user-select: text;
 
   &:placeholder-shown {
     padding-left: calc(23px + 30%);
@@ -145,13 +150,14 @@ input[type="text"] {
 
 .onDeck {
   width: 330px;
-  background: #dbdde4;
+  background: rgba(white,.33);
   height: 100vh;
 }
 
 .onDeckSongs {
   overflow-y: scroll;
   height: calc(100vh - 89px);
+  -webkit-overflow-scrolling: touch;
 }
 
 .onDeckSong .remove {

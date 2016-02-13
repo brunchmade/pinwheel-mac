@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500').gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?sat=100&palette=css&colors=1&class=album') %>">
+
 <div class="nowPlayingBackground" style="background-image: url(<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500').gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?blur=200') %>)"></div>
 
 <div class="flex-auto flex justify-center items-center">
@@ -6,7 +8,7 @@
       <div class="atvImg-layer" data-img="<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500').gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net')) %>"></div>
     </div>
     <div class="progressBar">
-      <div class="progress" style="width: 0"></div>
+      <div class="progress album-bg-1" style="width: 0"></div>
       <audio src="/demo.mp3" class="player hide"></audio>
     </div>
     <div class="flex justify-between opacity" style=";margin-top:.25rem">
