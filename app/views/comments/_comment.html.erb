@@ -4,7 +4,7 @@
   </a>
   <div class="ml1" style="width:226px;overflow:hidden">
     <h3 class="m0"><%= comment.responses['title'] %></h3>
-    <p class="m0 h6 opacity">Artist &ndash; Album</p>
+    <p class="m0 h6 opacity"><%= comment.responses['user']['username'] %></p>
     <p class="m0 h6 opacity">Added by <%= comment.user.name %></p>
   </div>
   <a class="block flex-none remove">&times;</a>
