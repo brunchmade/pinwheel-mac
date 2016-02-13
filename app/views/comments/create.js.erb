@@ -1,13 +1,3 @@
 // Add the track in place
 $('#comments').prepend('<%=j render @comment %>');
 $('#new_comment').replaceWith('<%=j render 'comments/new', message: @message %>');
-
-// Replace current playing info
-$('.nowPlaying h1').text('<%= @comment.responses['title'].to_s %>');
-$('.nowPlaying h2').text('<%= @comment.responses['user']['username'].to_s %>');
-$('.nowPlayingAlbumArt').attr('src','<%= @comment.responses['artwork_url'].to_s.gsub('large','t500x500') %>');
-// Drop that track
-player.pause();
-player.setSrc('<%= (@comment.responses['stream_url'].to_s + '?client_id=b59d1f4b68bbc8f2b0064188f210117d').to_s %>');
-player.load();
-player.play();

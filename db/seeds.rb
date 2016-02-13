@@ -5,4 +5,5 @@ wells   = User.create! name: 'Wells Riley'
 baldwin = User.create! name: 'Alex Baldwin'
 abby = User.create! name: 'Abby Culin'
 
-Message.create! title: 'Simple Casual', content: 'Keep it simple, keep it casual', user: baldwin
+message = Message.create! title: 'Simple Casual', content: 'Keep it simple, keep it casual', user: baldwin
+Comment.create! message: message, content:'https://soundcloud.com/beatsbyesta/hotline-bling', user: baldwin

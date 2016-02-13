@@ -5,7 +5,7 @@
 <div class="flex-auto flex justify-center items-center">
   <div class="nowPlaying center">
     <div class="atvImg nowPlayingAlbumArt">
-      <div class="atvImg-layer" data-img="<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500').gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net')) %>"></div>
+      <div class="atvImg-layer" data-img="<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500')) %>"></div>
     </div>
     <div class="progressBar">
       <div class="progress album-bg-1" style="width: 0"></div>
@@ -16,6 +16,9 @@
       <div class="h6 duration-time">&nbsp;</div>
     </div>
     <h1><%= @now_playing.responses['title'] %></h1>
+    <h1>Start: <%= @now_playing.aired_at %></h1>
+    <h1>End: <%= @now_playing.aired_at + (@now_playing.responses['duration'] / 1000) %></h1>
+    <h1>Offset: <%= (Time.now.utc - @now_playing.aired_at).to_i %></h1>
     <h2 class="opacity"><%= @now_playing.responses['user']['username'] %></h2>
     <div class="actions flex items-center justify-center">
       <a class="btn btnLike"></a>
@@ -40,6 +43,7 @@
   player = new MediaElementPlayer('audio', {features: [], alwaysShowControls: false, enableKeyboard: true});
   player.setSrc('<%= @now_playing.responses['stream_url'].to_s + '?client_id=b59d1f4b68bbc8f2b0064188f210117d' %>');
   player.load();
+  player.setCurrentTime(<%= (Time.now.utc - @now_playing.aired_at).to_i %>);
   player.play();
   player.media.addEventListener('timeupdate', function(e) {
       $('.current-time').text(String(player.media.currentTime).toHHMMSS());
@@ -52,5 +56,30 @@
     } else {
       player.pause();
     }
+  });
+
+  // Enable pusher logging - don't include this in production
+  Pusher.log = function(message) {
+    if (window.console && window.console.log) {
+      window.console.log(message);
+    }
+  };
+
+  var pusher = new Pusher('28b57a0348c8e7d03367', {
+    encrypted: true
+  });
+
+  var channel = pusher.subscribe('message_<%= @message.id %>');
+
+  channel.bind('now_playing', function(data) {
+    // Replace current playing info
+    $('.nowPlaying h1').text(data.title);
+    $('.nowPlaying h2').text(data.artist);
+    $('.atvImg-rendered-layer').css('background-image', 'url(' + data.artwork_url + ')');
+    // Drop that track
+    player.pause();
+    player.setSrc(data.stream_url);
+    player.load();
+    player.play();
   });
 </script>

@@ -10,6 +10,7 @@ gem 'pg'
 gem 'redis'
 gem 'soundcloud'
 gem 'puma'
+gem 'pusher'
 
 gem 'autoprefixer-rails'
 gem 'sass-rails', '~> 5.0'
