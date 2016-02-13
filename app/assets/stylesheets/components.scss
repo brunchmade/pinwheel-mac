@@ -30,6 +30,10 @@ h3 {
   text-overflow: ellipsis;
 }
 
+img {
+  display: block;
+}
+
 .nowPlayingBackground {
   position: absolute;
   top: 0;
@@ -54,6 +58,7 @@ h3 {
 
 .progressBar {
   height: 3px;
+  margin-top: 1rem;
   width: 100%;
   background: rgba($black,.5);
   position: relative;

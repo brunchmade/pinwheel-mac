@@ -2,15 +2,16 @@
 
 <div class="flex-auto flex justify-center items-center">
   <div class="nowPlaying center">
-    <%= image_tag(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500'), class: "nowPlayingAlbumArt") %>
+    <div class="atvImg" style="width:320px;height:320px;">
+      <div class="atvImg-layer" data-img="<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500')) %>"></div>
+    </div>
     <div class="progressBar">
       <div class="progress" style="width: 0"></div>
       <audio src="/demo.mp3" class="player hide"></audio>
     </div>
     <div class="flex justify-between opacity" style=";margin-top:.25rem">
-      <div class="h6 current-time">00:00:00</div>
-      <div class="h6 progress-bar">00:00:00</div>
-      <div class="h6 duration-time">00:00:00</div>
+      <div class="h6 current-time">&nbsp;</div>
+      <div class="h6 duration-time">&nbsp;</div>
     </div>
     <h1><%= @now_playing.responses['title'] %></h1>
     <h2 class="opacity"><%= @now_playing.responses['user']['username'] %></h2>
@@ -21,6 +22,7 @@
     </div>
   </div>
 </div>
+<audio src="/demo.mp3" class="player"></audio>
 
 <div class="onDeck p2 flex-none">
   <%= render 'comments/new', message: @message %>
@@ -31,6 +33,7 @@
 </div>
 
 <script>
+  atvImg();
   var player;
   player = new MediaElementPlayer('audio', {features: [], alwaysShowControls: false, enableKeyboard: true});
   player.setSrc('<%= @now_playing.responses['stream_url'].to_s + '?client_id=b59d1f4b68bbc8f2b0064188f210117d' %>');
@@ -39,7 +42,7 @@
   player.media.addEventListener('timeupdate', function(e) {
       $('.current-time').text(String(player.media.currentTime).toHHMMSS());
       $('.duration-time').text(String(player.media.duration).toHHMMSS());
-      $('.progressBar').css("width", Math.floor((player.media.currentTime / player.media.duration) * 100));
+      $('.progress').css("width", Math.floor((player.media.currentTime / player.media.duration) * 100));
   }, false);
   $('.btnPlay').click(function() {
     if (player.media.paused) {
