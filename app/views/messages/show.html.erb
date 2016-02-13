@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500').gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?sat=100&palette=css&colors=1&class=album') %>">
+<link rel="stylesheet" href="<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500').gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?palette=css&colors=2&class=album') %>">
 
 <div class="nowPlayingBackground" style="background-image: url(<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500').gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?blur=200') %>)"></div>
 
@@ -18,9 +18,9 @@
     <h1><%= @now_playing.responses['title'] %></h1>
     <h2 class="opacity"><%= @now_playing.responses['user']['username'] %></h2>
     <div class="actions flex items-center justify-center">
-      <a class="btn btnLike" href="#"></a>
-      <a class="btn btnPlay" href="#"></a>
-      <a class="btn btnFf" href="#"></a>
+      <a class="btn btnLike"></a>
+      <a class="btn btnPlay"></a>
+      <a class="btn btnFf"></a>
     </div>
   </div>
 </div>
