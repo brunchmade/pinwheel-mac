@@ -2,7 +2,7 @@
 
 <div class="flex-auto flex justify-center items-center">
   <div class="nowPlaying center">
-    <%= image_tag(@now_playing.responses['artwork_url'], class: "nowPlayingAlbumArt") %>
+    <%= image_tag(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500'), class: "nowPlayingAlbumArt") %>
     <div class="progressBar">
       <div class="progress" style="width: 40%"></div>
       <audio src="/demo.mp3" class="player hide"></audio>
@@ -44,4 +44,11 @@
   }, false);
   //player.pause();
   //console.log(player.currentTime);
+  $('.btnPlay').click(function() {
+    if (player.media.paused) {
+      player.play();
+    } else {
+      player.pause();
+    }
+  });
 </script>
