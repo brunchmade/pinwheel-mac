@@ -16,9 +16,6 @@
       <div class="h6 duration-time">&nbsp;</div>
     </div>
     <h1><%= @now_playing.responses['title'] %></h1>
-    <h1>Start: <%= @now_playing.aired_at %></h1>
-    <h1>End: <%= @now_playing.aired_at + (@now_playing.responses['duration'] / 1000) %></h1>
-    <h1>Offset: <%= (Time.now.utc - @now_playing.aired_at).to_i %></h1>
     <h2 class="opacity"><%= @now_playing.responses['user']['username'] %></h2>
     <div class="actions flex items-center justify-center">
       <a class="btn btnLike"></a>

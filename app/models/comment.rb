@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
 
   before_create :resolve
   # after_commit { CommentRelayJob.perform_later(self) }
-  after_commit :push
+  # after_commit :push
 
   private
 
