@@ -42,6 +42,6 @@ We use [Electron](https://github.com/atom/electron) to build the Mac app wrapper
 `cd electron && npm run pack && cd ..`
 
 **Development app**
-`cd electron && npm run pack:beta && cd ..`
+`cd electron-beta && npm run pack && cd ..`
 
-Your binary will be created at `electron/dist/Turntable-darwin-x64/Turntable.app`.
+Your binary will be created in your `/Applications` folder.
