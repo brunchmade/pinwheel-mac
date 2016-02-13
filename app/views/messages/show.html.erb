@@ -2,7 +2,7 @@
 
 <div class="flex-auto flex justify-center items-center">
   <div class="nowPlaying center">
-    <div class="atvImg" style="width:320px;height:320px;">
+    <div class="atvImg nowPlayingAlbumArt">
       <div class="atvImg-layer" data-img="<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500')) %>"></div>
     </div>
     <div class="progressBar">
@@ -24,10 +24,10 @@
 </div>
 <audio src="/demo.mp3" class="player"></audio>
 
-<div class="onDeck p2 flex-none">
+<div class="onDeck flex-none">
   <%= render 'comments/new', message: @message %>
-  <div class="h6 opacity" style="margin:1rem 0;font-weight:700;text-transform:uppercase">On deck:</div>
-  <ul class="list-reset onDeckSongs">
+  <div class="h6 px2 opacity" style="margin:1rem 0;font-weight:700;text-transform:uppercase">On deck:</div>
+  <ul class="list-reset onDeckSongs px2">
     <%= render 'comments/comments', message: @message %>
   </ul>
 </div>

@@ -51,9 +51,9 @@ img {
 
 .nowPlayingAlbumArt {
   width: calc(90vw - 330px);
+  height: calc(90vw - 330px);
   max-width: 320px;
   max-height: 320px;
-  box-shadow: 0 7px 15px rgba($black,.5);
 }
 
 .progressBar {
@@ -149,7 +149,7 @@ input[type="text"] {
 
 .onDeckSongs {
   overflow-y: scroll;
-  height: calc(100vh - 110px);
+  height: calc(100vh - 89px);
 }
 
 .onDeckSong .remove {
