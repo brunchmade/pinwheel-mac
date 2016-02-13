@@ -4,11 +4,12 @@
   <div class="nowPlaying center">
     <%= image_tag(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500'), class: "nowPlayingAlbumArt") %>
     <div class="progressBar">
-      <div class="progress" style="width: 40%"></div>
+      <div class="progress" style="width: 0"></div>
       <audio src="/demo.mp3" class="player hide"></audio>
     </div>
     <div class="flex justify-between opacity" style=";margin-top:.25rem">
       <div class="h6 current-time">00:00:00</div>
+      <div class="h6 progress-bar">00:00:00</div>
       <div class="h6 duration-time">00:00:00</div>
     </div>
     <h1><%= @now_playing.responses['title'] %></h1>
@@ -32,18 +33,14 @@
 <script>
   var player;
   player = new MediaElementPlayer('audio', {features: [], alwaysShowControls: false, enableKeyboard: true});
-  //player.setCurrentTime(0);
-  //player.pause();
   player.setSrc('<%= @now_playing.responses['stream_url'].to_s + '?client_id=b59d1f4b68bbc8f2b0064188f210117d' %>');
   player.load();
   player.play();
-  // add event listener
   player.media.addEventListener('timeupdate', function(e) {
       $('.current-time').text(String(player.media.currentTime).toHHMMSS());
       $('.duration-time').text(String(player.media.duration).toHHMMSS());
+      $('.progressBar').css("width", Math.floor((player.media.currentTime / player.media.duration) * 100));
   }, false);
-  //player.pause();
-  //console.log(player.currentTime);
   $('.btnPlay').click(function() {
     if (player.media.paused) {
       player.play();
