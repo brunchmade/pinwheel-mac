@@ -1,24 +1,26 @@
 class NextUpJob < ApplicationJob
+  include ApplicationHelper
   queue_as :default
 
   def perform(*args)
     c = Comment.where(now_playing: true).first
     f = Comment.where(now_playing: false, aired_at: nil).order(created_at: :desc).last
     
-    c.now_playing = false
-    f.now_playing = true
-    f.aired_at = Time.now.utc
+    if c
+      c.now_playing = false
+      c.save
+    end
 
-    c.save
-    f.save
+    if f
+      f.now_playing = true
+      f.aired_at = Time.now.utc
 
-    Pusher.trigger('message_' + f.message.id.to_s, 'now_playing', {
-      title:          f.responses['title'].to_s,
-      artist:         f.responses['user']['username'].to_s,
-      artwork_url:    f.responses['artwork_url'].to_s.gsub('large','t500x500'),
-      stream_url:     f.responses['stream_url'].to_s + '?client_id=b59d1f4b68bbc8f2b0064188f210117d'
-    })
-    # This should enqueue another job for this time
-    # f.aired_at + (f.responses['duration'] / 1000)
+      f.save
+
+      next_track_at = Time.now.utc + (f.responses['duration'] / 1000)
+      NextUpJob.set(wait_until: next_track_at).perform_later
+
+      push_track(f)
+    end
   end
 end

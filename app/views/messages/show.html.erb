@@ -30,7 +30,10 @@
   <%= render 'comments/new', message: @message %>
   <div class="h6 px2 opacity" style="margin:1rem 0;font-weight:700;text-transform:uppercase">On deck:</div>
   <ul class="list-reset onDeckSongs px2">
-    <%= render 'comments/comments', message: @message %>
+    <% @comments.each do |comment| %>
+      <% @comment = comment %>
+      <%= render 'comments/comment', comment: @comment %>
+    <% end %>
   </ul>
 </div>
 
@@ -45,7 +48,7 @@
   player.media.addEventListener('timeupdate', function(e) {
       $('.current-time').text(String(player.media.currentTime).toHHMMSS());
       $('.duration-time').text(String(player.media.duration).toHHMMSS());
-      $('.progress').css("width", Math.floor((player.media.currentTime / player.media.duration) * 100));
+      $('.progress').css("width", String(Math.floor((player.media.currentTime / player.media.duration) * 100)) + '%');
   }, false);
   $('.btnPlay').click(function() {
     if (player.media.paused) {
@@ -68,8 +71,12 @@
 
   var channel = pusher.subscribe('message_<%= @message.id %>');
 
+  channel.bind('on_deck', function(data) {
+    $('.onDeckSongs').prepend(data.message);
+  });
   channel.bind('now_playing', function(data) {
     // Replace current playing info
+    $('.onDeck li:last-child').remove();
     $('.nowPlaying h1').text(data.title);
     $('.nowPlaying h2').text(data.artist);
     $('.atvImg-rendered-layer').css('background-image', 'url(' + data.artwork_url + ')');

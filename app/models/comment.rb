@@ -1,10 +1,12 @@
 class Comment < ActiveRecord::Base
+  include ApplicationHelper
+
   belongs_to :message
   belongs_to :user
 
   before_create :resolve
   # after_commit { CommentRelayJob.perform_later(self) }
-  # after_commit :push
+  after_create :push
 
   private
 
@@ -18,11 +20,20 @@ class Comment < ActiveRecord::Base
   end
 
   def push
-    Pusher.trigger('message_' + self.message.id.to_s, 'now_playing', {
-      title:          self.responses['title'].to_s,
-      artist:         self.responses['user']['username'].to_s,
-      artwork_url:    self.responses['artwork_url'].to_s.gsub('large','t500x500'),
-      stream_url:     self.responses['stream_url'].to_s + '?client_id=b59d1f4b68bbc8f2b0064188f210117d'
-    })
+    if Comment.where(now_playing: true).count == 0
+      self.now_playing = true
+      self.aired_at = Time.now.utc
+      self.save
+      push_track(self)
+    else
+      Pusher.trigger('message_' + self.message.id.to_s, 'on_deck', {
+        # message: ApplicationController.new.render_to_string("comments/comment", :formats => [:html], :locals => {:comment => self}, :layout => false)
+        #message: ApplicationRenderer.render(comment: self, template: 'comments/comment', locals: { comment: self })
+        message: ApplicationController.render(
+          assigns: { comment: self },
+          template: 'comments/_comment'
+        )
+      })
+    end
   end
 end

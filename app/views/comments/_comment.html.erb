@@ -1,11 +1,11 @@
-<li class="onDeckSong flex items-center mb2" data-user-id="<%= comment.user.id %>">
-  <a href="<%= comment.responses['permalink_url'] %>" target="_blank" style="font-size:0">
-    <img src="<%= comment.responses['artwork_url'] %>" class="onDeckAlbumArt">
+<li class="onDeckSong flex items-center mb2" data-user-id="<%= @comment.user.id %>">
+  <a href="<%= @comment.responses['permalink_url'] %>" target="_blank" style="font-size:0">
+    <img src="<%= @comment.responses['artwork_url'] %>" class="onDeckAlbumArt">
   </a>
   <div class="ml1" style="width:226px;overflow:hidden">
-    <h3 class="m0"><%= comment.responses['title'] %></h3>
-    <p class="m0 h6 opacity"><%= comment.responses['user']['username'] %></p>
-    <p class="m0 h6 opacity">Added by <%= comment.user.name %></p>
+    <h3 class="m0"><%= @comment.responses['title'] %></h3>
+    <p class="m0 h6 opacity"><%= @comment.responses['user']['username'] %></p>
+    <p class="m0 h6 opacity">Added by <%= @comment.user.name %></p>
   </div>
   <a class="block flex-none remove">&times;</a>
 </li>

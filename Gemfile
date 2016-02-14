@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.3.0'
 
-ruby '2.3.0'
-
 gem 'rails', '5.0.0.beta2'
 gem 'sprockets-rails', github: "rails/sprockets-rails"
 
@@ -11,6 +9,7 @@ gem 'redis'
 gem 'soundcloud'
 gem 'puma'
 gem 'pusher'
+gem 'sidekiq'
 
 gem 'autoprefixer-rails'
 gem 'sass-rails', '~> 5.0'
@@ -23,6 +22,7 @@ gem 'jbuilder', '~> 2.0'
 
 group :development, :test do
   gem 'byebug'
+  gem 'dotenv-rails'
 end
 
 group :development do
