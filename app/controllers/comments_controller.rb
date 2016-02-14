@@ -3,6 +3,14 @@ class CommentsController < ApplicationController
 
   before_action :set_message
 
+  def destroy
+    @comment = Comment.find(params[:id])
+    Pusher.trigger('message_' + @comment.message.id.to_s, 'remove_on_deck', {
+      id: @comment.id
+    })
+    @comment.destroy
+  end
+
   def create
     @comment = @message.comments.create!(content: params[:comment][:content], user: @current_user)
     playing = @message.comments.where(now_playing: true).first

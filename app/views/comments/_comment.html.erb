@@ -1,4 +1,4 @@
-<li class="onDeckSong flex items-center mb2" data-user-id="<%= @comment.user.id %>">
+<li class="onDeckSong flex items-center mb2" data-comment-id="<%= @comment.id %>" data-user-id="<%= @comment.user.id %>">
   <a href="<%= @comment.responses['permalink_url'] %>" target="_blank" style="font-size:0">
     <img src="<%= @comment.responses['artwork_url'] %>" class="onDeckAlbumArt">
   </a>
@@ -7,5 +7,5 @@
     <p class="m0 h6 opacity"><%= @comment.responses['user']['username'] %></p>
     <p class="m0 h6 opacity">Added by <%= @comment.user.name %></p>
   </div>
-  <a class="block flex-none remove">&times;</a>
+  <%= link_to '&times;'.html_safe, message_comment_path(@comment.message.id, @comment.id), method: :delete, remote: true, class: 'block flex-none remove' %>
 </li>

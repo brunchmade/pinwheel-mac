@@ -128,6 +128,9 @@
   channel.bind('on_deck', function(data) {
     $('.onDeckSongs').append(data.message);
   });
+  channel.bind('remove_on_deck', function(data) {
+    $('*[data-comment-id=' + data.id + ']').remove();
+  });
   channel.bind('now_playing', function(data) {
     // Replace current playing info
     $('.onDeckSongs li:first-child').remove();
