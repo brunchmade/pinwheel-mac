@@ -1,14 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="31px" height="40px" viewBox="0 0 31 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    <!-- Generator: Sketch 3.5.2 (25235) - http://www.bohemiancoding.com/sketch -->
-    <title>play</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="Artboard-1" sketch:type="MSArtboardGroup" transform="translate(-1908.000000, -1089.000000)" fill="#000000">
-            <g id="Light-Vibrant-Blur" sketch:type="MSLayerGroup" transform="translate(1480.000000, 360.000000)">
-                <path d="M428.253631,749.808794 C427.56127,749.36211 427.564526,748.63579 428.253631,748.191206 L456.746369,729.808794 C457.43873,729.36211 458,729.677492 458,730.495044 L458,767.504956 C458,768.330646 457.435474,768.63579 456.746369,768.191206 L428.253631,749.808794 Z" id="play" sketch:type="MSShapeGroup" transform="translate(443.000000, 749.000000) scale(-1, 1) translate(-443.000000, -749.000000) "></path>
-            </g>
-        </g>
-    </g>
-</svg>
+<svg width="31" height="40" viewBox="0 0 31 40" xmlns="http://www.w3.org/2000/svg"><path d="M29.746 20.81c.693-.448.69-1.174 0-1.62L1.254.81C.56.36 0 .676 0 1.494v37.01c0 .826.565 1.13 1.254.686l28.492-18.38z" fill="#000" fill-rule="evenodd"/></svg>

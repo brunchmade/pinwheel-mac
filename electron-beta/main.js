@@ -1,10 +1,15 @@
 const electron = require('electron');
 const app = electron.app;
 const globalShortcut = electron.globalShortcut;
+const session = require('electron').session;
 var BrowserWindow = require('browser-window');
 var Menu = require('menu');
 
 var force_quit = false;
+
+// session.defaultSession.cookies.get({}, function(error, cookies) {
+//   console.log(cookies);
+// });
 
 var menu = Menu.buildFromTemplate([
   {
@@ -76,10 +81,7 @@ var menu = Menu.buildFromTemplate([
       {
         label: 'Reload',
         accelerator: 'CmdOrCtrl+R',
-        click: function(item, focusedWindow) {
-          if (focusedWindow)
-            focusedWindow.reload();
-        }
+        click: function() {mainWindow.reload();}
       },
       {
         label: 'Toggle Full Screen',
@@ -102,10 +104,27 @@ var menu = Menu.buildFromTemplate([
           else
             return 'Ctrl+Shift+I';
         })(),
-        click: function(item, focusedWindow) {
-          if (focusedWindow)
-            focusedWindow.toggleDevTools();
-        }
+        click: function() {mainWindow.toggleDevTools();}
+      },
+    ]
+  },
+  {
+    label: 'Controls',
+    submenu: [
+      {
+        label: 'Play',
+        accelerator: 'Space',
+        click: function() {playOrPause();}
+      },
+      {
+        label: 'Next',
+        accelerator: 'MediaNextTrack',
+        click: function() {nextTrack();}
+      },
+      {
+        label: 'Favorite Song',
+        accelerator: 'MediaPreviousTrack',
+        click: function() {favoriteSong();}
       },
     ]
   },
@@ -162,7 +181,7 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 600,
-    minWidth: 700,
+    minWidth: 900,
     minHeight: 550,
     'node-integration': false,
     'title-bar-style': 'hidden-inset'
@@ -173,26 +192,17 @@ app.on('ready', function() {
 
   // Register a 'MediaPlayPause' shortcut listener.
   var ret = globalShortcut.register('MediaPlayPause', function() {
-    console.log('MediaPlayPause was pressed');
-    if(mainWindow.webContents.isAudioMuted()) {
-      //mainWindow.webContents.executeJavaScript("player.play()");
-      mainWindow.webContents.setAudioMuted(false);
-    } else {
-      //mainWindow.webContents.executeJavaScript("player.pause()");
-      mainWindow.webContents.setAudioMuted(true);
-    };
+    playOrPause();
   });
 
   // Register a 'MediaPreviousTrack' shortcut listener.
   var ret = globalShortcut.register('MediaPreviousTrack', function() {
-    console.log('MediaPreviousTrack was pressed');
-    mainWindow.webContents.executeJavaScript("console.log('favorite button pressed')");
+    favoriteSong()
   });
 
   // Register a 'MediaNextTrack' shortcut listener.
   var ret = globalShortcut.register('MediaNextTrack', function() {
-    console.log('MediaNextTrack was pressed');
-    mainWindow.webContents.executeJavaScript("console.log('skip button pressed')");
+    nextTrack();
   });
 
   // open _blank links in same window
@@ -220,4 +230,26 @@ app.on('ready', function() {
   app.on('activate', function(){
     mainWindow.show();
   });
+
 });
+
+
+// FUNCTIONS FOR TUMTABLE
+// ----------------------------------------------------------------------------
+function playOrPause() {
+  if(mainWindow.webContents.isAudioMuted()) {
+    //mainWindow.webContents.executeJavaScript("player.play()");
+    mainWindow.webContents.setAudioMuted(false);
+  } else {
+    //mainWindow.webContents.executeJavaScript("player.pause()");
+    mainWindow.webContents.setAudioMuted(true);
+  };
+}
+
+function nextTrack() {
+  mainWindow.webContents.executeJavaScript("console.log('skip button pressed')");
+}
+
+function favoriteSong() {
+  mainWindow.webContents.executeJavaScript("console.log('back button pressed')");
+}

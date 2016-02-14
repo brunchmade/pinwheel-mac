@@ -162,7 +162,7 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 600,
-    minWidth: 700,
+    minWidth: 900,
     minHeight: 550,
     'node-integration': false,
     'title-bar-style': 'hidden-inset'

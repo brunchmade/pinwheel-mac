@@ -1,40 +1,83 @@
 <link rel="stylesheet" class="js-palette" href="<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500').gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?colorquant=2&palette=css&colors=2&class=album&zoom=100') %>">
 
-<div class="nowPlayingBackground js-nowPlayingBackground" style="background-image: url(<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500').gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?blur=200') %>)"></div>
+<div class="nowPlayingBackground js-nowPlayingBackground" style="background-image: url(<%= image_url('fucker.jpg') %>)"></div>
 
 <div class="flex-auto flex justify-center items-center">
   <div class="nowPlaying center">
     <div class="atvImg nowPlayingAlbumArt">
       <div class="atvImg-layer" data-img="<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500')) %>"></div>
     </div>
-    <div class="progressBar">
+    <div class="progressBar js-bgcheck background">
       <div class="progress album-bg-1" style="width: 0"></div>
       <audio src="/demo.mp3" class="player hide"></audio>
     </div>
-    <div class="flex justify-between opacity" style=";margin-top:.25rem">
+    <div class="flex justify-between opacity js-bgcheck text" style=";margin-top:.25rem">
       <div class="h6 current-time">&nbsp;</div>
       <div class="h6 duration-time">&nbsp;</div>
     </div>
-    <h1><%= @now_playing.responses['title'] %></h1>
-    <h2 class="opacity"><%= @now_playing.responses['user']['username'] %></h2>
-    <div class="actions flex items-center justify-center">
-      <a class="btn btnLike"></a>
-      <a class="btn btnPlay"></a>
-      <a class="btn btnFf"></a>
+    <span class="js-bgcheck text">
+      <h1><%= @now_playing.responses['title'] %></h1>
+      <h2 class="opacity"><%= @now_playing.responses['user']['username'] %></h2>
+    </span>
+    <div class="actions flex items-center justify-center js-bgcheck svg">
+      <a class="btn btnLike stroke">
+        <svg width="31" height="28" viewBox="0 0 31 28" xmlns="http://www.w3.org/2000/svg"><path d="M14.886 5.847C13.82 3.577 11.473 2 8.75 2 5.022 2 2 4.955 2 8.6c0 .14.004.28.013.417A8.45 8.45 0 0 0 2 9.5C2 15.712 14.51 26 15.5 26 15.677 26 29 16.033 29 9.5c0-.152-.006-.297-.016-.435.01-.154.016-.31.016-.465C29 4.955 25.978 2 22.25 2c-2.723 0-5.07 1.576-6.136 3.847V5.6h-1.228v.247z" stroke="#000" stroke-width="1.5" fill="none" fill-rule="evenodd"/></svg>
+      </a>
+      <a class="btn btnPlay hide">
+        <svg width="31" height="40" viewBox="0 0 31 40" xmlns="http://www.w3.org/2000/svg"><path d="M29.746 20.81c.693-.448.69-1.174 0-1.62L1.254.81C.56.36 0 .676 0 1.494v37.01c0 .826.565 1.13 1.254.686l28.492-18.38z" fill="#000" fill-rule="evenodd"/></svg>
+      </a>
+      <a class="btn btnPause">
+        <svg width="29" height="38" viewBox="0 0 29 38" xmlns="http://www.w3.org/2000/svg"><path d="M0 1.5C0 .673.668 0 1.508 0h7.668c.833 0 1.508.676 1.508 1.5v35A1.5 1.5 0 0 1 9.176 38H1.508A1.507 1.507 0 0 1 0 36.5v-35zm18.316 0c0-.828.668-1.5 1.508-1.5h7.668C28.325 0 29 .676 29 1.5v35a1.5 1.5 0 0 1-1.508 1.5h-7.668a1.507 1.507 0 0 1-1.508-1.5v-35z" fill="#000" fill-rule="evenodd"/></svg>
+      </a>
+      <a class="btn btnFf">
+        <svg width="41" height="27" viewBox="0 0 41 27" xmlns="http://www.w3.org/2000/svg"><path d="M20.492 13.707c-.062.23-.226.447-.49.624L1.25 26.795c-.693.46-1.25.16-1.25-.668V.874C0 .046.56-.253 1.25.206L20 12.67c.267.176.43.395.492.623V.873c0-.827.56-1.126 1.25-.667l18.75 12.463c.693.46.69 1.202 0 1.66l-18.75 12.464c-.693.46-1.25.16-1.25-.668v-12.42z" fill="#000" fill-rule="evenodd"/></svg>
+      </a>
     </div>
   </div>
 </div>
 <audio src="/demo.mp3" class="player"></audio>
 
-<div class="onDeck flex-none">
+<div class="onDeck flex-none border-left">
   <%= render 'comments/new', message: @message %>
-  <div class="h6 px2 opacity" style="margin:1rem 0;font-weight:700;text-transform:uppercase">On deck:</div>
-  <ul class="list-reset onDeckSongs px2">
+
+  <div class="m2 flex justify-between">
+    <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">Online now</div>
+    <a class="h6 opacity" style="font-weight:700">@wr ▾</a>
+  </div>
+  <div class="usersInRoomWrapper">
+    <div class="usersInRoom pl2">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+      <img src="http://fillmurray.com/100/100">
+    </div>
+  </div>
+
+  <div class="m2 flex justify-between">
+    <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">On deck</div>
+    <a class="h6 opacity" style="font-weight:700">Simple Casual ▾</a>
+  </div>
+  <ul class="list-reset m0 onDeckSongs px2">
     <% @comments.each do |comment| %>
       <% @comment = comment %>
       <%= render 'comments/comment', comment: @comment %>
     <% end %>
   </ul>
+  <div class="toastSongNotification">Song added to queue.</div>
 </div>
 
 <script>
@@ -50,11 +93,23 @@
       $('.duration-time').text(String(player.media.duration).toHHMMSS());
       $('.progress').css("width", String(Math.floor((player.media.currentTime / player.media.duration) * 100)) + '%');
   }, false);
+  $('.btnPause').click(function() {
+    if (player.media.paused) {
+      return
+    } else {
+      player.pause();
+      $(this).addClass('hide');
+      $('.btnPlay').removeClass('hide');
+    }
+  });
+
   $('.btnPlay').click(function() {
     if (player.media.paused) {
       player.play();
+      $(this).addClass('hide');
+      $('.btnPause').removeClass('hide');
     } else {
-      player.pause();
+      return
     }
   });
 
@@ -82,10 +137,17 @@
     $('.atvImg-rendered-layer').css('background-image', 'url(' + data.artwork_url + ')');
     $('.js-nowPlayingBackground').css('background-image', 'url(' + data.artwork_url.to_s.gsub('large','t500x500').gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?blur=200' + ')');
     $('.js-palette').attr('href', data.artwork_url.to_s.gsub('large','t500x500').gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?colorquant=2&palette=css&colors=2&class=album&zoom=100');
+    BackgroundCheck.refresh();
+
     // Drop that track
     player.pause();
     player.setSrc(data.stream_url);
     player.load();
     player.play();
+  });
+
+  BackgroundCheck.init({
+    targets: '.js-bgcheck',
+    images: '.js-nowPlayingBackground'
   });
 </script>

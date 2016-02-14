@@ -13,7 +13,6 @@ body {
 }
 
 $osx-blue: #0068d9;
-$black: #000000;
 
 h1 {
   font-size: 1.2rem;
@@ -47,6 +46,86 @@ img {
   display: block;
 }
 
+.js-bgcheck.text.background--light {
+  color: black;
+}
+.js-bgcheck.background.background--light {
+  background-color: black;
+
+  &.progressBar {
+    background: rgba(black,.15);
+  }
+}
+
+.js-bgcheck.svg.background--light {
+  path {
+    stroke: none;
+    fill: black;
+  }
+
+  .stroke {
+    path {
+      fill: none;
+      stroke: black;
+    }
+  }
+}
+
+.js-bgcheck.text.background--dark {
+  color: white;
+}
+.js-bgcheck.background.background--dark {
+  background-color: white;
+
+  &.progressBar {
+    background: rgba(white,.15);
+  }
+}
+
+.js-bgcheck.svg.background--dark {
+  path {
+    stroke: none;
+    fill: white;
+  }
+
+  .stroke {
+    path {
+      fill: none;
+      stroke: white;
+    }
+  }
+}
+
+.js-bgcheck.text.background--complex {
+  color: gray;
+}
+
+.js-bgcheck.background.background--complex {
+  background-color: gray;
+
+  &.progressBar {
+    background: rgba(gray,.15);
+  }
+}
+
+.js-bgcheck.svg.background--complex {
+  path {
+    stroke: none;
+    fill: gray;
+  }
+
+  .stroke {
+    path {
+      fill: none;
+      stroke: gray;
+    }
+  }
+}
+
+.border-left {
+  border-left: 1px solid rgba(black,.25);
+}
+
 .nowPlayingBackground {
   position: absolute;
   top: 0;
@@ -54,7 +133,7 @@ img {
   bottom: 0;
   left: 0;
   z-index: -1;
-  background-color: rgba($black,.9);
+  background-color: rgba(black,.9);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -76,7 +155,7 @@ img {
   height: 3px;
   margin-top: 1rem;
   width: 100%;
-  background: rgba($black,.15);
+  background: rgba(black,.15);
   position: relative;
   z-index: 3;
 }
@@ -96,6 +175,11 @@ img {
 .btn {
   opacity: .6;
   transition: all .2s;
+  cursor: pointer;
+}
+
+.btn svg {
+  height: 100%;
 }
 
 .btn:hover {
@@ -105,16 +189,19 @@ img {
 .btnLike {
   width: 30px;
   height: 22px;
-  background: image-url('like.svg') no-repeat center;
-  background-size: contain;
   display: inline-block;
 }
 
 .btnPlay {
   width: 24px;
   height: 30px;
-  background: image-url('play.svg') no-repeat center;
-  background-size: contain;
+  display: inline-block;
+  margin: 0 4rem;
+}
+
+.btnPause {
+  width: 24px;
+  height: 30px;
   display: inline-block;
   margin: 0 4rem;
 }
@@ -122,8 +209,6 @@ img {
 .btnFf {
   width: 30px;
   height: 20px;
-  background: image-url('ff.svg') no-repeat center;
-  background-size: contain;
   display: inline-block;
 }
 
@@ -136,7 +221,7 @@ input[type="text"] {
   -webkit-appearance: none;
   border: none;
   border-radius: 4px;
-  box-shadow: 0 1px 1px 0 rgba($black,.15);
+  box-shadow: 0 1px 1px 0 rgba(black,.15);
   transition: all .25s;
   background: white image-url('search.svg') no-repeat;
   background-size: 13px;
@@ -153,7 +238,26 @@ input[type="text"] {
     padding-left: 26px;
     background-position: 10px 7px;
     outline: none;
-    box-shadow: 0 0 1px 1px $osx-blue;
+  }
+}
+
+.usersInRoomWrapper {
+  height: 2.75rem;
+  overflow: hidden;
+  overflow: scroll;
+
+  .usersInRoom {
+    margin: 0;
+  }
+
+  img {
+    width: 2rem;
+    height: 2rem;
+    display: inline-block;
+    border-radius: 50%;
+    float: left;
+    margin: 0 .75rem .75rem 0;
+    white-space: nowrap;
   }
 }
 
@@ -161,18 +265,19 @@ input[type="text"] {
   width: 330px;
   background: rgba(white,.33);
   height: 100vh;
+  position: relative;
 }
 
 .onDeckSongs {
   overflow-y: scroll;
-  height: calc(100vh - 89px);
+  height: calc(100vh - 182px);
   -webkit-overflow-scrolling: touch;
 }
 
 .onDeckSong .remove {
   transition: all .15s;
   display: none;
-  background: rgba($black,.33);
+  background: rgba(black,.33);
   border-radius: 50%;
   width: 18px;
   height: 18px;
@@ -185,7 +290,7 @@ input[type="text"] {
   cursor: pointer;
 
   &:hover {
-    background: rgba($black,.5);
+    background: rgba(black,.5);
   }
 }
 
@@ -201,8 +306,28 @@ input[type="text"] {
 }
 
 .onDeckAlbumArt {
-  background-color: rgba($black,.2);
+  background-color: rgba(black,.2);
   width: 46px;
   height: 46px;
-  box-shadow: 0 0 1px 0 rgba($black,.5);
+  box-shadow: 0 0 1px 0 rgba(black,.5);
+}
+
+.toastSongNotification {
+  position: absolute;
+  bottom: -30px;
+  left: 50px;
+  right: 50px;
+  text-align: center;
+  padding: .4rem;
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(20px);
+  transition: all .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 2px 10px rgba(black,.25);
+  font-size: .85rem;
+  font-weight: 500;
+
+  &.good {
+    background: white;
+    bottom: 10px;
+  }
 }
