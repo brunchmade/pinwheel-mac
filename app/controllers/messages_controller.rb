@@ -5,7 +5,12 @@ class MessagesController < ApplicationController
 
   def show
     @message = Message.find(params[:id])
-    @now_playing = Comment.where(now_playing: true).first
-    @comments = Comment.where(now_playing: false, aired_at: nil).order(created_at: :asc)
+    playing = Comment.where(now_playing: true, message_id: params[:id]).first
+    if playing
+      @now_playing = playing
+    else
+      @now_playing = Comment.first
+    end
+    @comments = Comment.where(now_playing: false, aired_at: nil, message_id: params[:id]).order(created_at: :asc)
   end
 end

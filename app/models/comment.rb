@@ -1,13 +1,10 @@
 class Comment < ActiveRecord::Base
   include ApplicationHelper
 
-  validates :content, uniqueness: true
-
   belongs_to :message
   belongs_to :user
 
   before_create :resolve
-  # after_commit { CommentRelayJob.perform_later(self) }
   after_create :push
 
   private
