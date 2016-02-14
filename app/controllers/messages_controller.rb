@@ -1,7 +1,4 @@
 class MessagesController < ApplicationController
-  require 'net/http'
-  require 'json'
-
   def backfill
     @message = Message.find(params[:id])
 
