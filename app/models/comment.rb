@@ -27,8 +27,6 @@ class Comment < ActiveRecord::Base
       push_track(self)
     else
       Pusher.trigger('message_' + self.message.id.to_s, 'on_deck', {
-        # message: ApplicationController.new.render_to_string("comments/comment", :formats => [:html], :locals => {:comment => self}, :layout => false)
-        #message: ApplicationRenderer.render(comment: self, template: 'comments/comment', locals: { comment: self })
         message: ApplicationController.render(
           assigns: { comment: self },
           template: 'comments/_comment'

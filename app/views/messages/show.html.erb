@@ -72,11 +72,11 @@
   var channel = pusher.subscribe('message_<%= @message.id %>');
 
   channel.bind('on_deck', function(data) {
-    $('.onDeckSongs').prepend(data.message);
+    $('.onDeckSongs').append(data.message);
   });
   channel.bind('now_playing', function(data) {
     // Replace current playing info
-    $('.onDeck li:last-child').remove();
+    $('.onDeckSongs li:first-child').remove();
     $('.nowPlaying h1').text(data.title);
     $('.nowPlaying h2').text(data.artist);
     $('.atvImg-rendered-layer').css('background-image', 'url(' + data.artwork_url + ')');
