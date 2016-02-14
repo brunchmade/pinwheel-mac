@@ -1,4 +1,6 @@
-var app = require('app');
+const electron = require('electron');
+const app = electron.app;
+const globalShortcut = electron.globalShortcut;
 var BrowserWindow = require('browser-window');
 var Menu = require('menu');
 
@@ -169,6 +171,30 @@ app.on('ready', function() {
   // and load the index.html of the app.
   mainWindow.loadURL('http://localhost:3000');
 
+  // Register a 'MediaPlayPause' shortcut listener.
+  var ret = globalShortcut.register('MediaPlayPause', function() {
+    console.log('MediaPlayPause was pressed');
+    if(mainWindow.webContents.isAudioMuted()) {
+      //mainWindow.webContents.executeJavaScript("player.play()");
+      mainWindow.webContents.setAudioMuted(false);
+    } else {
+      //mainWindow.webContents.executeJavaScript("player.pause()");
+      mainWindow.webContents.setAudioMuted(true);
+    };
+  });
+
+  // Register a 'MediaPreviousTrack' shortcut listener.
+  var ret = globalShortcut.register('MediaPreviousTrack', function() {
+    console.log('MediaPreviousTrack was pressed');
+    mainWindow.webContents.executeJavaScript("console.log('favorite button pressed')");
+  });
+
+  // Register a 'MediaNextTrack' shortcut listener.
+  var ret = globalShortcut.register('MediaNextTrack', function() {
+    console.log('MediaNextTrack was pressed');
+    mainWindow.webContents.executeJavaScript("console.log('skip button pressed')");
+  });
+
   // open _blank links in same window
   mainWindow.webContents.on('new-window', function(e, url) {
     e.preventDefault();
@@ -187,6 +213,7 @@ app.on('ready', function() {
 
   mainWindow.on('closed', function(){
     mainWindow = null;
+    globalShortcut.unregisterAll()
     app.quit();
   });
 
