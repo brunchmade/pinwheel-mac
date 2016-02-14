@@ -41,5 +41,5 @@ Rails.application.configure do
 
   # Set Action Cable server url for consumer connection
   #config.action_cable.url = 'ws://localhost:28080'
-  config.action_cable.disable_request_forgery_protection = true
+  # config.action_cable.disable_request_forgery_protection = true
 end

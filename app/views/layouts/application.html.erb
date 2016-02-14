@@ -2,11 +2,10 @@
 <html>
 <head>
   <title>Melos</title>
-  <%= action_cable_meta_tag %>
   <link href="//npmcdn.com/basscss@8.0.0-beta5/css/basscss.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/mediaplayer/mediaelementplayer.css" /></code>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <script src="//js.pusher.com/3.0/pusher.min.js"></script>
   <script src="/mediaplayer/mediaelement-and-player.min.js"></script>
   <%= csrf_meta_tags %>

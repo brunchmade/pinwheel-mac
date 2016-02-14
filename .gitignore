@@ -22,3 +22,4 @@
 npn-debug.log
 .env
 dump.rdb
+.byebug_history

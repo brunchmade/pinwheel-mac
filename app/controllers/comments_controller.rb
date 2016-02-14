@@ -16,11 +16,13 @@ class CommentsController < ApplicationController
     playing = @message.comments.where(now_playing: true).first
 
     if playing
+      html = ApplicationController.render(
+        assigns: { comment: @comment },
+        template: 'comments/_comment',
+        layout: false
+      )
       Pusher.trigger('message_' + @comment.message.id.to_s, 'on_deck', {
-        message: ApplicationController.render(
-          assigns: { comment: @comment },
-          template: 'comments/_comment'
-        )
+        message: html
       })
     else
       now = Time.now.utc

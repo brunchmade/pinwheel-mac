@@ -1,6 +1,6 @@
 module Authentication
   extend ActiveSupport::Concern
-  
+
   included do
     before_action :ensure_authenticated_user
   end
@@ -18,7 +18,6 @@ module Authentication
     end
 
     def unauthenticate_user
-      ActionCable.server.disconnect(current_user: @current_user)
       @current_user = nil
       cookies.delete(:user_id)
     end
