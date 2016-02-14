@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
   def create
     authenticate_user(params[:user_id])
-    redirect_to examples_url
+    redirect_to messages_url
   end
 
   def destroy

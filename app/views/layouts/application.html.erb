@@ -12,6 +12,9 @@
   <meta name="current-user" id="<%= @current_user.try(:id) %>">
 </head>
 <body class="m0 flex">
+  <% if @current_user %>
+    Hello <%= @current_user.name %> (<%= link_to 'Logout', session_path, method: :delete %>)!
+  <% end %>
   <%= yield %>
 </body>
 </html>

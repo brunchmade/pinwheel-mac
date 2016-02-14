@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-  resource  :session
-  resources :examples
+  root 'sessions#new'
 
   resources :messages do
     resources :comments
   end
-
-  root 'examples#index'
+  resource  :session
 end
