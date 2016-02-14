@@ -11,9 +11,9 @@
       <div class="progress album-bg-1" style="width: 0"></div>
       <audio src="/demo.mp3" class="player hide"></audio>
     </div>
-    <div class="flex justify-between opacity js-bgcheck text" style=";margin-top:.25rem">
-      <div class="h6 current-time">&nbsp;</div>
-      <div class="h6 duration-time">&nbsp;</div>
+    <div class="flex justify-between opacity" style=";margin-top:.25rem">
+      <div class="h6 current-time js-bgcheck text">&nbsp;</div>
+      <div class="h6 duration-time js-bgcheck text">&nbsp;</div>
     </div>
     <span class="js-bgcheck text">
       <h1><%= @now_playing.responses['title'] %></h1>
@@ -31,7 +31,6 @@
                 repeatCount="1"></animate>
              </path>
           </defs>
-          <use xlink:href="#ytp-12" class="ytp-svg-shadow"></use>
           <use xlink:href="#ytp-12" class="ytp-svg-fill"></use>
        </svg>
       </a>
