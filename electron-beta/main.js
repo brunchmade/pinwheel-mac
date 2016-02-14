@@ -16,11 +16,6 @@ var menu = Menu.buildFromTemplate([
         type: 'separator'
       },
       {
-        label: 'Reload',
-        accelerator: 'CmdOrCtrl+R',
-        click: function() {mainWindow.reload();}
-      },
-      {
         label: 'Hide Tumtable',
         accelerator: 'CmdOrCtrl+H',
         click: function() {mainWindow.hide();}
