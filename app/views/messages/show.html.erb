@@ -55,24 +55,6 @@
   </div>
   <div class="usersInRoomWrapper">
     <div class="usersInRoom pl2">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
-      <img src="http://fillmurray.com/100/100">
     </div>
   </div>
 
@@ -128,7 +110,14 @@
   });
 
   var pusher = new Pusher('<%= ENV['PUSHER_KEY'] %>', {
-    encrypted: true
+    encrypted: true,
+    authEndpoint: '/pusher/auth',
+    channel_name: '1',
+    auth: {
+      headers: {
+        'X-CSRF-Token': '<%= form_authenticity_token %>'
+      }
+    }
   });
 
   var channel = pusher.subscribe('message_<%= @message.id %>');
@@ -152,6 +141,23 @@
     player.setSrc(data.stream_url);
     player.load();
     player.play();
+  });
+
+  var presenceChannel = pusher.subscribe('presence-<%= @message.id %>');
+  var count = presenceChannel.members.count;
+  presenceChannel.bind('pusher:subscription_succeeded', function(members) {
+    members.each(function(member) {
+      $('.usersInRoom').append('<img src="https://fillmurray.com/100/100">');
+    });
+  })
+
+  presenceChannel.bind('pusher:member_added', function(member) {
+    add_member(member.id, member.info);
+    $('.usersInRoom').append('<img src="https://fillmurray.com/100/100">');
+  });
+  presenceChannel.bind('pusher:member_removed', function(member) {
+    add_member(member.id, member.info);
+    $('.usersInRoom').delete('<img src="https://fillmurray.com/100/100">');
   });
 
   BackgroundCheck.init({
