@@ -1,6 +1,8 @@
 class Comment < ActiveRecord::Base
   include ApplicationHelper
 
+  validates :content, uniqueness: true
+
   belongs_to :message
   belongs_to :user
 

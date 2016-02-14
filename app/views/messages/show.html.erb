@@ -27,7 +27,9 @@
 <audio src="/demo.mp3" class="player"></audio>
 
 <div class="onDeck flex-none">
-  <%= render 'comments/new', message: @message %>
+  <div class="mt2 mx2">
+    <%= render 'comments/new', message: @message %>
+  </div>
   <div class="h6 px2 opacity" style="margin:1rem 0;font-weight:700;text-transform:uppercase">On deck:</div>
   <ul class="list-reset onDeckSongs px2">
     <% @comments.each do |comment| %>
