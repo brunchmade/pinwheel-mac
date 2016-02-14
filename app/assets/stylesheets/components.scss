@@ -146,7 +146,8 @@ img {
 }
 
 .nowPlaying {
-  width: calc(90vw - 330px);
+  width: calc(90vw - 500px);
+  max-width: 60vh;
 }
 
 .nowPlayingAlbumArt {
