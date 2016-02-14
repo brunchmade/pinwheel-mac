@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   resources :messages do
     resources :comments
+    member do
+      get 'backfill'
+    end
   end
+
   resource  :session
 
   post 'pusher/auth'
