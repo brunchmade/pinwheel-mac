@@ -132,10 +132,6 @@ img {
   }
 }
 
-.border-left {
-  border-left: 1px solid rgba(black,.25);
-}
-
 .nowPlayingBackground {
   position: absolute;
   top: 0;
@@ -151,20 +147,21 @@ img {
 
 .nowPlaying {
   width: calc(90vw - 330px);
-  max-width: 320px;
 }
 
 .nowPlayingAlbumArt {
-  width: calc(90vw - 330px);
-  height: calc(90vw - 330px);
-  max-width: 320px;
-  max-height: 320px;
+  width: calc(90vw - 500px);
+  height: calc(90vw - 500px);
+  max-width: 60vh;
+  max-height: 60vh;
+  margin: 0 auto;
 }
 
 .progressBar {
   height: 3px;
-  margin-top: 1rem;
-  width: 100%;
+  margin: 1rem auto 0;
+  width: calc(90vw - 500px);
+  max-width: 60vh;
   background: rgba(black,.15);
   position: relative;
   z-index: 3;
@@ -287,6 +284,7 @@ input[type="text"] {
 .onDeck {
   width: 330px;
   background: rgba(white,.33);
+  border-left: 1px solid rgba(white,.2);
   height: 100vh;
   position: relative;
 }
