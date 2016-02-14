@@ -27,15 +27,20 @@ h1 {
 
 h2 {
   font-size: .9rem;
-  font-weight: 400;
+  font-weight: 500;
   margin: 0 auto 1.4rem;
 }
 
 h3 {
-  font-size: .9rem;
+  font-size: .85rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.h6 {
+  font-size: .8rem;
+  font-weight: 500;
 }
 
 img {
@@ -85,7 +90,7 @@ img {
 }
 
 .opacity {
-  opacity: .4;
+  opacity: .45;
 }
 
 .btn {
