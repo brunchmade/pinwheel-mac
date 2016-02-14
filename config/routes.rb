@@ -5,4 +5,6 @@ Rails.application.routes.draw do
     resources :comments
   end
   resource  :session
+
+  post 'pusher/auth'
 end
