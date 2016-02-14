@@ -1,5 +1,3 @@
-<div class="m2">
-  <%= form_for [ message, Comment.new ], remote: true do |form| %>
-    <%= form.text_field :content, placeholder: 'Add a song' %>
-  <% end %>
-</div>
+<%= form_for [ message, Comment.new ], remote: true do |form| %>
+  <%= form.text_field :content, placeholder: 'Add a song' %>
+<% end %>
