@@ -143,22 +143,24 @@
     player.setSrc(data.stream_url);
     player.load();
     player.play();
+    // Refresh background
+    BackgroundCheck.refresh();
   });
 
   var presenceChannel = pusher.subscribe('presence-<%= @message.id %>');
   var count = presenceChannel.members.count;
   presenceChannel.bind('pusher:subscription_succeeded', function(members) {
     members.each(function(member) {
-      $('.usersInRoom').append('<img src="' + member.info['avatar_url'] + '">');
+      $('.usersInRoom').append('<img src="' + member.info['avatar_url'] + '" data-member-id="' + member.id + '">');
     });
   })
   presenceChannel.bind('pusher:member_added', function(member) {
     //add_member(member.id, member.info);
-    $('.usersInRoom').append('<img src="' + member.info['avatar_url'] + '">');
+    $('.usersInRoom').append('<img src="' + member.info['avatar_url'] + '" data-member-id="' + member.id + '">');
   });
   presenceChannel.bind('pusher:member_removed', function(member) {
     //add_member(member.id, member.info);
-    $('.usersInRoom img:last-child').remove();
+    $('*[data-member-id=' + member.id + ']').remove();
   });
 
   BackgroundCheck.init({
