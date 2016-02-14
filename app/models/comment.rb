@@ -5,7 +5,18 @@ class Comment < ActiveRecord::Base
   belongs_to :user
 
   before_create :resolve
-  after_create :push
+
+  def album_art_url
+    self.responses['artwork_url'].to_s.gsub('large','t500x500')
+  end
+
+  def blurred_album_art_url
+    album_art_url.gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?blur=200'
+  end
+
+  def palette_url
+    album_art_url.gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?colorquant=2&palette=css&colors=2&class=album&zoom=100'
+  end
 
   def reset!
     update_attributes(aired_at: nil, now_playing: false)
@@ -20,21 +31,5 @@ class Comment < ActiveRecord::Base
     })
     track = client.get('/resolve', :url => self.content)
     self.responses = track.to_json
-  end
-
-  def push
-    if Comment.where(now_playing: true).count == 0
-      self.now_playing = true
-      self.aired_at = Time.now.utc
-      self.save
-      push_track(self)
-    else
-      Pusher.trigger('message_' + self.message.id.to_s, 'on_deck', {
-        message: ApplicationController.render(
-          assigns: { comment: self },
-          template: 'comments/_comment'
-        )
-      })
-    end
   end
 end

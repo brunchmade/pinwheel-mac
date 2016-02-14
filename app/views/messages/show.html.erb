@@ -1,11 +1,11 @@
-<link rel="stylesheet" class="js-palette" href="<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500').gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?colorquant=2&palette=css&colors=2&class=album&zoom=100') %>">
+<link rel="stylesheet" class="js-palette" href="<%= @now_playing.palette_url %>">
 
-<div class="nowPlayingBackground js-nowPlayingBackground" style="background-image: url(<%= image_url('fucker.jpg') %>)"></div>
+<div class="nowPlayingBackground js-nowPlayingBackground" style="background-image: url(<%= @now_playing.blurred_album_art_url %>)"></div>
 
 <div class="flex-auto flex justify-center items-center">
   <div class="nowPlaying center">
     <div class="atvImg nowPlayingAlbumArt">
-      <div class="atvImg-layer" data-img="<%= image_url(@now_playing.responses['artwork_url'].to_s.gsub('large','t500x500')) %>"></div>
+      <div class="atvImg-layer" data-img="<%= @now_playing.album_art_url %>"></div>
     </div>
     <div class="progressBar js-bgcheck background">
       <div class="progress album-bg-1" style="width: 0"></div>
@@ -86,7 +86,7 @@
   player = new MediaElementPlayer('audio', {features: [], alwaysShowControls: false, enableKeyboard: true});
   player.setSrc('<%= @now_playing.responses['stream_url'].to_s + '?client_id=b59d1f4b68bbc8f2b0064188f210117d' %>');
   player.load();
-  player.setCurrentTime(<%= (Time.now.utc - @now_playing.aired_at).to_i %>);
+  player.setCurrentTime(<%= @now_playing.aired_at ? (Time.now.utc - @now_playing.aired_at).to_i : 0 %>);
   player.play();
   player.media.addEventListener('timeupdate', function(e) {
       $('.current-time').text(String(player.media.currentTime).toHHMMSS());

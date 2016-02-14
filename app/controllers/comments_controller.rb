@@ -1,8 +1,27 @@
 class CommentsController < ApplicationController
+  include ApplicationHelper
+
   before_action :set_message
 
   def create
-    @comment = Comment.create! content: params[:comment][:content], message: @message, user: @current_user
+    @comment = @message.comments.create!(content: params[:comment][:content], user: @current_user)
+    playing = @message.comments.where(now_playing: true).first
+
+    if playing
+      Pusher.trigger('message_' + @comment.message.id.to_s, 'on_deck', {
+        message: ApplicationController.render(
+          assigns: { comment: @comment },
+          template: 'comments/_comment'
+        )
+      })
+    else
+      now = Time.now.utc
+      @comment.update_attributes(now_playing: true, aired_at: now)
+      next_track_at = now + (@comment.responses['duration'] / 1000).ceil
+      NextUpJob.set(wait_until: next_track_at).perform_later(@message.id)
+
+      push_track(@comment)
+    end
   end
 
   private
