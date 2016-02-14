@@ -7,7 +7,13 @@ class Comment < ActiveRecord::Base
   before_create :resolve
 
   def album_art_url
-    self.responses['artwork_url'].to_s.gsub('large','t500x500')
+    if self.responses['artwork_url']
+      self.responses['artwork_url'].to_s.gsub('large','t500x500')
+    elsif self.responses['user']['avatar_url']
+      self.responses['user']['avatar_url'].to_s.gsub('large','t500x500')
+    else
+      'https://i1.sndcdn.com/avatars-000106486517-x71ahg-large.jpg'
+    end
   end
 
   def blurred_album_art_url

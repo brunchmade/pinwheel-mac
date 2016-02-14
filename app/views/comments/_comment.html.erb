@@ -1,6 +1,6 @@
 <li class="onDeckSong flex items-center mb2" data-comment-id="<%= @comment.id %>" data-user-id="<%= @comment.user.id %>">
   <a href="<%= @comment.responses['permalink_url'] %>" target="_blank" style="font-size:0">
-    <img src="<%= @comment.responses['artwork_url'] %>" class="onDeckAlbumArt">
+    <img src="<%= @comment.album_art_url %>" class="onDeckAlbumArt">
   </a>
   <div class="ml1" style="width:226px;overflow:hidden">
     <h3 class="m0"><%= @comment.responses['title'] %></h3>
