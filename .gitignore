@@ -21,3 +21,4 @@
 /electron/dist
 npn-debug.log
 .env
+dump.rdb

@@ -37,6 +37,7 @@
 </div>
 <audio src="/demo.mp3" class="player"></audio>
 
+<<<<<<< HEAD
 <div class="onDeck flex-none border-left">
   <%= render 'comments/new', message: @message %>
 
@@ -113,13 +114,6 @@
     }
   });
 
-  // Enable pusher logging - don't include this in production
-  Pusher.log = function(message) {
-    if (window.console && window.console.log) {
-      window.console.log(message);
-    }
-  };
-
   var pusher = new Pusher('<%= ENV['PUSHER_KEY'] %>', {
     encrypted: true
   });
@@ -135,10 +129,8 @@
     $('.nowPlaying h1').text(data.title);
     $('.nowPlaying h2').text(data.artist);
     $('.atvImg-rendered-layer').css('background-image', 'url(' + data.artwork_url + ')');
-    $('.js-nowPlayingBackground').css('background-image', 'url(' + data.artwork_url.to_s.gsub('large','t500x500').gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?blur=200' + ')');
-    $('.js-palette').attr('href', data.artwork_url.to_s.gsub('large','t500x500').gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?colorquant=2&palette=css&colors=2&class=album&zoom=100');
-    BackgroundCheck.refresh();
-
+    $('.js-nowPlayingBackground').css('background-image', 'url(' + data.background_url  + ')');
+    $('.js-palette').attr('href', data.palette_url);
     // Drop that track
     player.pause();
     player.setSrc(data.stream_url);
