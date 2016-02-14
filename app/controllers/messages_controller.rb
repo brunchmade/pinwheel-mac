@@ -26,7 +26,11 @@ class MessagesController < ApplicationController
       })
     end
 
-    NextUpJob.perform_now(@message.id)
+
+    playing = @message.comments.where(now_playing: true).first
+    unless playing
+      NextUpJob.perform_now(@message.id)
+    end
   end
 
   def index
