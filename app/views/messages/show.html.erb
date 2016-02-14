@@ -65,7 +65,7 @@
     }
   };
 
-  var pusher = new Pusher('28b57a0348c8e7d03367', {
+  var pusher = new Pusher('<%= ENV['PUSHER_KEY'] %>', {
     encrypted: true
   });
 
