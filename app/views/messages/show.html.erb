@@ -147,17 +147,16 @@
   var count = presenceChannel.members.count;
   presenceChannel.bind('pusher:subscription_succeeded', function(members) {
     members.each(function(member) {
-      $('.usersInRoom').append('<img src="https://fillmurray.com/100/100">');
+      $('.usersInRoom').append('<img src="https://tumtable.imgix.net/avatars-000106486517-x71ahg-t200x200.jpg">');
     });
   })
-
   presenceChannel.bind('pusher:member_added', function(member) {
-    add_member(member.id, member.info);
-    $('.usersInRoom').append('<img src="https://fillmurray.com/100/100">');
+    //add_member(member.id, member.info);
+    $('.usersInRoom').append('<img src="https://tumtable.imgix.net/avatars-000106486517-x71ahg-t200x200.jpg">');
   });
   presenceChannel.bind('pusher:member_removed', function(member) {
-    add_member(member.id, member.info);
-    $('.usersInRoom').delete('<img src="https://fillmurray.com/100/100">');
+    //add_member(member.id, member.info);
+    $('.usersInRoom img:last-child').remove();
   });
 
   BackgroundCheck.init({
