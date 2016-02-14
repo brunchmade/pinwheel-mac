@@ -114,7 +114,7 @@ var menu = Menu.buildFromTemplate([
       {
         label: 'Play',
         accelerator: 'Space',
-        click: function() {playOrPause();}
+        click: function() {muteOrUnmute();}
       },
       {
         label: 'Next',
@@ -188,11 +188,11 @@ app.on('ready', function() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL('http://localhost:3000');
+  mainWindow.loadURL('http://localhost:5000');
 
   // Register a 'MediaPlayPause' shortcut listener.
   var ret = globalShortcut.register('MediaPlayPause', function() {
-    playOrPause();
+    muteOrUnmute();
   });
 
   // Register a 'MediaPreviousTrack' shortcut listener.
@@ -236,14 +236,8 @@ app.on('ready', function() {
 
 // FUNCTIONS FOR TUMTABLE
 // ----------------------------------------------------------------------------
-function playOrPause() {
-  if(mainWindow.webContents.isAudioMuted()) {
-    //mainWindow.webContents.executeJavaScript("player.play()");
-    mainWindow.webContents.setAudioMuted(false);
-  } else {
-    //mainWindow.webContents.executeJavaScript("player.pause()");
-    mainWindow.webContents.setAudioMuted(true);
-  };
+function muteOrUnmute() {
+  mainWindow.webContents.executeJavaScript("muteOrUnmute()");
 }
 
 function nextTrack() {

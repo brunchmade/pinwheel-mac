@@ -95,22 +95,28 @@
       $('.duration-time').text(String(player.media.duration).toHHMMSS());
       $('.progress').css("width", String(Math.floor((player.media.currentTime / player.media.duration) * 100)) + '%');
   }, false);
-  $('.btnPause').click(function() {
-    if (player.media.paused) {
-      return
+
+  function muteOrUnmute() {
+    if($("audio").prop('muted')) {
+      if (player.media.paused) {
+        player.play();
+      }
+      $("audio").prop('muted', false); //mute
+      $('.btnPlay').addClass('hide');
+      $('.btnPause').removeClass('hide');
+    } else {
+      $("audio").prop('muted', true); //mute
+      $('.btnPause').addClass('hide');
+      $('.btnPlay').removeClass('hide');
     }
-    $("audio").prop('muted', true); //mute
-    $(this).addClass('hide');
-    $('.btnPlay').removeClass('hide');
+  }
+
+  $('.btnPause').click(function() {
+    muteOrUnmute();
   });
 
   $('.btnPlay').click(function() {
-    if (player.media.paused) {
-      player.play()
-    }
-    $("audio").prop('muted', false); //mute
-    $(this).addClass('hide');
-    $('.btnPause').removeClass('hide');
+    muteOrUnmute();
   });
 
   var pusher = new Pusher('<%= ENV['PUSHER_KEY'] %>', {
