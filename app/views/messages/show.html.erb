@@ -23,11 +23,17 @@
       <a class="btn btnLike stroke">
         <svg width="31" height="28" viewBox="0 0 31 28" xmlns="http://www.w3.org/2000/svg"><path d="M14.886 5.847C13.82 3.577 11.473 2 8.75 2 5.022 2 2 4.955 2 8.6c0 .14.004.28.013.417A8.45 8.45 0 0 0 2 9.5C2 15.712 14.51 26 15.5 26 15.677 26 29 16.033 29 9.5c0-.152-.006-.297-.016-.435.01-.154.016-.31.016-.465C29 4.955 25.978 2 22.25 2c-2.723 0-5.07 1.576-6.136 3.847V5.6h-1.228v.247z" stroke="#000" stroke-width="1.5" fill="none" fill-rule="evenodd"/></svg>
       </a>
-      <a class="btn btnPlay hide">
-        <svg width="31" height="40" viewBox="0 0 31 40" xmlns="http://www.w3.org/2000/svg"><path d="M29.746 20.81c.693-.448.69-1.174 0-1.62L1.254.81C.56.36 0 .676 0 1.494v37.01c0 .826.565 1.13 1.254.686l28.492-18.38z" fill="#000" fill-rule="evenodd"/></svg>
-      </a>
-      <a class="btn btnPause">
-        <svg width="29" height="38" viewBox="0 0 29 38" xmlns="http://www.w3.org/2000/svg"><path d="M0 1.5C0 .673.668 0 1.508 0h7.668c.833 0 1.508.676 1.508 1.5v35A1.5 1.5 0 0 1 9.176 38H1.508A1.507 1.507 0 0 1 0 36.5v-35zm18.316 0c0-.828.668-1.5 1.508-1.5h7.668C28.325 0 29 .676 29 1.5v35a1.5 1.5 0 0 1-1.508 1.5h-7.668a1.507 1.507 0 0 1-1.508-1.5v-35z" fill="#000" fill-rule="evenodd"/></svg>
+      <a class="btn btnPlayPause">
+        <svg viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <defs>
+             <path id="ytp-12" d="M 11 10 L 17 10 L 17 26 L 11 26 M 20 10 L 26 10 L 26 26 L 20 26">
+                <animate id="animation" begin="indefinite" attributeType="XML" attributeName="d" fill="freeze" from="M11,10 L17,10 17,26 11,26 M20,10 L26,10 26,26 20,26" to="M11,10 L18,13.74 18,22.28 11,26 M18,13.74 L26,18 26,18 18,22.28" dur="0.1s" keySplines=".4 0 1 1"
+                repeatCount="1"></animate>
+             </path>
+          </defs>
+          <use xlink:href="#ytp-12" class="ytp-svg-shadow"></use>
+          <use xlink:href="#ytp-12" class="ytp-svg-fill"></use>
+       </svg>
       </a>
       <a class="btn btnFf">
         <svg width="41" height="27" viewBox="0 0 41 27" xmlns="http://www.w3.org/2000/svg"><path d="M20.492 13.707c-.062.23-.226.447-.49.624L1.25 26.795c-.693.46-1.25.16-1.25-.668V.874C0 .046.56-.253 1.25.206L20 12.67c.267.176.43.395.492.623V.873c0-.827.56-1.126 1.25-.667l18.75 12.463c.693.46.69 1.202 0 1.66l-18.75 12.464c-.693.46-1.25.16-1.25-.668v-12.42z" fill="#000" fill-rule="evenodd"/></svg>
@@ -96,26 +102,27 @@
       $('.progress').css("width", String(Math.floor((player.media.currentTime / player.media.duration) * 100)) + '%');
   }, false);
 
+  var flip = true;
   function muteOrUnmute() {
     if($("audio").prop('muted')) {
       if (player.media.paused) {
         player.play();
       }
       $("audio").prop('muted', false); //mute
-      $('.btnPlay').addClass('hide');
-      $('.btnPause').removeClass('hide');
     } else {
       $("audio").prop('muted', true); //mute
-      $('.btnPause').addClass('hide');
-      $('.btnPlay').removeClass('hide');
     }
+    pause = "M11,10 L18,13.74 18,22.28 11,26 M18,13.74 L26,18 26,18 18,22.28",
+    play = "M11,10 L17,10 17,26 11,26 M20,10 L26,10 26,26 20,26",
+    $animation = $('#animation');
+    flip = !flip;
+    $animation.attr({
+      "from": flip ? pause : play,
+      "to": flip ? play : pause
+    }).get(0).beginElement();
   }
 
-  $('.btnPause').click(function() {
-    muteOrUnmute();
-  });
-
-  $('.btnPlay').click(function() {
+  $('.btnPlayPause').click(function() {
     muteOrUnmute();
   });
 

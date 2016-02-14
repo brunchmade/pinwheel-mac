@@ -192,18 +192,21 @@ img {
   display: inline-block;
 }
 
-.btnPlay {
-  width: 24px;
-  height: 30px;
+.btnPlayPause {
+  width: 40px;
+  height: 40px;
   display: inline-block;
   margin: 0 4rem;
-}
+  overflow: hidden;
+  position: relative;
 
-.btnPause {
-  width: 24px;
-  height: 30px;
-  display: inline-block;
-  margin: 0 4rem;
+  svg {
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    top: -20px;
+    left: -21px;
+  }
 }
 
 .btnFf {
