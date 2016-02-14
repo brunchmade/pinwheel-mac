@@ -98,21 +98,19 @@
   $('.btnPause').click(function() {
     if (player.media.paused) {
       return
-    } else {
-      player.pause();
-      $(this).addClass('hide');
-      $('.btnPlay').removeClass('hide');
     }
+    $("audio").prop('muted', true); //mute
+    $(this).addClass('hide');
+    $('.btnPlay').removeClass('hide');
   });
 
   $('.btnPlay').click(function() {
     if (player.media.paused) {
-      player.play();
-      $(this).addClass('hide');
-      $('.btnPause').removeClass('hide');
-    } else {
-      return
+      player.play()
     }
+    $("audio").prop('muted', false); //mute
+    $(this).addClass('hide');
+    $('.btnPause').removeClass('hide');
   });
 
   var pusher = new Pusher('<%= ENV['PUSHER_KEY'] %>', {
