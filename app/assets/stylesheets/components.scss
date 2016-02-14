@@ -53,6 +53,7 @@ a.h6 {
 
 img {
   display: block;
+  border: none;
 }
 
 .js-bgcheck.text.background--light {
@@ -199,6 +200,16 @@ img {
   width: 30px;
   height: 22px;
   display: inline-block;
+
+  &.liked {
+    svg {
+      filter: drop-shadow(0 1px 1px rgba(black,.25));
+    }
+    path {
+      fill: red !important;
+      stroke: none;
+    }
+  }
 }
 
 .btnPlayPause {
