@@ -10,5 +10,7 @@ Rails.application.routes.draw do
 
   resource  :session
 
+  match 'soundcloud/callback', to: 'sessions#soundcloud', via: [:get]
   post 'pusher/auth'
+  match '/login', to: 'sessions#create', via: [:post]
 end
