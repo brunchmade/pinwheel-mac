@@ -19,6 +19,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', github: "rails/coffee-rails"
 gem 'jquery-rails'
 gem 'turbolinks', github: "rails/turbolinks"
+gem 'imgix-rails'
 
 gem 'jbuilder', '~> 2.0'
 

@@ -14,3 +14,10 @@ module ActioncableExamples
     config.active_job.queue_adapter = :sidekiq
   end
 end
+
+Rails.application.configure do
+  config.imgix = {
+    source: "tumtable.imgix.net",
+    hostname_to_replace: "i1.sndcdn.com"
+  }
+end

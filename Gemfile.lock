@@ -73,6 +73,7 @@ GEM
       method_source
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.4.0)
     arel (7.0.0)
     autoprefixer-rails (6.3.2)
       execjs
@@ -105,6 +106,10 @@ GEM
       multi_xml (>= 0.5.2)
     httpclient (2.7.1)
     i18n (0.7.0)
+    imgix (1.0.0)
+      addressable
+    imgix-rails (1.0.0)
+      imgix (~> 1.0, >= 1.0.0)
     jbuilder (2.4.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -206,6 +211,7 @@ DEPENDENCIES
   byebug
   coffee-rails!
   dotenv-rails
+  imgix-rails
   jbuilder (~> 2.0)
   jquery-rails
   pg

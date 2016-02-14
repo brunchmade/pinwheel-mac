@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
   include ApplicationHelper
+  include Imgix::Rails::UrlHelper
 
   belongs_to :message
   belongs_to :user
@@ -17,11 +18,11 @@ class Comment < ActiveRecord::Base
   end
 
   def blurred_album_art_url
-    album_art_url.gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?blur=200'
+    ix_image_url(album_art_url, { blur: 200 })
   end
 
   def palette_url
-    album_art_url.gsub('https://i1.sndcdn.com', 'https://tumtable.imgix.net') + '?colorquant=2&palette=css&colors=2&class=album&zoom=100'
+    ix_image_url(album_art_url, { palette: 'css', colors: 2, class: 'album', zoom: 100 })
   end
 
   def reset!
