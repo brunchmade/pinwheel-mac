@@ -4,9 +4,11 @@
 
 <div class="flex-auto flex justify-center items-center">
   <div class="nowPlaying center">
-    <div class="atvImg nowPlayingAlbumArt">
-      <div class="atvImg-layer" data-img="<%= @now_playing.album_art_url %>"></div>
-    </div>
+    <a href="<%= @now_playing.responses['permalink_url'] %>" target="_blank">
+      <div class="atvImg nowPlayingAlbumArt">
+        <div class="atvImg-layer" data-img="<%= @now_playing.album_art_url %>"></div>
+      </div>
+    </a>
     <div class="progressBar js-bgcheck background">
       <div class="progress album-bg-1" style="width: 0"></div>
     </div>
@@ -15,7 +17,7 @@
       <div class="h6 duration-time js-bgcheck text">&nbsp;</div>
     </div>
     <span class="js-bgcheck text">
-      <h1><%= @now_playing.responses['title'] %></h1>
+      <h1><a href="<%= @now_playing.responses['permalink_url'] %>" target="_blank"><%= @now_playing.responses['title'] %></a></h1>
       <h2 class="opacity"><%= @now_playing.responses['user']['username'] %></h2>
     </span>
     <div class="actions flex items-center justify-center js-bgcheck svg">
