@@ -22,7 +22,7 @@ class Comment < ActiveRecord::Base
   end
 
   def palette_url
-    ix_image_url(album_art_url, { palette: 'css', colors: 2, class: 'album', zoom: 100 })
+    ix_image_url(album_art_url, { palette: 'css', colors: 4, class: 'album', zoom: 100 })
   end
 
   def reset!
