@@ -1,4 +1,10 @@
 class MessagesController < ApplicationController
+  def next
+    @message = Message.find(params[:id])
+    @comment = @message.comments.where(now_playing: true).first
+    NextUpJob.perform_now(@message.id, @comment.id)
+  end
+
   def backfill
     @message = Message.find(params[:id])
 
