@@ -92,13 +92,13 @@ img {
   }
 }
 
-.js-bgcheck.svg.background--light {
+.js-bgcheck..background--light {
   path, .ytp-svg-fill {
     stroke: none;
     fill: black;
   }
 
-  .stroke {
+  &.stroke {
     path {
       fill: none;
       stroke: black;
@@ -123,7 +123,7 @@ img {
     fill: white;
   }
 
-  .stroke {
+  &.stroke {
     path {
       fill: none;
       stroke: white;
@@ -149,7 +149,7 @@ img {
     fill: gray;
   }
 
-  .stroke {
+  &.stroke {
     path {
       fill: none;
       stroke: gray;
