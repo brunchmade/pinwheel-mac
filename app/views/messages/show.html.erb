@@ -204,6 +204,7 @@
 
   var presenceChannel = pusher.subscribe('presence-<%= @message.id %>');
   presenceChannel.bind('pusher:subscription_succeeded', function(members) {
+      $('.usersInRoom').empty();
     members.each(function(member) {
       $('.usersInRoom').append('<img src="' + member.info['avatar_url'] + '" data-member-id="' + member.id + '" title="' + member.name + '">');
     });

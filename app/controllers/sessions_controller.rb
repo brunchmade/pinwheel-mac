@@ -2,7 +2,6 @@ class SessionsController < ApplicationController
   skip_before_action :ensure_authenticated_user, only: %i( new soundcloud create )
 
   def new
-    # @users = User.all
   end
 
   def soundcloud
