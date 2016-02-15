@@ -30,7 +30,7 @@ class MessagesController < ApplicationController
 
     playing = @message.comments.where(now_playing: true).order(created_at: :asc).first
     unless playing
-      NextUpJob.perform_now(@message.id)
+      NextUpJob.perform_now(@message.id, @comment.id)
     end
   end
 
@@ -48,7 +48,7 @@ class MessagesController < ApplicationController
       if @now_playing = @message.comments.where(aired_at: nil).order(created_at: :asc).first
         @now_playing.update_attributes(now_playing: true, aired_at: now)
         next_track_at = now + (@now_playing.responses['duration'] / 1000).ceil
-        NextUpJob.set(wait_until: next_track_at).perform_later(@message.id)
+        NextUpJob.set(wait_until: next_track_at).perform_later(@message.id, @now_playing.id)
       else
         @now_playing = Comment.new(responses: {
           artwork_url: '/default.png',
