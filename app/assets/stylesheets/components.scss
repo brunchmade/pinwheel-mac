@@ -10,9 +10,10 @@ body {
   box-sizing: border-box;
   font-family: '-apple-system', 'San Francisco Display', 'San Francisco Text', 'SF UI Display', 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   user-select: none;
+  -webkit-font-smoothing:antialiased;
 }
 
-$osx-blue: #0068d9;
+$osx-blue: #4899fb;
 
 h1 {
   font-size: 1.2rem;
@@ -258,7 +259,41 @@ img {
   display: inline-block;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  padding: .25rem .5rem;
+  border: 1px solid rgba(black,.5);
+  border-radius: 4px;
+  transition: all .25s;
+  user-select: text;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+button {
+  font-size: .9rem;
+  font-weight: 400;
+  background-image: linear-gradient(top, rgb(255,255,255) 0%,rgb(241,241,241) 100%);
+  border: none;
+  box-shadow: 0 0 0 1px rgba(black,.3);
+  border-radius: 4px;
+  min-width: 70px;
+  outline: none;
+
+  &:active {
+    background-image: linear-gradient(top, #4a96fd 0%, #0867e4 100%);
+    outline: none;
+    color: white;
+  }
+}
+
+input.search {
   display: block;
   width: 100%;
   font-size: 1rem;
@@ -307,16 +342,42 @@ input[type="text"] {
   }
 }
 
-.onDeck {
+.sidebarContainer {
   width: 330px;
-  background: rgba(white,.3);
-  height: 100vh;
+  overflow: hidden;
   position: relative;
-  z-index: 10;
   transition: margin-right .6s cubic-bezier(0.165, 0.84, 0.44, 1);
 
   &.isHidden {
     margin-right: -330px;
+  }
+}
+
+.modalWindow {
+  width: 330px;
+  background: rgba(white,.3);
+  height: 100vh;
+  position: absolute;
+  z-index: 10;
+  transition: right .6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  right: 0;
+
+  &.isHidden {
+    right: 330px;
+  }
+}
+
+.onDeck {
+  width: 330px;
+  background: rgba(white,.3);
+  height: 100vh;
+  position: absolute;
+  z-index: 10;
+  transition: all .6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  right: 0;
+
+  &.isHidden {
+    right: -330px;
   }
 }
 
@@ -398,14 +459,44 @@ input[type="text"] {
   right: 6px;
   font-size: 24px;
   transform: rotateZ(540deg);
-  transition: all 0;
+  transition: all .8s;
   cursor: pointer;
+  z-index: 200;
 
   &.closed {
     transform: rotateZ(0);
-    right: 336px;
-    transition: all .8s;
     background: rgba(white,.3);
     box-shadow: 0 0 1px rgba(black,.25);
+  }
+}
+
+.dropdownMenu {
+  position: absolute;
+  right: 1rem;
+  margin-top: 1.1rem;
+  min-width: 150px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 9px 18px rgba(black,.5);
+  padding: 4px 0;
+  z-index: 20;
+
+  li {
+    padding: .09rem 1.3rem .11rem;
+    font-size: .95rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all .05s;
+    color: rgba(black,.9);
+
+    &:hover {
+      background: $osx-blue;
+      color: white;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
   }
 }

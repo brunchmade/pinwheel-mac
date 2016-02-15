@@ -43,43 +43,62 @@
 </div>
 <div class="hide"><audio src="/0.mp3" class="player hide"></audio></div>
 
-<div class="onDeck flex-none">
-<!--   <div class="flex"> for debugging the color palette
-    <div class="album-bg-1 flex-auto" style="height:5px;"></div>
-    <div class="album-bg-2 flex-auto" style="height:5px;"></div>
-    <div class="album-bg-3 flex-auto" style="height:5px;"></div>
-    <div class="album-bg-4 flex-auto" style="height:5px;"></div>
-  </div> -->
-  <div class="m2">
-    <%= render 'comments/new', message: @message %>
+<div class="sidebarContainer">
+  <div class="modalWindow settings p2 isHidden">
+    <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">Settings</div>
+    <input class="mt2" type="text" name="name" placeholder="Full Name">
+    <input class="mt2" type="email" name="name" placeholder="Email Address">
+    <input class="mt2" type="password" name="name" placeholder="New Password">
+    <input class="mt2" type="password" name="name" placeholder="Confirm New Password">
+    <button class="mt2 toggleSettings">Save</button>
   </div>
 
-  <div class="m2 flex justify-between">
-    <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">Online now (<span class="js-membersOnline">0</span>)</div>
-    <% if @current_user %>
-      <%= link_to "#{@current_user.soundcloud_response['full_name'] || @current_user.soundcloud_response['username']} ▾", session_path, class: 'h6 opacity', style: 'text-decoration:none; font-weight:700', method: :delete %>
-    <% end %>
-  </div>
-  <div class="usersInRoomWrapper">
-    <div class="usersInRoom pl2">
+  <div class="onDeck">
+  <!--   <div class="flex"> for debugging the color palette
+      <div class="album-bg-1 flex-auto" style="height:5px;"></div>
+      <div class="album-bg-2 flex-auto" style="height:5px;"></div>
+      <div class="album-bg-3 flex-auto" style="height:5px;"></div>
+      <div class="album-bg-4 flex-auto" style="height:5px;"></div>
+    </div> -->
+    <div class="m2">
+      <%= render 'comments/new', message: @message %>
     </div>
-  </div>
 
-  <div class="m2 flex justify-between">
-    <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">
-      <%= link_to 'On Deck', controller: 'messages', action: 'backfill', remote: true  %> (<span class="js-songsOnDeck">0</span>)
+    <div class="m2 flex justify-between">
+      <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">Online now (<span class="js-membersOnline">0</span>)</div>
+      <% if @current_user %>
+        <%= link_to "#{@current_user.soundcloud_response['full_name'] || @current_user.soundcloud_response['username']} ▾", session_path, class: 'h6 opacity', style: 'text-decoration:none; font-weight:700', method: :delete %>
+        <ul class="dropdownMenu list-reset">
+          <li class="toggleSettings">Settings</li>
+          <li>Log out</li>
+        </ul>
+      <% end %>
     </div>
-    <%= link_to "#{@message.title} ▾", messages_path, class: 'h6 opacity', style: 'text-decoration:none; font-weight:700' %>
+    <div class="usersInRoomWrapper">
+      <div class="usersInRoom pl2">
+      </div>
+    </div>
+
+    <div class="m2 flex justify-between">
+      <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">
+        <%= link_to 'On Deck', controller: 'messages', action: 'backfill', remote: true  %> (<span class="js-songsOnDeck">0</span>)
+      </div>
+      <%= link_to "#{@message.title} ▾", messages_path, class: 'h6 opacity', style: 'text-decoration:none; font-weight:700' %>
+      <ul class="dropdownMenu list-reset">
+        <li>Change rooms</li>
+        <li>Create a new room</li>
+      </ul>
+    </div>
+    <ul class="list-reset m0 onDeckSongs px2">
+      <% @comments.each do |comment| %>
+        <% @comment = comment %>
+        <%= render 'comments/comment', comment: @comment %>
+      <% end %>
+    </ul>
+    <div class="toastSongNotification">Song added to queue</div>
   </div>
-  <ul class="list-reset m0 onDeckSongs px2">
-    <% @comments.each do |comment| %>
-      <% @comment = comment %>
-      <%= render 'comments/comment', comment: @comment %>
-    <% end %>
-  </ul>
-  <div class="toastSongNotification">Song added to queue</div>
-  <div class="toggleSidebar">◂</div>
 </div>
+<div class="toggleSidebar">◂</div>
 
 <script>
   atvImg();
@@ -198,12 +217,21 @@
   });
 
   function toggleSidebar() {
-    $('.onDeck').toggleClass('isHidden');
+    $('.sidebarContainer').toggleClass('isHidden');
     $('.toggleSidebar').toggleClass('closed');
   }
 
   $('.toggleSidebar').click(function() {
     toggleSidebar();
+  });
+
+  function toggleSettings() {
+    $('.onDeck').toggleClass('isHidden');
+    $('.settings').toggleClass('isHidden');
+  }
+
+  $('.toggleSettings').click(function() {
+    toggleSettings();
   });
 
 </script>
