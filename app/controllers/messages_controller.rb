@@ -44,10 +44,10 @@ class MessagesController < ApplicationController
         NextUpJob.set(wait_until: next_track_at).perform_later(@message.id)
       else
         @now_playing = Comment.new(responses: {
-          artwork_url: 'https://i1.sndcdn.com/artworks-000127422318-y9zmkl-large.jpg',
-          title: 'Rick and Morty',
+          artwork_url: '/default.png',
+          title: 'Add some songs',
           user: {
-            username: 'Tumtable'
+            username: 'Keep the music flowing!'
           },
           stream_url: ''
         })
