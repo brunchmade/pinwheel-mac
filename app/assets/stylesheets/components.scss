@@ -470,6 +470,15 @@ input.search {
   }
 }
 
+.dropdownTrigger {
+  cursor: pointer;
+  transition: all .1s;
+
+  &:hover {
+    opacity: .7;
+  }
+}
+
 .dropdownMenu {
   position: absolute;
   right: 1rem;
@@ -480,6 +489,12 @@ input.search {
   box-shadow: 0 9px 18px rgba(black,.5);
   padding: 4px 0;
   z-index: 20;
+  opacity: 1;
+  transition: all .2s;
+
+  &.hide {
+    opacity: .7;
+  }
 
   li {
     padding: .09rem 1.3rem .11rem;
