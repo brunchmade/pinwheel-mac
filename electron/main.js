@@ -84,6 +84,11 @@ var menu = Menu.buildFromTemplate([
         click: function() {mainWindow.reload();}
       },
       {
+        label: 'Toggle Sidebar',
+        accelerator: 'Shift+Cmd+L',
+        click: function() {toggleSidebar();}
+      },
+      {
         label: 'Toggle Full Screen',
         accelerator: (function() {
           if (process.platform == 'darwin')
@@ -247,4 +252,8 @@ function nextTrack() {
 
 function favoriteSong() {
   mainWindow.webContents.executeJavaScript("console.log('back button pressed')");
+}
+
+function toggleSidebar() {
+  mainWindow.webContents.executeJavaScript("toggleSidebar()");
 }

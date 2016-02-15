@@ -289,11 +289,15 @@ input[type="text"] {
 
 .onDeck {
   width: 330px;
-  background: rgba(white,.33);
-  border-left: 1px solid rgba(white,.2);
+  background: rgba(white,.3);
   height: 100vh;
   position: relative;
   z-index: 10;
+  transition: margin-right .6s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  &.isHidden {
+    margin-right: -330px;
+  }
 }
 
 .onDeckSongs {
