@@ -142,6 +142,7 @@ GEM
     pusher-signature (0.1.8)
     rack (2.0.0.alpha)
       json
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.0.beta2)
@@ -217,6 +218,7 @@ DEPENDENCIES
   pg
   puma
   pusher
+  rack-cors
   rails (= 5.0.0.beta2)
   redis
   sass-rails (~> 5.0)
