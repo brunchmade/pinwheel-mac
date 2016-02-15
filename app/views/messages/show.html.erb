@@ -67,7 +67,7 @@
     <div class="m2 flex justify-between">
       <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">Online now (<span class="js-membersOnline">0</span>)</div>
       <% if @current_user %>
-        <%= link_to "#{@current_user.soundcloud_response['full_name'] || @current_user.soundcloud_response['username']} ▾", session_path, class: 'h6 opacity', style: 'text-decoration:none; font-weight:700', method: :delete %>
+        <%= link_to "#{@current_user.full_name} ▾", session_path, class: 'h6 opacity', style: 'text-decoration:none; font-weight:700', method: :delete %>
         <ul class="dropdownMenu list-reset">
           <li class="toggleSettings">Settings</li>
           <li>Log out</li>
