@@ -400,12 +400,12 @@ input[type="text"] {
   transform: rotateZ(540deg);
   transition: all 0;
   cursor: pointer;
-  box-shadow: 0 0 1px rgba(black,.25);
 
   &.closed {
     transform: rotateZ(0);
     right: 336px;
     transition: all .8s;
     background: rgba(white,.3);
+    box-shadow: 0 0 1px rgba(black,.25);
   }
 }
