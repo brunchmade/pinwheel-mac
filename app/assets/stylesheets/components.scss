@@ -452,16 +452,20 @@ input.search {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  color: black;
+  color: rgba(black,.6);
   text-align: center;
   line-height: 26px;
   font-weight: 700;
   right: 6px;
   font-size: 24px;
   transform: rotateZ(540deg);
-  transition: all .8s;
+  transition: all .6s;
   cursor: pointer;
   z-index: 200;
+
+  &:hover {
+    color: black;
+  }
 
   &.closed {
     transform: rotateZ(0);
