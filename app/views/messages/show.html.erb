@@ -246,13 +246,10 @@
     }
   });
 
-  $('.dropdownMenu').click(function(e){
-    e.stopPropagation();
-  });
-
-  $('.dropdownTrigger').click(function() {
+  $('.dropdownTrigger, .dropdownMenu').click(function() {
     $('.dropdownMenu').addClass('hide')
     $(this).addClass('expanded').next('.dropdownMenu').removeClass('hide');
   });
+
 
 </script>
