@@ -33,6 +33,9 @@ You must have redis installed and running on the default port:6379 (or configure
 
 We use [Electron](https://github.com/atom/electron) to build the Mac app wrapper. To compile your own binaries, run the following scripts from the project root:
 
+# Install the `electron` command globally in your $PATH
+`npm install electron-prebuilt -g`
+
 **Production app**
 `cd electron && npm run pack && cd ..`
 
