@@ -7,7 +7,7 @@ module ApplicationHelper
       stream_url:     comment.responses['stream_url'].to_s + '?client_id=b59d1f4b68bbc8f2b0064188f210117d',
       background_url: comment.blurred_album_art_url,
       palette_url:    comment.palette_url,
-      count:          (comment.message.queue_count.to_i - 1).to_s
+      count:          comment.message.queue_count
     })
   end
 end
