@@ -131,14 +131,21 @@
   var channel = pusher.subscribe('message_<%= @message.id %>');
 
   channel.bind('on_deck', function(data) {
-    $('.onDeckSongs').append(data.message);
+    $(data.message)
+      .css({ display: 'none', opacity: 0 })
+      .appendTo($('.onDeckSongs'))
+      .slideDown(340).animate({ opacity: 1 },{ queue: false, duration: 340 });
   });
   channel.bind('remove_on_deck', function(data) {
-    $('*[data-comment-id=' + data.id + ']').remove();
+    $('*[data-comment-id=' + data.id + ']')
+      .slideUp(340, function() { $(this).remove(); })
+      .animate({ opacity: 0 },{ queue: false, duration: 340 });
   });
   channel.bind('now_playing', function(data) {
     // Replace current playing info
-    $('.onDeckSongs li:first-child').remove();
+    $('.onDeckSongs li:first-child')
+      .slideUp(340, function() {$(this).remove(); })
+      .animate({ opacity: 0 },{ queue: false, duration: 340 });
     $('.nowPlaying h1').text(data.title);
     $('.nowPlaying h2').text(data.artist);
     $('.atvImg-rendered-layer').css('background-image', 'url(' + data.artwork_url + ')');
@@ -156,8 +163,6 @@
     player.setSrc(data.stream_url);
     player.load();
     player.play();
-    // Refresh background
-    BackgroundCheck.refresh();
   });
 
   var presenceChannel = pusher.subscribe('presence-<%= @message.id %>');
