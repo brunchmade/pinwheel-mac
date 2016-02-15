@@ -6,7 +6,8 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     Pusher.trigger('message_' + @comment.message.id.to_s, 'remove_on_deck', {
-      id: @comment.id
+      id: @comment.id,
+      count: (@message.queue_count.to_i - 1).to_s
     })
     @comment.destroy
   end
@@ -22,7 +23,8 @@ class CommentsController < ApplicationController
         layout: false
       )
       Pusher.trigger('message_' + @comment.message.id.to_s, 'on_deck', {
-        message: html
+        message: html,
+        count: @message.queue_count
       })
     else
       now = Time.now.utc

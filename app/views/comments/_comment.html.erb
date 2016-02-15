@@ -5,7 +5,7 @@
   <div class="ml1" style="width:226px;overflow:hidden">
     <h3 class="m0"><a href="<%= @comment.responses['permalink_url'] %>" target="_blank"><%= @comment.responses['title'] %></a></h3>
     <p class="m0 h6 opacity"><%= @comment.responses['user']['username'] %></p>
-    <p class="m0 h6 opacity">Added by <%= @comment.user.soundcloud_response['full_name'] || @comment.user.soundcloud_response['username'] %></p>
+    <p class="m0 h6 opacity">Added by <%= @comment.user.full_name %></p>
   </div>
   <%= link_to '&times;'.html_safe, message_comment_path(@comment.message.id, @comment.id), method: :delete, remote: true, class: 'block flex-none remove' %>
 </li>
