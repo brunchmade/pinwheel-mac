@@ -7,6 +7,7 @@ String.prototype.toHHMMSS = function () {
   if (seconds < 10) {seconds = "0"+seconds;}
 
   if (hours > 0) {
+    if (minutes < 10) {minutes = "0"+minutes;}
     var time = hours+':'+minutes+':'+seconds;
   } else {
     var time = minutes+':'+seconds;

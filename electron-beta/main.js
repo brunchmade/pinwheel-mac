@@ -184,7 +184,8 @@ app.on('ready', function() {
     minWidth: 900,
     minHeight: 550,
     'node-integration': false,
-    'title-bar-style': 'hidden-inset'
+    'title-bar-style': 'hidden-inset',
+    'web-preferences': {'web-security': false}
   });
 
   // and load the index.html of the app.

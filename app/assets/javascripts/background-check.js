@@ -161,7 +161,6 @@
           url = url.slice(4, -1);
           url = url.replace(/"/g, '');
 
-          list[e].img.crossOrigin = '';
           list[e].img.src = url;
           log('CSS Image - ' + url);
         } else {

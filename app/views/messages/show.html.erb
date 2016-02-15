@@ -86,6 +86,13 @@
       $('.progress').css("width", String(Math.floor((player.media.currentTime / player.media.duration) * 100)) + '%');
   }, false);
 
+  document.title = "<%= @now_playing.responses['title'] + " - " + @now_playing.responses['user']['username'] %>";
+
+  BackgroundCheck.init({
+    targets: '.js-bgcheck',
+    images: '.js-nowPlayingBackground'
+  });
+
   var flip = true;
   function muteOrUnmute() {
     if($("audio").prop('muted')) {
@@ -137,6 +144,10 @@
     $('.atvImg-rendered-layer').css('background-image', 'url(' + data.artwork_url + ')');
     $('.js-nowPlayingBackground').css('background-image', 'url(' + data.background_url  + ')');
     $('.js-palette').attr('href', data.palette_url);
+    document.title = data.title + " - " + data.artist;
+
+    BackgroundCheck.refresh();
+
     // Drop that track
     player.pause();
     player.setSrc(data.stream_url);
@@ -162,8 +173,4 @@
     $('*[data-member-id=' + member.id + ']').remove();
   });
 
-  BackgroundCheck.init({
-    targets: '.js-bgcheck',
-    images: '.js-nowPlayingBackground'
-  });
 </script>

@@ -146,23 +146,24 @@ img {
 }
 
 .nowPlaying {
-  width: calc(90vw - 500px);
+  width: calc(90vw - 400px);
   max-width: 60vh;
+  min-width: 300px;
 }
 
 .nowPlayingAlbumArt {
-  width: calc(90vw - 500px);
-  height: calc(90vw - 500px);
+  width: calc(90vw - 400px);
+  height: calc(90vw - 400px);
   max-width: 60vh;
   max-height: 60vh;
+  min-width: 300px;
+  min-height: 300px;
   margin: 0 auto;
 }
 
 .progressBar {
   height: 3px;
   margin: 1rem auto 0;
-  width: calc(90vw - 500px);
-  max-width: 60vh;
   background: rgba(black,.15);
   position: relative;
   z-index: 3;
