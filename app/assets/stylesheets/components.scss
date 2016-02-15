@@ -56,6 +56,10 @@ img {
   border: none;
 }
 
+.js-bgcheck {
+  transition: all .2s;
+}
+
 .js-bgcheck.text.background--light {
   color: black;
 }
@@ -289,6 +293,7 @@ input[type="text"] {
   border-left: 1px solid rgba(white,.2);
   height: 100vh;
   position: relative;
+  z-index: 10;
 }
 
 .onDeckSongs {
