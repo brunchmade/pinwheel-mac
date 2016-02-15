@@ -20,11 +20,11 @@
       <h1><a href="<%= @now_playing.responses['permalink_url'] %>" target="_blank"><%= @now_playing.responses['title'] %></a></h1>
       <h2 class="opacity"><%= @now_playing.responses['user']['username'] %></h2>
     </span>
-    <div class="actions flex items-center justify-center js-bgcheck svg">
-      <a class="btn btnLike stroke"><!-- remove 'stroke' and add 'liked' if this song is a favorite (query the api and respond to click)-->
+    <div class="actions flex items-center justify-center">
+      <a class="js-bgcheck svg btn btnLike stroke"><!-- remove 'stroke' and add 'liked' if this song is a favorite (query the api and respond to click)-->
         <svg width="31" height="28" viewBox="0 0 31 28" xmlns="http://www.w3.org/2000/svg"><path d="M14.886 5.847C13.82 3.577 11.473 2 8.75 2 5.022 2 2 4.955 2 8.6c0 .14.004.28.013.417A8.45 8.45 0 0 0 2 9.5C2 15.712 14.51 26 15.5 26 15.677 26 29 16.033 29 9.5c0-.152-.006-.297-.016-.435.01-.154.016-.31.016-.465C29 4.955 25.978 2 22.25 2c-2.723 0-5.07 1.576-6.136 3.847V5.6h-1.228v.247z" stroke="#000" stroke-width="1.5" fill="none" fill-rule="evenodd"/></svg>
       </a>
-      <a class="btn btnPlayPause">
+      <a class="js-bgcheck svg btn btnPlayPause">
         <svg viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <defs>
              <path id="ytp-12" d="M 11 10 L 17 10 L 17 26 L 11 26 M 20 10 L 26 10 L 26 26 L 20 26">
@@ -35,7 +35,7 @@
           <use xlink:href="#ytp-12" class="ytp-svg-fill"></use>
        </svg>
       </a>
-      <a class="btn btnFf">
+      <a class="js-bgcheck svg btn btnFf">
         <svg width="41" height="27" viewBox="0 0 41 27" xmlns="http://www.w3.org/2000/svg"><path d="M20.492 13.707c-.062.23-.226.447-.49.624L1.25 26.795c-.693.46-1.25.16-1.25-.668V.874C0 .046.56-.253 1.25.206L20 12.67c.267.176.43.395.492.623V.873c0-.827.56-1.126 1.25-.667l18.75 12.463c.693.46.69 1.202 0 1.66l-18.75 12.464c-.693.46-1.25.16-1.25-.668v-12.42z" fill="#000" fill-rule="evenodd"/></svg>
       </a>
     </div>
