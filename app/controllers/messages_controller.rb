@@ -17,7 +17,8 @@ class MessagesController < ApplicationController
         layout: false
       )
       Pusher.trigger('message_' + @comment.message.id.to_s, 'on_deck', {
-        message: html
+        message: html,
+        count: @message.queue_count
       })
     end
 
