@@ -4,8 +4,10 @@ class PusherController < ApplicationController
   def auth
     if @current_user
       response = Pusher[params[:channel_name]].authenticate(params[:socket_id], {
-        user_id: @current_user.id, # => required
-        user_info: {} # optional
+        user_id: @current_user.id,
+        user_info: {
+          avatar_url: @current_user.soundcloud_response['avatar_url']
+        }
       })
       render :json => response
     else
