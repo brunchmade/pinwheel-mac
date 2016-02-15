@@ -76,6 +76,7 @@
     <% end %>
   </ul>
   <div class="toastSongNotification">Song added to queue</div>
+  <div class="toggleSidebar">◂</div>
 </div>
 
 <script>
@@ -196,9 +197,10 @@
 
   function toggleSidebar() {
     $('.onDeck').toggleClass('isHidden');
+    $('.toggleSidebar').toggleClass('closed');
   }
 
-  $('.nowPlayingAlbumArt').click(function() {
+  $('.toggleSidebar').click(function() {
     toggleSidebar();
   });
 
