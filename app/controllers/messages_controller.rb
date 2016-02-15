@@ -10,9 +10,7 @@ class MessagesController < ApplicationController
     tracks.delete_if { |t| t['streamable'] == false}
 
     tracks.each do |comment|
-      @comment = comment
-      @comment = Comment.create! message: @message, content: @comment['permalink_url'], user: @current_user
-
+      @comment = @message.comments.create! content: comment['permalink_url'], user: @current_user
       html = ApplicationController.render(
         assigns: { comment: @comment },
         template: 'comments/_comment',
@@ -23,8 +21,7 @@ class MessagesController < ApplicationController
       })
     end
 
-
-    playing = @message.comments.where(now_playing: true).first
+    playing = @message.comments.where(now_playing: true).order(created_at: :asc).first
     unless playing
       NextUpJob.perform_now(@message.id)
     end
