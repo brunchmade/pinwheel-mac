@@ -118,7 +118,7 @@ var menu = Menu.buildFromTemplate([
     submenu: [
       {
         label: 'Play',
-        accelerator: 'Space',
+        accelerator: 'MediaPlayPause',
         click: function() {muteOrUnmute();}
       },
       {
@@ -247,11 +247,11 @@ function muteOrUnmute() {
 }
 
 function nextTrack() {
-  mainWindow.webContents.executeJavaScript("console.log('skip button pressed')");
+  mainWindow.webContents.executeJavaScript("nextTrack()");
 }
 
 function favoriteSong() {
-  mainWindow.webContents.executeJavaScript("console.log('back button pressed')");
+  mainWindow.webContents.executeJavaScript("favoriteSong()");
 }
 
 function toggleSidebar() {

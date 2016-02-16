@@ -35,11 +35,9 @@
           <use xlink:href="#ytp-12" class="ytp-svg-fill"></use>
        </svg>
       </a>
-      <%= link_to controller: 'messages', action: 'next', remote: true do %>
-        <span class="js-bgcheck svg btn btnFf">
-          <svg width="41" height="27" viewBox="0 0 41 27" xmlns="http://www.w3.org/2000/svg"><path d="M20.492 13.707c-.062.23-.226.447-.49.624L1.25 26.795c-.693.46-1.25.16-1.25-.668V.874C0 .046.56-.253 1.25.206L20 12.67c.267.176.43.395.492.623V.873c0-.827.56-1.126 1.25-.667l18.75 12.463c.693.46.69 1.202 0 1.66l-18.75 12.464c-.693.46-1.25.16-1.25-.668v-12.42z" fill="#000" fill-rule="evenodd"/></svg>
-        </span>
-      <% end %>
+      <span class="js-bgcheck svg btn btnFf">
+        <svg width="41" height="27" viewBox="0 0 41 27" xmlns="http://www.w3.org/2000/svg"><path d="M20.492 13.707c-.062.23-.226.447-.49.624L1.25 26.795c-.693.46-1.25.16-1.25-.668V.874C0 .046.56-.253 1.25.206L20 12.67c.267.176.43.395.492.623V.873c0-.827.56-1.126 1.25-.667l18.75 12.463c.693.46.69 1.202 0 1.66l-18.75 12.464c-.693.46-1.25.16-1.25-.668v-12.42z" fill="#000" fill-rule="evenodd"/></svg>
+      </span>
     </div>
   </div>
 </div>
@@ -146,6 +144,14 @@
 
   $('.btnPlayPause').click(function() {
     muteOrUnmute();
+  });
+
+  function nextTrack() {
+    $.ajax({url: "/messages/<%= @message.id %>/next"});
+  }
+
+  $('.btnFf').click(function() {
+    nextTrack();
   });
 
   var pusher = new Pusher('<%= ENV['PUSHER_KEY'] %>', {
