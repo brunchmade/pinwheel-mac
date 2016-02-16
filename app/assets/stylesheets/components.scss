@@ -430,7 +430,7 @@ input.search {
   box-shadow: 0 0 1px 0 rgba(black,.5);
 }
 
-.toastSongNotification {
+.toastNotification {
   position: absolute;
   bottom: -30px;
   left: 50px;
@@ -446,6 +446,12 @@ input.search {
 
   &.good {
     background: white;
+    bottom: 10px;
+  }
+
+  &.bad {
+    background: red;
+    color: white;
     bottom: 10px;
   }
 }

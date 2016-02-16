@@ -18,7 +18,7 @@
     </div>
     <span class="js-bgcheck text">
       <h1><a href="<%= @now_playing.responses['permalink_url'] %>" target="_blank"><%= @now_playing.responses['title'] %></a></h1>
-      <h2 class="opacity"><%= @now_playing.responses['user']['username'] %></h2>
+      <h2 class="opacity"><%= @now_playing.responses['user']['username'] %> &ndash; Added by NAME</h2>
     </span>
     <div class="actions flex items-center justify-center">
       <a class="js-bgcheck svg btn btnLike stroke"><!-- remove 'stroke' and add 'liked' if this song is a favorite (query the api and respond to click)-->
@@ -96,7 +96,7 @@
         <%= render 'comments/comment', comment: @comment %>
       <% end %>
     </ul>
-    <div class="toastSongNotification">Song added to queue</div>
+    <div class="toastNotification">Song added to queue</div>
   </div>
 </div>
 <div class="toggleSidebar">◂</div>
@@ -165,23 +165,49 @@
     }
   });
 
+
+  var toastOpen = false;
+  var toastInOut;
+  function toastNotification(string, type) {
+    // string (string): 'Notification text here'
+    // type (string): 'good', 'bad', 'info'
+    if(toastInOut) {
+      clearTimeout(toastInOut);
+      toastInOut = null;
+    }
+    if(toastOpen) {
+      $('.toastNotification').html(string).addClass(type);
+    } else {
+      $('.toastNotification').html(string).addClass(type);
+      setTimeout(function () {
+        $('.toastNotification').removeClass(type);
+      }, 4000);
+    }
+    toastOpen = !toastOpen;
+  }
+
   var channel = pusher.subscribe('message_<%= @message.id %>');
 
   channel.bind('on_deck', function(data) {
-    $(data.message)
-      .css({ display: 'none', opacity: 0 })
-      .appendTo($('.onDeckSongs'))
-      .slideDown(340).animate({ opacity: 1 },{ queue: false, duration: 340 });
-    $('.toastSongNotification').addClass('good');
-    setTimeout(function () {
-      $('.toastSongNotification').removeClass('good');
-    }, 4000);
-    $('.js-songsOnDeck').text(data.count);
+    if(true) { // if track is streamable
+      $(data.message)
+        .css({ display: 'none', opacity: 0 })
+        .appendTo($('.onDeckSongs'))
+        .slideDown(340).animate({ opacity: 1 },{ queue: false, duration: 340 });
+      toastNotification('Song added to queue', 'good');
+      $('.js-songsOnDeck').text(data.count);
+    } else if { // if track is not streamable
+      toastNotification('Song is not streamable ', 'bad');
+    } else {
+      toastNotification('Invalid SoundCloud URL', 'bad');
+    }
   });
   channel.bind('remove_on_deck', function(data) {
     $('*[data-comment-id=' + data.id + ']')
       .slideUp(340, function() { $(this).remove(); })
       .animate({ opacity: 0 },{ queue: false, duration: 340 });
+    $('.js-songsOnDeck').text(data.count);
+    toastNotification('Song removed from queue', 'good');
     $('.js-songsOnDeck').text(data.count);
   });
   channel.bind('now_playing', function(data) {
@@ -256,6 +282,5 @@
     $('.dropdownMenu').addClass('hide')
     $(this).addClass('expanded').next('.dropdownMenu').removeClass('hide');
   });
-
 
 </script>
