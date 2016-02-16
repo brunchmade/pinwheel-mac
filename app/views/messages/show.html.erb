@@ -196,11 +196,12 @@
         .slideDown(340).animate({ opacity: 1 },{ queue: false, duration: 340 });
       toastNotification('Song added to queue', 'good');
       $('.js-songsOnDeck').text(data.count);
-    } else if { // if track is not streamable
-      toastNotification('Song is not streamable ', 'bad');
-    } else {
-      toastNotification('Invalid SoundCloud URL', 'bad');
     }
+    //  else if { // if track is not streamable
+    //   toastNotification('Song is not streamable ', 'bad');
+    // } else {
+    //   toastNotification('Invalid SoundCloud URL', 'bad');
+    // }
   });
   channel.bind('remove_on_deck', function(data) {
     $('*[data-comment-id=' + data.id + ']')
