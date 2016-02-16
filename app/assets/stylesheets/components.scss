@@ -315,8 +315,8 @@ input.search {
   user-select: text;
 
   &:placeholder-shown {
-    padding-left: calc(23px + 30%);
-    background-position: calc(10px + 30%) 7px;
+    padding-left: calc(23px + 20%);
+    background-position: calc(10px + 20%) 7px;
   }
 
   &:focus {
