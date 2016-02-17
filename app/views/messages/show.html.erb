@@ -281,11 +281,9 @@
   var presenceChannel = pusher.subscribe('presence-<%= @message.id %>');
   presenceChannel.bind('pusher:subscription_succeeded', function(members) {
     $('.usersInRoom').empty();
-    <% 16.times do %>
     members.each(function(member) {
       $('.usersInRoom').append('<span class="tooltip" data-title="' + member.info['name'] + '"><img src="' + member.info['avatar_url'] + '" data-member-id="' + member.id + '"></span>');
     });
-    <% end %>
     $('.js-membersOnline').text(presenceChannel.members.count);
   })
 
