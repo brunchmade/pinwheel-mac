@@ -204,7 +204,7 @@
 
     s = timeLeft % 60;
     m = Math.floor( timeLeft / 60 ) % 60;
-    h = Math.floor( timeLeft / 120 ) % 60;
+    h = Math.floor(( timeLeft / 60 ) / 60) % 60;
 
     s = s < 10 ? "0"+s : s;
 
@@ -212,7 +212,7 @@
 
     if(h > 0) {
       m = m < 10 ? "0"+m : m;
-      timeline.text('-'+h+':'+m+':'+s);
+      timeleft.text('-'+h+':'+m+':'+s);
     }
 
   }, false);
