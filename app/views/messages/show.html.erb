@@ -44,7 +44,7 @@
 <div class="hide"><audio src="/0.mp3" class="player hide"></audio></div>
 
 <div class="sidebarContainer">
-  <div class="modalWindow settings p2 isHidden">
+  <div class="pane settings p2 isHidden">
     <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">Settings</div>
     <input class="mt2" type="text" name="name" placeholder="Full Name">
     <input class="mt2" type="email" name="name" placeholder="Email Address">
@@ -69,7 +69,7 @@
       <% if @current_user %>
         <div class="h6 opacity dropdownTrigger" style="font-weight:700"><%= @current_user.full_name %> ▾</div>
         <ul class="dropdownMenu list-reset hide">
-          <li class="toggleSettings">Settings</li>
+          <li onclick="openModal('.userSettings');">Settings</li>
           <li><%= link_to "Log out", session_path, method: :delete %></li>
         </ul>
       <% end %>
@@ -87,7 +87,7 @@
       <ul class="dropdownMenu list-reset hide">
         <li><%= link_to "Add 10 popular tracks", controller: 'messages', action: 'backfill', remote: true  %></li>
         <li><%= link_to "Change rooms", messages_path %></li>
-        <li>Create a new room</li>
+        <li onclick="openModal('.createNewRoom');">Create a new room</li>
       </ul>
     </div>
     <ul class="list-reset m0 onDeckSongs px2">
@@ -100,6 +100,33 @@
   </div>
 </div>
 <div class="toggleSidebar">◂</div>
+
+<div class="js-nowPlayingBackground modalBg isHidden" style="background-image: url(<%= @now_playing.blurred_album_art_url %>)">
+
+  <div class="createNewRoom modalWindow p3 isHidden">
+    <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">Create a new room</div>
+    <form>
+      <input type="text" name="new-room" placeholder="Room name" class="my2">
+      <div class="right">
+        <button class="mr1" onclick="closeModal('.createNewRoom');">Cancel</button> <button>Create Room</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="userSettings modalWindow p3 isHidden">
+    <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">Settings</div>
+    <form>
+      <input class="mt2" type="text" name="name" placeholder="Full Name">
+      <input class="mt2" type="email" name="name" placeholder="Email Address">
+      <input class="mt2" type="password" name="name" placeholder="New Password">
+      <input class="my2" type="password" name="name" placeholder="Confirm New Password">
+      <div class="right">
+        <button class="mr1" onclick="closeModal('.userSettings');">Cancel</button> <button>Save</button>
+      </div>
+    </form>
+  </div>
+
+</div>
 
 <script>
   atvImg();
@@ -164,6 +191,16 @@
       }
     }
   });
+
+  function openModal(name) {
+    $(name).parent().removeClass('isHidden');
+    $(name).removeClass('isHidden');
+  }
+
+  function closeModal(name) {
+    $(name).addClass('isHidden');
+    $(name).parent().addClass('isHidden');
+  }
 
 
   var toastOpen = false;
