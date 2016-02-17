@@ -39,6 +39,8 @@ class MessagesController < ApplicationController
   end
 
   def show
+    @messages = Message.all
+
     @message = Message.find(params[:id])
     playing = @message.comments.where(now_playing: true).first
     if playing

@@ -53,6 +53,20 @@ h3 {
   }
 }
 
+.h5 {
+  font-size: .9rem;
+
+  a {
+    font-weight: 600;
+    color: rgba(black,.6);
+    transition: all .15s;
+
+    &:hover {
+      color: black;
+    }
+  }
+}
+
 .h6 {
   font-size: .8rem;
   font-weight: 500;
@@ -537,10 +551,12 @@ input.search {
   background-position: center;
   z-index: 1000;
   transition: all .2s;
+  perspective: 800px;
 
   &.isHidden {
     opacity: 0;
     pointer-events: none;
+    transition-delay: .3s
   }
 }
 
@@ -548,17 +564,24 @@ input.search {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translateY(-50%) translateX(-50%);
+  transform: translateY(-50%) translateX(-50%) rotateX(0deg);
   width: 40vw;
   background: rgba(white,.5);
   border-radius: 4px;
-  transition: all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all .6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   opacity: 1;
 
   &.isHidden {
-    top: 60%;
+    top: 80%;
     opacity: 0;
-    transition-delay: .2s;
     pointer-events: none;
+    transform: translateY(-50%) translateX(-50%) rotateX(-20deg);
+  }
+
+  &.up {
+    top: 10%;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) translateX(-50%) rotateX(20deg);
   }
 }
