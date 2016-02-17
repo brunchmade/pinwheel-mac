@@ -1,8 +1,8 @@
 {
-  "name"    : "Tumtable",
+  "name"    : "Pinwheel",
   "version" : "0.1.0",
   "main"    : "main.js",
   "scripts" : {
-    "pack": "electron-packager . \"Tumtable\" --platform=darwin --arch=x64 --version=0.36.7 --icon=tumtable.icns --out=/Applications --ignore=dist --overwrite --asar=true"
+    "pack": "electron-packager . \"Pinwheel\" --platform=darwin --arch=x64 --version=0.36.7 --icon=pinwheel.icns --app-bundle-id=fm.pinwheel.app --out=/Applications --ignore=dist --overwrite --asar=true"
   }
 }

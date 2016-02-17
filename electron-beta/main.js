@@ -13,17 +13,17 @@ var force_quit = false;
 
 var menu = Menu.buildFromTemplate([
   {
-    label: 'Tumtable',
+    label: 'Pinwheel',
     submenu: [
       {
-        label: 'About Tumtable',
+        label: 'About Pinwheel',
         selector: 'orderFrontStandardAboutPanel:'
       },
       {
         type: 'separator'
       },
       {
-        label: 'Hide Tumtable',
+        label: 'Hide Pinwheel',
         accelerator: 'CmdOrCtrl+H',
         click: function() {mainWindow.hide();}
       },
@@ -31,7 +31,7 @@ var menu = Menu.buildFromTemplate([
         type: 'separator'
       },
       {
-        label: 'Quit Tumtable',
+        label: 'Quit Pinwheel',
         accelerator: 'CmdOrCtrl+Q',
         click: function() {force_quit=true; app.quit();}
       },
@@ -154,8 +154,8 @@ var menu = Menu.buildFromTemplate([
     role: 'help',
     submenu: [
       {
-        label: 'Tumtable on GitHub',
-        click: function() { require('electron').shell.openExternal('https://github.com/brunchmade/tumtable') }
+        label: 'Pinwheel on GitHub',
+        click: function() { require('electron').shell.openExternal('https://github.com/brunchmade/pinwheel.fm') }
       },
     ]
   }
@@ -240,7 +240,7 @@ app.on('ready', function() {
 });
 
 
-// FUNCTIONS FOR TUMTABLE
+// FUNCTIONS FOR WEBAPP
 // ----------------------------------------------------------------------------
 function muteOrUnmute() {
   mainWindow.webContents.executeJavaScript("muteOrUnmute()");

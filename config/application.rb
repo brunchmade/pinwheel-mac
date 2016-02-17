@@ -25,7 +25,7 @@ end
 
 Rails.application.configure do
   config.imgix = {
-    source: "tumtable.imgix.net",
+    source: "pinwheel.imgix.net",
     hostname_to_replace: "i1.sndcdn.com"
   }
 end
