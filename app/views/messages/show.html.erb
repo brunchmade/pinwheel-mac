@@ -1,12 +1,14 @@
 <link rel="stylesheet" class="js-palette" href="<%= @now_playing.palette_url %>">
 
-<div class="nowPlayingBackground js-nowPlayingBackground" style="background-image: url(<%= @now_playing.blurred_album_art_url %>)"></div>
-
+<div class="nowPlayingBackground" style="background-image: url(<%= @now_playing.blurred_album_art_url %>)"></div>
 <div class="flex-auto flex justify-center items-center">
   <div class="nowPlaying center">
     <a href="<%= @now_playing.responses['permalink_url'] %>" target="_blank">
       <div class="atvImg nowPlayingAlbumArt">
         <div class="atvImg-layer" data-img="<%= @now_playing.album_art_url %>"></div>
+        <% if @now_playing.responses['uri'] == 'https://api.soundcloud.com/tracks/26098612' %>
+          <div class="atvImg-layer" data-img="https://media.giphy.com/media/TeBpzQZRaBIC4/giphy.gif"></div>
+        <% end %>
       </div>
     </a>
     <div class="progressBar js-bgcheck background">
@@ -103,6 +105,10 @@
 
 <script>
   atvImg();
+  <% if @now_playing.responses['uri'] == 'https://api.soundcloud.com/tracks/26098612' %>
+    $('.atvImg-rendered-layer:nth-child(2)').css('background-repeat', 'repeat');
+    $('.atvImg-rendered-layer:nth-child(2)').css('background-size', '70px 144px');
+  <% end %>
   var player;
   player = new MediaElementPlayer('audio', {features: [], alwaysShowControls: false, enableKeyboard: true});
   player.setSrc('<%= @now_playing.responses['stream_url'].to_s + '?client_id=b59d1f4b68bbc8f2b0064188f210117d' %>');
