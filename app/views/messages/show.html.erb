@@ -162,7 +162,7 @@
 
   // Progress bar for player
   player.media.addEventListener('timeupdate', function(e) {
-    $('.progress').css("width", String(Math.floor((player.media.currentTime / player.media.duration) * 100)) + '%');
+    $('.progress').css("width", String((player.media.currentTime / player.media.duration) * 100) + '%');
   }, false);
 
   // Countup timer for player
