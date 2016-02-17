@@ -12,6 +12,8 @@ gem 'soundcloud'
 gem 'puma'
 gem 'pusher'
 gem 'sidekiq'
+gem 'bugsnag'
+gem 'skylight'
 
 gem 'rack-cors', :require => 'rack/cors'
 

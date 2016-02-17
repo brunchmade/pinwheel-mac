@@ -79,6 +79,8 @@ GEM
       execjs
       json
     awesome_print (1.6.1)
+    bugsnag (3.0.0)
+      json (~> 1.7, >= 1.7.7)
     builder (3.2.2)
     byebug (8.2.1)
     coffee-script (2.4.1)
@@ -189,6 +191,8 @@ GEM
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
       redis (~> 3.2, >= 3.2.1)
+    skylight (0.10.3)
+      activesupport (>= 3.0.0)
     soundcloud (0.3.2)
       hashie (~> 2.0)
       httmultiparty (~> 0.3.0)
@@ -214,6 +218,7 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   awesome_print
+  bugsnag
   byebug
   coffee-rails!
   dotenv-rails
@@ -229,6 +234,7 @@ DEPENDENCIES
   redis
   sass-rails (~> 5.0)
   sidekiq
+  skylight
   soundcloud
   spring
   sprockets-rails!
