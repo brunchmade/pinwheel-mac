@@ -159,10 +159,27 @@
   // current shared timecode.
   player.setCurrentTime(<%= @now_playing.aired_at ? (Time.now.utc - @now_playing.aired_at).to_i : 0 %>);
   player.play();
+
+  // Progress bar for player
   player.media.addEventListener('timeupdate', function(e) {
-      $('.current-time').text(String(player.media.currentTime).toHHMMSS());
-      $('.duration-time').text("-"+ String(Math.floor(player.media.duration - player.media.currentTime)).toHHMMSS());
-      $('.progress').css("width", String(Math.floor((player.media.currentTime / player.media.duration) * 100)) + '%');
+    $('.progress').css("width", String(Math.floor((player.media.currentTime / player.media.duration) * 100)) + '%');
+  }, false);
+
+  // Countup timer for player
+  player.media.addEventListener("timeupdate", function() {
+    var timeline = $('.current-time');
+    var s = parseInt(player.media.currentTime % 60);
+    var m = parseInt((player.media.currentTime / 60) % 60);
+    var h = parseInt((player.media.currentTime / 120) % 60);
+
+    s = s < 10 ? "0"+s : s;
+
+    timeline.text(m+':'+s);
+
+    if(h > 0) {
+      m = m < 10 ? "0"+m : m;
+      timeline.text(h+':'+m+':'+s);
+    }
   }, false);
 
   // Initialize Pusher
@@ -176,6 +193,29 @@
       }
     }
   });
+
+  // Countdown timer for player
+  player.media.addEventListener("timeupdate", function() {
+    var timeleft = $('.duration-time'),
+      duration = parseInt( player.media.duration ),
+      currentTime = parseInt( player.media.currentTime ),
+      timeLeft = duration - currentTime,
+      s, m, h;
+
+    s = timeLeft % 60;
+    m = Math.floor( timeLeft / 60 ) % 60;
+    h = Math.floor( timeLeft / 120 ) % 60;
+
+    s = s < 10 ? "0"+s : s;
+
+    timeleft.text('-'+m+":"+s);
+
+    if(h > 0) {
+      m = m < 10 ? "0"+m : m;
+      timeline.text('-'+h+':'+m+':'+s);
+    }
+
+  }, false);
 
   var channel = pusher.subscribe('message_<%= @message.id %>');
 
