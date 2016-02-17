@@ -1,1 +1,10 @@
-<%= link_to(image_tag('http://connect.soundcloud.com/2/btn-connect-sc-l.png', width: 242, height: 29), soundcloud_callback_path, class: 'mx-auto block flex flex-center items-center') %>
+<div class="flex flex-auto flex-column">
+  <div class="flex-auto flex items-center">
+    <div class="mx-auto splashLogoContainer">
+      <%= image_tag('pinwheel.png', class: 'splashLogo') %>
+      <%= image_tag('pin.png', class: 'splashPin') %>
+    </div>
+  </div>
+
+  <%= link_to(image_tag('http://connect.soundcloud.com/2/btn-connect-sc-l.png', width: 242, height: 29), soundcloud_callback_path, class: 'mx-auto block flex-auto') %>
+</div>

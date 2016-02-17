@@ -598,3 +598,36 @@ input.search {
     transition-delay: .4s;
   }
 }
+
+@keyframes splashLogo {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(1800deg);
+  }
+}
+
+.splashLogoContainer {
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+.splashLogo {
+  width: 200px;
+  height: 200px;
+  display: block;
+  animation-name: splashLogo;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.splashPin {
+  width: 25px;
+  height: 27px;
+  position: absolute;
+  top: 88px;
+  left: 88px;
+}
