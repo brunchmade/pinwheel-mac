@@ -349,13 +349,16 @@ input.search {
     margin: 0;
   }
 
+  span {
+    float: left;
+    margin: 0 .75rem .75rem 0;
+  }
+
   img {
     width: 2rem;
     height: 2rem;
     display: inline-block;
     border-radius: 50%;
-    float: left;
-    margin: 0 .75rem .75rem 0;
     white-space: nowrap;
   }
 }
@@ -577,11 +580,12 @@ input.search {
     font-size: .8rem;
     font-weight: 600;
     position: absolute;
-    right: -50%;
+    right: 0;
     top: -30%;
     opacity: 0;
     border-radius: 3px;
     z-index: 200;
+    white-space: nowrap;
     transition: all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
