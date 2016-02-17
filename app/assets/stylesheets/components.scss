@@ -342,9 +342,8 @@ input.search {
 }
 
 .usersInRoomWrapper {
-  height: 2.75rem;
-  overflow: hidden;
-  overflow: scroll;
+  min-height: 2.75rem;
+  max-height: 4.5rem;
 
   .usersInRoom {
     margin: 0;
@@ -364,8 +363,8 @@ input.search {
 .sidebarContainer {
   width: 330px;
   height: 100vh;
+  position: relative;
   background: rgba(white,.3);
-  overflow: hidden;
   transition: margin-right .6s cubic-bezier(0.165, 0.84, 0.44, 1);
 
   &.isHidden {
@@ -548,20 +547,46 @@ input.search {
   width: 40vw;
   background: rgba(white,.5);
   border-radius: 4px;
+  box-shadow: 0 1px 1px 0 rgba(black,.15);
   transition: all .6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   opacity: 1;
 
   &.isHidden {
-    top: 80%;
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-50%) translateX(-50%) rotateX(-20deg);
+    transform: translateY(100%) translateX(-50%) rotateX(-20deg);
   }
 
   &.up {
-    top: 10%;
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-50%) translateX(-50%) rotateX(20deg);
+    transform: translateY(-150%) translateX(-50%) rotateX(20deg);
+  }
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+
+  &:after {
+    padding: .25rem .5rem;
+    background: rgba(black,.6);
+    border: 1px solid rgba(white,.15);
+    color: white;
+    content: attr(data-title);
+    font-size: .8rem;
+    font-weight: 600;
+    position: absolute;
+    right: -50%;
+    top: -30%;
+    opacity: 0;
+    border-radius: 3px;
+    z-index: 200;
+    transition: all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  &:hover:after {
+    top: -60%;
+    opacity: 1;
   }
 }

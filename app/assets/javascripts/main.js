@@ -15,28 +15,3 @@ String.prototype.toHHMMSS = function () {
 
   return time;
 }
-
-var $trackForm;
-var $trackInput;
-
-$(document).ready(function() {
-  $trackForm = $('#new_comment');
-  $trackInput = $('#comment_content');
-
-  $trackForm.submit(function(event) {
-    event.preventDefault();
-    console.log('submit')
-    $.ajax({
-      url: $trackForm.attr('action'),
-      method: 'post',
-      data: {
-        comment: {
-          content: $trackInput.val()
-        }
-      },
-      success: function(response) {
-        $trackInput.val('');
-      }
-    });
-  });
-});
