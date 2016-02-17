@@ -136,11 +136,27 @@
 
 
 <script>
+
+  // Intialize the tvOS style album art
   atvImg();
+
+  // Update the <title> with the song playing on page load
+  document.title = "<%= @now_playing.responses['title'] + " - " + @now_playing.responses['user']['username'] %>";
+
+  // Initialize the background light/dark detection
+  BackgroundCheck.init({
+    targets: '.js-bgcheck',
+    images: '.js-nowPlayingBackground'
+  });
+
+  // Intialize the audio player
   var player;
   player = new MediaElementPlayer('audio', {features: [], alwaysShowControls: false, enableKeyboard: true});
   player.setSrc('<%= @now_playing.responses['stream_url'].to_s + '?client_id=b59d1f4b68bbc8f2b0064188f210117d' %>');
   player.load();
+
+  // Grab the @now_playing track and play it at the
+  // current shared timecode.
   player.setCurrentTime(<%= @now_playing.aired_at ? (Time.now.utc - @now_playing.aired_at).to_i : 0 %>);
   player.play();
   player.media.addEventListener('timeupdate', function(e) {
@@ -149,45 +165,7 @@
       $('.progress').css("width", String(Math.floor((player.media.currentTime / player.media.duration) * 100)) + '%');
   }, false);
 
-  document.title = "<%= @now_playing.responses['title'] + " - " + @now_playing.responses['user']['username'] %>";
-
-  BackgroundCheck.init({
-    targets: '.js-bgcheck',
-    images: '.js-nowPlayingBackground'
-  });
-
-  var flip = true;
-  function muteOrUnmute() {
-    if($("audio").prop('muted')) {
-      if (player.media.paused) {
-        player.play();
-      }
-      $("audio").prop('muted', false); //mute
-    } else {
-      $("audio").prop('muted', true); //mute
-    }
-    pause = "M11,10 L18,13.74 18,22.28 11,26 M18,13.74 L26,18 26,18 18,22.28",
-    play = "M11,10 L17,10 17,26 11,26 M20,10 L26,10 26,26 20,26",
-    $animation = $('#animation');
-    flip = !flip;
-    $animation.attr({
-      "from": flip ? pause : play,
-      "to": flip ? play : pause
-    }).get(0).beginElement();
-  }
-
-  $('.btnPlayPause').click(function() {
-    muteOrUnmute();
-  });
-
-  function nextTrack() {
-    $.ajax({url: "/messages/<%= @message.id %>/next"});
-  }
-
-  $('.btnFf').click(function() {
-    nextTrack();
-  });
-
+  // Initialize Pusher
   var pusher = new Pusher('<%= ENV['PUSHER_KEY'] %>', {
     encrypted: true,
     authEndpoint: '/pusher/auth',
@@ -199,42 +177,9 @@
     }
   });
 
-  function openModal(name) {
-    $(name).parent().removeClass('isHidden');
-    $(name).removeClass('isHidden');
-  }
-
-  function closeModal(name) {
-    $(name).addClass('isHidden up');
-    $(name).parent().addClass('isHidden');
-    setTimeout(function () {
-      $(name).removeClass('up');
-    }, 400);
-  }
-
-
-  var toastOpen = false;
-  var toastInOut;
-  function toastNotification(string, type) {
-    // string (string): 'Notification text here'
-    // type (string): 'good', 'bad', 'info'
-    if(toastInOut) {
-      clearTimeout(toastInOut);
-      toastInOut = null;
-    }
-    if(toastOpen) {
-      $('.toastNotification').html(string).addClass(type);
-    } else {
-      $('.toastNotification').html(string).addClass(type);
-      setTimeout(function () {
-        $('.toastNotification').removeClass(type);
-      }, 4000);
-    }
-    toastOpen = !toastOpen;
-  }
-
   var channel = pusher.subscribe('message_<%= @message.id %>');
 
+  // Initialize and listen for new tracks
   channel.bind('on_deck', function(data) {
     if(true) { // if track is streamable
       $(data.message)
@@ -250,6 +195,8 @@
     //   toastNotification('Invalid SoundCloud URL', 'bad');
     // }
   });
+
+  // Initialize and listen for tracks deleted from the queue
   channel.bind('remove_on_deck', function(data) {
     $('*[data-comment-id=' + data.id + ']')
       .slideUp(340, function() { $(this).remove(); })
@@ -258,6 +205,8 @@
     toastNotification('Song removed from queue', 'good');
     $('.js-songsOnDeck').text(data.count);
   });
+
+  // Initialize and listen for new tracks playing
   channel.bind('now_playing', function(data) {
     // Replace current playing info
     $('.js-songsOnDeck').text(data.count);
@@ -271,6 +220,7 @@
     $('.js-palette').attr('href', data.palette_url);
     document.title = data.title + " - " + data.artist;
 
+    // Re-analyze the background image for the light/dark detection
     BackgroundCheck.init({
       targets: '.js-bgcheck',
       images: '.js-nowPlayingBackground'
@@ -282,9 +232,12 @@
     player.load();
     player.play();
 
+    // Refresh the light/dark detection (don't know why we need
+    // to do this twice, but we do). ¯\_(ツ)_/¯
     BackgroundCheck.refresh();
   });
 
+  // Initialize and listen for users currently in the room
   var presenceChannel = pusher.subscribe('presence-<%= @message.id %>');
   presenceChannel.bind('pusher:subscription_succeeded', function(members) {
     $('.usersInRoom').empty();
@@ -293,39 +246,123 @@
     });
     $('.js-membersOnline').text(presenceChannel.members.count);
   })
+
+  // Listen for users entering the room
   presenceChannel.bind('pusher:member_added', function(member) {
     $('.usersInRoom').append('<img src="' + member.info['avatar_url'] + '" data-member-id="' + member.id + '" title="' + member.info['name'] + '">');
     $('.js-membersOnline').text(presenceChannel.members.count);
   });
+
+  // Listen for users leaving the room
   presenceChannel.bind('pusher:member_removed', function(member) {
     $('*[data-member-id=' + member.id + ']').fadeOut();
     $('.js-membersOnline').text(presenceChannel.members.count);
   });
 
+  // muteOrUnmute();
+  // Controls the play+pause function by muting
+  // or unmuting the current track.
+  var flip = true;
+  function muteOrUnmute() {
+    if($("audio").prop('muted')) {
+      // If the track is Paused (instead of muted) for
+      // some reason, resume playing
+      if (player.media.paused) {
+        player.play();
+      }
+      $("audio").prop('muted', false); //mute
+    } else {
+      $("audio").prop('muted', true); //mute
+    }
+
+    // Play+pause button SVG animation
+    pause = "M11,10 L18,13.74 18,22.28 11,26 M18,13.74 L26,18 26,18 18,22.28",
+    play = "M11,10 L17,10 17,26 11,26 M20,10 L26,10 26,26 20,26",
+    $animation = $('#animation');
+    flip = !flip;
+    $animation.attr({
+      "from": flip ? pause : play,
+      "to": flip ? play : pause
+    }).get(0).beginElement();
+  }
+
+  // When the user clicks the ".btnPlayPause" button
+  $('.btnPlayPause').click(function() {
+    muteOrUnmute();
+  });
+
+  // nextTrack();
+  // Skips to the next track for all users in the room.
+  function nextTrack() {
+    $.ajax({url: "/messages/<%= @message.id %>/next"});
+  }
+
+  // When the user clicks the ".btnFf" button
+  $('.btnFf').click(function() {
+    nextTrack();
+  });
+
+  // openModal();
+  // Opens a modal window
+  function openModal(name) {
+    $(name).parent().removeClass('isHidden');
+    $(name).removeClass('isHidden');
+  }
+
+  // closeModal();
+  // Closes a modal window
+  function closeModal(name) {
+    $(name).addClass('isHidden up');
+    $(name).parent().addClass('isHidden');
+    setTimeout(function () {
+      $(name).removeClass('up');
+    }, 400);
+  }
+
+  // toastNotification("Message", "type");
+  // Pops up an arbitrary status message and closes
+  // it after 4 seconds.
+  // `type` can be : "good", "bad"
+  // Both arguments are required.
+  var toastOpen = false;
+  var toastInOut;
+  function toastNotification(message, type) {
+    if(toastInOut) {
+      clearTimeout(toastInOut);
+      toastInOut = null;
+    }
+    if(toastOpen) {
+      $('.toastNotification').html(message).addClass(type);
+    } else {
+      $('.toastNotification').html(message).addClass(type);
+      setTimeout(function () {
+        $('.toastNotification').removeClass(type);
+      }, 4000);
+    }
+    toastOpen = !toastOpen;
+  }
+
+  // toggleSidebar();
+  // Show and hide the main app sidebar
   function toggleSidebar() {
     $('.sidebarContainer').toggleClass('isHidden');
     $('.toggleSidebar').toggleClass('closed');
   }
-
+  // when the user clicks the ".toggleSidebar" icon
   $('.toggleSidebar').click(function() {
     toggleSidebar();
   });
 
-  function toggleSettings() {
-    $('.onDeck').toggleClass('isHidden');
-    $('.settings').toggleClass('isHidden');
-  }
-
-  $('.toggleSettings').click(function() {
-    toggleSettings();
-  });
-
+  // If a dropdown menu is open, and the user clicks
+  // anywhere except the dropdown trigger, close the dropdown.
   $(document).click(function(){
     if(!$(event.target).is('.expanded')) {
       $('.dropdownMenu').addClass('hide').prev().removeClass('expanded');
     }
   });
 
+  // If the user clicks the dropdown trigger, show the dropdown
+  // and close any other open ones.
   $('.dropdownTrigger, .dropdownMenu').click(function() {
     $('.dropdownMenu').addClass('hide')
     $(this).addClass('expanded').next('.dropdownMenu').removeClass('hide');
