@@ -363,8 +363,9 @@ input.search {
 
 .sidebarContainer {
   width: 330px;
+  height: 100vh;
+  background: rgba(white,.3);
   overflow: hidden;
-  position: relative;
   transition: margin-right .6s cubic-bezier(0.165, 0.84, 0.44, 1);
 
   &.isHidden {
@@ -372,32 +373,11 @@ input.search {
   }
 }
 
-.pane {
-  width: 330px;
-  background: rgba(white,.3);
-  height: 100vh;
-  position: absolute;
-  z-index: 10;
-  transition: right .6s cubic-bezier(0.165, 0.84, 0.44, 1);
-  right: 0;
-
-  &.isHidden {
-    right: 330px;
-  }
-}
-
 .onDeck {
   width: 330px;
-  background: rgba(white,.3);
   height: 100vh;
-  position: absolute;
   z-index: 10;
   transition: all .6s cubic-bezier(0.165, 0.84, 0.44, 1);
-  right: 0;
-
-  &.isHidden {
-    right: -330px;
-  }
 }
 
 .onDeckSongs {
