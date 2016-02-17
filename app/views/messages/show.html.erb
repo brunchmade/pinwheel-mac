@@ -165,23 +165,6 @@
     $('.progress').css("width", String((player.media.currentTime / player.media.duration) * 100) + '%');
   }, false);
 
-  // Countup timer for player
-  player.media.addEventListener("timeupdate", function() {
-    var timeline = $('.current-time');
-    var s = parseInt(player.media.currentTime % 60);
-    var m = parseInt((player.media.currentTime / 60) % 60);
-    var h = parseInt((player.media.currentTime / 120) % 60);
-
-    s = s < 10 ? "0"+s : s;
-
-    timeline.text(m+':'+s);
-
-    if(h > 0) {
-      m = m < 10 ? "0"+m : m;
-      timeline.text(h+':'+m+':'+s);
-    }
-  }, false);
-
   // Initialize Pusher
   var pusher = new Pusher('<%= ENV['PUSHER_KEY'] %>', {
     encrypted: true,
@@ -194,6 +177,23 @@
     }
   });
 
+  // Countup timer for player
+  player.media.addEventListener("timeupdate", function() {
+    var timeline = $('.current-time');
+    var s = parseInt(player.media.currentTime % 60);
+    var m = parseInt((player.media.currentTime / 60) % 60);
+    var h = parseInt((player.media.currentTime / 3600) % 60);
+
+    s = s < 10 ? "0"+s : s;
+
+    timeline.text(m+':'+s);
+
+    if(h > 0) {
+      m = m < 10 ? "0"+m : m;
+      timeline.text(h+':'+m+':'+s);
+    }
+  }, false);
+
   // Countdown timer for player
   player.media.addEventListener("timeupdate", function() {
     var timeleft = $('.duration-time'),
@@ -204,7 +204,7 @@
 
     s = timeLeft % 60;
     m = Math.floor( timeLeft / 60 ) % 60;
-    h = Math.floor(( timeLeft / 60 ) / 60) % 60;
+    h = Math.floor( timeLeft / 3600) % 60;
 
     s = s < 10 ? "0"+s : s;
 
