@@ -343,7 +343,8 @@ input.search {
 
 .usersInRoomWrapper {
   min-height: 2.75rem;
-  max-height: 4.5rem;
+  max-height: 4.7rem;
+  overflow-y: scroll;
 
   .usersInRoom {
     margin: 0;
@@ -351,7 +352,7 @@ input.search {
 
   span {
     float: left;
-    margin: 0 .75rem .75rem 0;
+    margin: 0 .75rem .5rem 0;
   }
 
   img {
@@ -577,21 +578,22 @@ input.search {
     border: 1px solid rgba(white,.15);
     color: white;
     content: attr(data-title);
-    font-size: .8rem;
+    font-size: .7rem;
     font-weight: 600;
     position: absolute;
-    right: 0;
-    top: -30%;
-    opacity: 0;
+    top: 2px;
+    right: -50%;
     border-radius: 3px;
     z-index: 200;
     white-space: nowrap;
     transition: all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transition-delay: .15s;
+    pointer-events: none;
+    opacity: 0;
   }
 
   &:hover:after {
-    top: -60%;
+    top: 4px;
     opacity: 1;
     transition-delay: .4s;
   }
