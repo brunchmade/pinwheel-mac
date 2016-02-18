@@ -25,7 +25,7 @@ end
 
 Rails.application.configure do
   config.imgix = {
-    source: "pinwheel.imgix.net",
+    source: "i.pinwheel.fm",
     hostname_to_replace: "i1.sndcdn.com"
   }
 end
