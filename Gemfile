@@ -4,8 +4,6 @@ ruby '2.3.0'
 gem 'rails', '5.0.0.beta2'
 gem 'sprockets-rails', github: "rails/sprockets-rails"
 
-gem 'awesome_print'
-
 gem 'pg'
 gem 'redis'
 gem 'soundcloud'
