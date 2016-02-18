@@ -76,7 +76,9 @@
       </div>
       <div class="h6 opacity dropdownTrigger" style="font-weight:700"><%= @message.title %> ▾</div>
       <ul class="dropdownMenu list-reset hide">
+        <li onclick="openModal('.roomStats');">Room stats</li>
         <li><%= link_to "Add 10 popular tracks", controller: 'messages', action: 'backfill', remote: true  %></li>
+        <li class="divider"></li>
         <li onclick="openModal('.switchRooms');">Switch rooms</li>
         <li onclick="openModal('.createNewRoom');">Create a new room</li>
       </ul>
@@ -126,6 +128,32 @@
     <input class="my2" type="password" name="name" placeholder="Confirm New Password">
     <div class="right">
       <button class="mr1" onclick="closeModal('.userSettings');">Cancel</button> <button>Save</button>
+    </div>
+  </div>
+
+  <div class="roomStats modalWindow p3 isHidden">
+    <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">Room Stats for <%= @message.title %></div>
+
+    <table class="my3">
+      <tr>
+        <td>Songs played</td><td>9,001</td>
+      </tr>
+      <tr>
+        <td>Most users in room</td><td>A lot</td>
+      </tr>
+      <tr>
+        <td>Hours of music queued up</td><td>So many</td>
+      </tr>
+      <tr>
+        <td>Longest streak</td><td>Like, days</td>
+      </tr>
+      <tr>
+        <td>MVDJ</td><td>Baldwin</td>
+      </tr>
+    </table>
+
+    <div class="right">
+      <button onclick="closeModal('.roomStats');">Close</button>
     </div>
   </div>
 

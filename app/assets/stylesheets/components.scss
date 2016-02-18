@@ -488,6 +488,21 @@ input.search {
   }
 }
 
+@keyframes blink {
+  0% {
+    background: white;
+    color: rgba(black,.9);
+  }
+  50% {
+    background: $osx-blue;
+    color: white;
+  }
+  100% {
+    background: white;
+    color: rgba(black,.9);
+  }
+}
+
 .dropdownMenu {
   position: absolute;
   right: 1rem;
@@ -500,11 +515,10 @@ input.search {
   z-index: 20;
 
   li {
-    padding: .09rem 1.3rem .11rem;
+    padding: .09rem 1.3rem .16rem;
     font-size: .95rem;
     font-weight: 400;
     cursor: pointer;
-    transition: all .05s;
     color: rgba(black,.9);
 
     &:hover {
@@ -512,9 +526,22 @@ input.search {
       color: white;
     }
 
+    &:active {
+      animation-name: blink;
+      animation-duration: .09s;
+      animation-timing-function:steps(1);
+    }
+
     a {
       color: inherit;
       text-decoration: none;
+    }
+
+    &.divider {
+      margin: 4px 0;
+      padding: 0;
+      border-top: 2px solid rgba(black,.1);
+      pointer-events: none;
     }
   }
 }
@@ -531,7 +558,9 @@ input.search {
   background-position: center;
   z-index: 1000;
   transition: all .2s;
-  perspective: 800px;
+  perspective: 1800px;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform:translate3d(0,0,0);
 
   &.isHidden {
     opacity: 0;
