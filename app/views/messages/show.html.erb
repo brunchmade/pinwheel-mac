@@ -4,7 +4,7 @@
 
 <div class="flex-auto flex justify-center items-center">
   <div class="nowPlaying center">
-    <a href="<%= @now_playing.responses['permalink_url'] %>" target="_blank">
+    <a class="nowPlayingPermalink" href="<%= @now_playing.responses['permalink_url'] %>" target="_blank">
       <div class="atvImg nowPlayingAlbumArt">
         <div class="atvImg-layer" data-img="<%= @now_playing.album_art_url %>"></div>
       </div>
@@ -17,7 +17,7 @@
       <div class="h6 duration-time js-bgcheck text">&nbsp;</div>
     </div>
     <span class="js-bgcheck text">
-      <h1><a href="<%= @now_playing.responses['permalink_url'] %>" target="_blank"><%= @now_playing.responses['title'] %></a></h1>
+      <h1><a class="nowPlayingPermalink" href="<%= @now_playing.responses['permalink_url'] %>" target="_blank"><%= @now_playing.responses['title'] %></a></h1>
       <h2 class="opacity"><%= @now_playing.responses['user']['username'] %> &ndash; Added by NAME</h2>
     </span>
     <div class="actions flex items-center justify-center">
@@ -253,7 +253,9 @@
     $('.onDeckSongs li:first-child')
       .slideUp(340, function() {$(this).remove(); })
       .animate({ opacity: 0 },{ queue: false, duration: 340 });
-    $('.nowPlaying h1').text(data.title);
+    $('.nowPlaying h1 a').text(data.title);
+    $('.nowPlayingPermalink').attr('href', data.permalink_url);
+    console.log(data.permalink_url);
     $('.nowPlaying h2').text(data.artist);
     $('.atvImg-rendered-layer').css('background-image', 'url(' + data.artwork_url + ')');
     $('.js-nowPlayingBackground').css('background-image', 'url(' + data.background_url  + ')');

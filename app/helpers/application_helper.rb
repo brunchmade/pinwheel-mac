@@ -4,6 +4,7 @@ module ApplicationHelper
       title:          comment.responses['title'].to_s,
       artist:         comment.responses['user']['username'].to_s,
       artwork_url:    comment.album_art_url,
+      permalink_url:  comment.responses['permalink_url'],
       stream_url:     comment.responses['stream_url'].to_s + '?client_id=b59d1f4b68bbc8f2b0064188f210117d',
       background_url: comment.blurred_album_art_url,
       palette_url:    comment.palette_url,
