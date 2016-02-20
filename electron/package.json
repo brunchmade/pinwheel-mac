@@ -1,8 +1,9 @@
 {
   "name"    : "Pinwheel",
-  "version" : "0.1.0",
+  "version" : "0.0.4",
   "main"    : "main.js",
   "scripts" : {
-    "pack": "electron-packager . \"Pinwheel\" --platform=darwin --arch=x64 --version=0.36.7 --icon=pinwheel.icns --app-bundle-id=fm.pinwheel.app --out=/Applications --ignore=dist --overwrite --asar=true"
+    "mas": "electron-packager . \"Pinwheel\" --platform=darwin --arch=x64 --version=0.35.4 --app-version=0.0.4 --icon=pinwheel.icns --app-bundle-id=fm.pinwheel.mac --out=/Applications --ignore=dist --overwrite --asar=true",
+    "pack": "electron-packager . \"Pinwheel\" --platform=mas --arch=x64 --version=0.35.4 --app-version=0.0.4 --icon=pinwheel.icns --app-bundle-id=fm.pinwheel.mac --out=/Applications --ignore=dist --overwrite --asar=true"
   }
 }
