@@ -7,10 +7,6 @@ var Menu = require('menu');
 
 var force_quit = false;
 
-// session.defaultSession.cookies.get({}, function(error, cookies) {
-//   console.log(cookies);
-// });
-
 var menu = Menu.buildFromTemplate([
   {
     label: 'Pinwheel',

@@ -283,7 +283,6 @@
       .animate({ opacity: 0 },{ queue: false, duration: 340 });
     $('.nowPlaying h1 a').text(data.title);
     $('.nowPlayingPermalink').attr('href', data.permalink_url);
-    console.log(data.permalink_url);
     $('.nowPlaying h2').text(data.artist);
     $('.atvImg-rendered-layer').css('background-image', 'url(' + data.artwork_url + ')');
     $('.js-nowPlayingBackground').css('background-image', 'url(' + data.background_url  + ')');
