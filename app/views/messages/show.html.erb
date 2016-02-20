@@ -484,7 +484,7 @@
   // If the user clicks the dropdown trigger, show the dropdown
   // and close any other open ones.
   $('.dropdownTrigger, .dropdownMenu').click(function() {
-    $('.dropdownMenu').addClass('hide')
+    $('.dropdownMenu').addClass('hide');
     $(this).addClass('expanded').next('.dropdownMenu').removeClass('hide');
   });
 
