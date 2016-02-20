@@ -5,6 +5,12 @@ class MessagesController < ApplicationController
     NextUpJob.perform_now(@message.id, @comment.id)
   end
 
+  def reload_all
+    Pusher.trigger('reloadAllSessions', 'reload_all', {
+      message: 'reload_all'
+    })
+  end
+
   def backfill
     @message = Message.find(params[:id])
 

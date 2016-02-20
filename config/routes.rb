@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     member do
       get 'backfill'
       get 'next'
+      get 'reload_all'
     end
   end
 
