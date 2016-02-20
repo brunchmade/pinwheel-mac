@@ -92,7 +92,7 @@ img {
 }
 
 .js-bgcheck {
-  transition: all .1s;
+  transition: all .4s;
 }
 
 .js-bgcheck.text.background--light {
@@ -182,6 +182,7 @@ img {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  transition: all .4s;
 }
 
 .nowPlaying {
@@ -198,6 +199,10 @@ img {
   min-width: 300px;
   min-height: 300px;
   margin: 0 auto;
+}
+
+.atvImg-rendered-layer {
+  transition: background-image .4s;
 }
 
 .progressBar {
