@@ -13,6 +13,10 @@ body {
   -webkit-font-smoothing:antialiased;
 }
 
+a {
+  color: inherit;
+}
+
 $osx-blue: #4899fb;
 
 h1 {
@@ -599,6 +603,10 @@ input.search {
     pointer-events: none;
     transform: translateY(-150%) translateX(-50%) rotateX(20deg);
   }
+}
+
+.betaNotes {
+  width: 60vw;
 }
 
 @keyframes splashLogo {
