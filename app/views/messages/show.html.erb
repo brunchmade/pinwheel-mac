@@ -62,7 +62,7 @@
         <ul class="dropdownMenu list-reset hide">
           <li onclick="openModal('.userSettings');">Settings</li>
           <li><%= link_to "Log out", session_path, method: :delete %></li>
-          <% if @current_user.boss == true %>
+          <% if @current_user.boss %>
             <li class="divider"></li>
             <li><%= link_to "Reload All Users", controller: 'messages', action: 'reload_all', remote: true  %></li>
           <% end %>
