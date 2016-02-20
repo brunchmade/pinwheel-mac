@@ -95,6 +95,10 @@
 
 <div class="toggleSidebar">◂</div>
 
+<div class="betaNotesTrigger" onclick="openModal('.betaNotes');">Beta notes</div>
+
+
+
 <div class="js-nowPlayingBackground modalBg isHidden" style="background-image: url(<%= @now_playing.blurred_album_art_url %>)">
 
   <div class="switchRooms modalWindow p3 isHidden">
@@ -157,11 +161,51 @@
     </div>
   </div>
 
+  <div class="betaNotes modalWindow p3 isHidden">
+    <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">Welcome to the Pinwheel beta!</div>
+
+    <p>Thanks so much for giving Pinwheel a try! If you have any feedback about the app, feel free to tweet <a href="https://twitter.com/wr" target="_blank">@wr</a> and/or <a href="https://twitter.com/alexbaldwin" target="_blank">@alexbaldwin</a>. We'd really appreciate it :)</p>
+
+    <p>Right now this app just has some basic functionality. Currently you can:</p>
+
+    <ul>
+      <li>Join the Simple Casual room – it's currently the <u>only</u> room :)</li>
+      <li>Add tracks (any SoundCloud track URL should work). Note that songs set as "not streamable" by the uploader currently "play" in Pinwheel, but with no audio. We're going to fix that soon.</li>
+      <li>Add SoundCloud playlists (any SoundCloud playlist URL should work).</li>
+      <li>Play / Pause (since it's a collaborative radio app, "pause" really just means mute. The song will continue to play for everyone else).</li>
+      <li>Skip – this will skip the track for everyone in the room.</li>
+      <li>Remove songs from the queue – this removes the track for everyone.</li>
+      <li>"Add 10 popular tracks" from the room name menu ("Simple Casual"). This will randomly pick 10 of the Top 100 songs on SoundCloud.</li>
+      <li>Share the app with friends! Just send them to <a href="https://pinwheel.fm" target="_blank">pinwheel.fm</a> to download the app.
+    </ul>
+
+    <p>Some currently-visible functionality that doesn't work:</p>
+
+    <ul>
+      <li>Favoriting a track does not work</li>
+      <li>User settings</li>
+      <li>Create new room</li>
+      <li>Switch rooms</li>
+      <li>Room stats</li>
+      <li>Searching for a track</li>
+    </ul>
+
+    <p>Some stuff we're thinking about adding (please let us know what you think!):</p>
+
+    <ul>
+      <li>Favoriting a track will add a similar track to the queue</li>
+      <li>Adding YouTube songs</li>
+      <li>Adding YouTube videos</li>
+      <li>Adding Spotify songs (currently unsupported by their API, but maybe soon!)</li>
+      <li>DJbot – automatically adds similar tracks to keep the vibe going</li>
+    </ul>
+
+    <div class="right">
+      <button onclick="closeModal('.betaNotes');">Close</button>
+    </div>
+  </div>
+
 </div>
-
-
-
-
 
 <script>
 

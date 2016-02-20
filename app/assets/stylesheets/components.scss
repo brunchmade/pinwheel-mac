@@ -580,6 +580,8 @@ input.search {
   box-shadow: 0 1px 1px 0 rgba(black,.15);
   transition: all .6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   opacity: 1;
+  max-height: 90vh;
+  overflow-y: scroll;
 
   &.isHidden {
     opacity: 0;
@@ -625,4 +627,25 @@ input.search {
   position: absolute;
   top: 88px;
   left: 88px;
+}
+
+.betaNotesTrigger {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  border-radius: 20px;
+  height: 20px;
+  padding: 0 10px;
+  line-height: 20px;
+  background: rgba(white,.2);
+  font-size: .7rem;
+  font-weight: 700;
+  opacity: .5;
+  transition: all .2s;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
 }
