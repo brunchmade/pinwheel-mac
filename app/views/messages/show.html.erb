@@ -342,16 +342,13 @@
       targets: '.js-bgcheck',
       images: '.js-nowPlayingBackground'
     });
+    BackgroundCheck.refresh();
 
     // Drop that track
     player.pause();
     player.setSrc(data.stream_url);
     player.load();
     player.play();
-
-    // Refresh the light/dark detection (don't know why we need
-    // to do this twice, but we do). ¯\_(ツ)_/¯
-    BackgroundCheck.refresh();
   });
 
   // Initialize and listen for users currently in the room
@@ -362,7 +359,7 @@
       $('.usersInRoom').append('<img src="' + member.info['avatar_url'] + '" data-member-id="' + member.id + '" title="' + member.info['name'] + '">');
     });
     $('.js-membersOnline').text(presenceChannel.members.count);
-  })
+  });
 
   // Listen for users entering the room
   presenceChannel.bind('pusher:member_added', function(member) {
@@ -380,7 +377,7 @@
   var reloadSession = pusher.subscribe('reloadAllSessions');
   reloadSession.bind('reload_all', function() {
     location.reload();
-  })
+  });
 
   // muteOrUnmute();
   // Controls the play+pause function by muting
