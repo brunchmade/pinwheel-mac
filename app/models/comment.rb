@@ -8,9 +8,9 @@ class Comment < ActiveRecord::Base
   before_create :resolve
 
   def album_art_url
-    if self.responses['artwork_url']
+    if self.responses.dig('artwork_url').to_s != ''
       self.responses['artwork_url'].to_s.gsub('large','t500x500')
-    elsif self.responses['user']['avatar_url']
+    elsif self.responses.dig('user', 'avatar_url').to_s != ''
       self.responses['user']['avatar_url'].to_s.gsub('large','t500x500')
     else
       'https://i1.sndcdn.com/avatars-000106486517-x71ahg-large.jpg'
