@@ -78,6 +78,7 @@ GEM
     autoprefixer-rails (6.3.3)
       execjs
       json
+    awesome_print (1.6.1)
     bugsnag (3.0.0)
       json (~> 1.7, >= 1.7.7)
     builder (3.2.2)
@@ -216,6 +217,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
+  awesome_print
   bugsnag
   byebug
   coffee-rails!
