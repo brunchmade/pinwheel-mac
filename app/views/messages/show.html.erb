@@ -337,6 +337,12 @@
     $('.js-palette').attr('href', data.palette_url);
     document.title = data.title + " - " + data.artist;
 
+    // Drop that track
+    player.pause();
+    player.setSrc(data.stream_url);
+    player.load();
+    player.play();
+
     // Re-analyze the background image for the light/dark detection
     BackgroundCheck.init({
       targets: '.js-bgcheck',
@@ -344,11 +350,6 @@
     });
     BackgroundCheck.refresh();
 
-    // Drop that track
-    player.pause();
-    player.setSrc(data.stream_url);
-    player.load();
-    player.play();
   });
 
   // Initialize and listen for users currently in the room
