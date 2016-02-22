@@ -488,4 +488,9 @@
     $(this).addClass('expanded').next('.dropdownMenu').removeClass('hide');
   });
 
+  // When the user submits a new track url, it will clear the input
+  $('#new_comment').bind('ajax:complete', function(event,xhr,status){
+    $('#comment_content').val('');
+  });
+
 </script>
