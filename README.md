@@ -36,9 +36,9 @@ We use [Electron](https://github.com/atom/electron) to build the Mac app wrapper
 `npm install electron-prebuilt -g`
 
 **Production app**
-`cd electron && npm run pack && cd ..`
+`cd electron && npm run mac && cd ..`
 
 **Development app**
-`cd electron-beta && npm run pack && cd ..`
+`cd electron-beta && npm run mac && cd ..`
 
 Your binary will be created in your `/Applications` folder.

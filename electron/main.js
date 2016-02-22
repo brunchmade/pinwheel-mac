@@ -186,7 +186,8 @@ app.on('ready', function() {
     minHeight: 550,
     'node-integration': false,
     'title-bar-style': 'hidden-inset',
-    'web-preferences': {'web-security': false}
+    'web-preferences': {'web-security': false},
+    'icon': 'pinwheel.png'
   });
 
   // and load the index.html of the app.
