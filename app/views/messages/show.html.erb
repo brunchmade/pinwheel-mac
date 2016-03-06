@@ -106,12 +106,14 @@
 <div class="js-nowPlayingBackground modalBg isHidden" style="background-image: url(<%= @now_playing.blurred_album_art_url %>)">
 
   <div class="switchRooms modalWindow p3 isHidden">
+    <!-- Not quite ready for search yet
     <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">Switch Rooms</div>
     <input type="text" name="new-room" placeholder="Room name" class="my2">
     <div class="right-align">
       <button class="mr1" onclick="closeModal('.switchRooms');">Cancel</button> <button>OK</button>
     </div>
-    <div class="h6 opacity mt3" style="font-weight:700;text-transform:uppercase">Trending Rooms</div>
+    -->
+    <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">Trending Rooms</div>
     <ul class="list-reset h5">
       <% @messages.each do |message| %>
         <li><%= link_to message.title, message %></li>
@@ -121,10 +123,13 @@
 
   <div class="createNewRoom modalWindow p3 isHidden">
     <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">Create a new room</div>
-    <input type="text" name="new-room" placeholder="Room name" class="my2">
+    <%= form_for message_url, url: {action: "create"}, html: {class: ""} do |f| %>
+    <%= f.text_field :title, class: 'my2', placeholder: 'Room name' %>
     <div class="right">
-      <button class="mr1" onclick="closeModal('.createNewRoom');">Cancel</button> <button>Create Room</button>
+      <button class="mr1" onclick="closeModal('.createNewRoom');">Cancel</button> 
+      <%= button_tag "Create Room" %>
     </div>
+    <% end %>
   </div>
 
   <div class="userSettings modalWindow p3 isHidden">

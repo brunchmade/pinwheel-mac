@@ -5,3 +5,8 @@
     <li><%= link_to message.title, message %></li>
   <% end %>
 </ul>
+
+<%= form_for @message, url: {action: "create"}, html: {class: ""} do |f| %>
+  <%= f.text_field :title %>
+  <%= f.submit "Create" %>
+<% end %>
