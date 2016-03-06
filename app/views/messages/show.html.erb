@@ -123,10 +123,10 @@
 
   <div class="createNewRoom modalWindow p3 isHidden">
     <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">Create a new room</div>
-    <%= form_for message_url, url: {action: "create"}, html: {class: ""} do |f| %>
+    <%= form_for Message.new do |f| %>
     <%= f.text_field :title, class: 'my2', placeholder: 'Room name' %>
     <div class="right">
-      <button class="mr1" onclick="closeModal('.createNewRoom');">Cancel</button> 
+      <button class="mr1" onclick="closeModal('.createNewRoom');">Cancel</button>
       <%= button_tag "Create Room" %>
     </div>
     <% end %>

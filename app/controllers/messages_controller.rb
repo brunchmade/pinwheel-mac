@@ -73,13 +73,13 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @new_message = Message.new
-    redirect_to @new_message
+    @message = Message.create message_params
+    redirect_to @message
   end
 
   private
 
   def message_params
-    params.require(:title)
+    params.require(:message).permit(:title)
   end
 end
