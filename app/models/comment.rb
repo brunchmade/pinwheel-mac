@@ -7,6 +7,8 @@ class Comment < ActiveRecord::Base
 
   before_create :resolve
 
+  scope :enqueued, -> { where(now_playing: false, aired_at: nil).order(created_at: :asc) }
+
   def album_art_url
     if self.responses.dig('artwork_url').to_s != ''
       self.responses['artwork_url'].to_s.gsub('large','t500x500')
@@ -55,7 +57,7 @@ class Comment < ActiveRecord::Base
         )
         Pusher.trigger('message_' + @comment.message.id.to_s, 'on_deck', {
           message: html,
-          count: message.queue_count
+          count: message.queue_count.to_s
         })
       end
     else

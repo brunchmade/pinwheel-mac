@@ -30,7 +30,7 @@ class MessagesController < ApplicationController
       )
       Pusher.trigger('message_' + @comment.message.id.to_s, 'on_deck', {
         message: html,
-        count: @message.queue_count
+        count: @message.queue_count.to_s
       })
     end
 
@@ -53,7 +53,7 @@ class MessagesController < ApplicationController
       @now_playing = playing
     else
       now = Time.now.utc
-      if @now_playing = @message.comments.where(aired_at: nil).order(created_at: :asc).first
+      if @now_playing = @message.comments.enqueued.first
         @now_playing.update_attributes(now_playing: true, aired_at: now)
         next_track_at = now + (@now_playing.responses['duration'] / 1000).ceil
         NextUpJob.set(wait_until: next_track_at).perform_later(@message.id, @now_playing.id)
@@ -68,7 +68,7 @@ class MessagesController < ApplicationController
         })
       end
     end
-    @comments = @message.comments.where(now_playing: false, aired_at: nil).order(created_at: :asc)
+    @comments = @message.comments.enqueued
   end
 
   def create

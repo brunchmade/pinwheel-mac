@@ -11,7 +11,7 @@ class NextUpJob < ApplicationJob
       playing.now_playing = false
       playing.save
 
-      if f = message.comments.where(now_playing: false, aired_at: nil).order(created_at: :asc).first
+      if f = message.comments.enqueued.first
         now = Time.now.utc
 
         f.now_playing = true

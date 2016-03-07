@@ -3,6 +3,6 @@ class Message < ActiveRecord::Base
   has_many :comments
 
   def queue_count
-    self.comments.where(now_playing: false, aired_at: nil).count.to_s
+    self.comments.enqueued.count
   end
 end
