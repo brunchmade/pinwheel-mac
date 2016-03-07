@@ -69,7 +69,6 @@ class MessagesController < ApplicationController
       end
     end
     @comments = @message.comments.where(now_playing: false, aired_at: nil).order(created_at: :asc)
-    @new_message = Message.new
   end
 
   def create
