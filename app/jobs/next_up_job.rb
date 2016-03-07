@@ -1,5 +1,4 @@
 class NextUpJob < ApplicationJob
-  include ApplicationHelper
   queue_as :default
 
   def perform(message_id, comment_id)
@@ -21,7 +20,7 @@ class NextUpJob < ApplicationJob
         next_track_at = now + (f.responses['duration'] / 1000).ceil
         NextUpJob.set(wait_until: next_track_at).perform_later(message.id, f.id)
 
-        push_track(f)
+        PusherService.now_playing_track(f)
       end
     end
   end

@@ -6,9 +6,7 @@ class MessagesController < ApplicationController
   end
 
   def reload_all
-    Pusher.trigger('reloadAllSessions', 'reload_all', {
-      message: 'reload_all'
-    })
+    PusherService.reload_all_rooms
   end
 
   def backfill
@@ -23,15 +21,7 @@ class MessagesController < ApplicationController
 
     tracks.each do |comment|
       @comment = @message.comments.create! content: comment['permalink_url'], user: @current_user
-      html = ApplicationController.render(
-        assigns: { comment: @comment },
-        template: 'comments/_comment',
-        layout: false
-      )
-      Pusher.trigger('message_' + @comment.message.id.to_s, 'on_deck', {
-        message: html,
-        count: @message.queue_count.to_s
-      })
+      PusherService.add_track(@comment)
     end
 
     playing = @message.comments.where(now_playing: true).order(created_at: :asc).first

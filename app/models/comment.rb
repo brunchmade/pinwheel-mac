@@ -1,5 +1,4 @@
 class Comment < ActiveRecord::Base
-  include ApplicationHelper
   include Imgix::Rails::UrlHelper
 
   belongs_to :message
@@ -50,15 +49,7 @@ class Comment < ActiveRecord::Base
       tracks.delete(first)
       tracks.each do |comment|
         @comment = message.comments.create! content: comment['permalink_url'], user: current_user
-        html = ApplicationController.render(
-          assigns: { comment: @comment },
-          template: 'comments/_comment',
-          layout: false
-        )
-        Pusher.trigger('message_' + @comment.message.id.to_s, 'on_deck', {
-          message: html,
-          count: message.queue_count.to_s
-        })
+        PusherService.add_track(@comment)
       end
     else
       self.responses = response.to_json
