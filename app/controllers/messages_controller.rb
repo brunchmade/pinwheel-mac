@@ -70,4 +70,15 @@ class MessagesController < ApplicationController
     end
     @comments = @message.comments.where(now_playing: false, aired_at: nil).order(created_at: :asc)
   end
+
+  def create
+    @message = Message.create message_params
+    redirect_to @message
+  end
+
+  private
+
+  def message_params
+    params.require(:message).permit(:title)
+  end
 end
