@@ -10,13 +10,13 @@ class MessagesController < ApplicationController
     tracks.delete_if { |t| t['streamable'] == false}
 
     tracks.each do |comment|
-      @comment = @message.comments.create! content: comment['permalink_url'], user: current_user
-      PusherService.add_track(@comment)
-    end
-
-    playing = @message.comments.playing.first
-    unless playing
-      NextUpJob.perform_now(@message.id, @comment.id)
+      if @comment = @message.comments.create(content: comment['permalink_url'], user: current_user)
+        if @message.comments.playing.count > 0
+          PusherService.add_track(@comment)
+        else
+          @comment.start_playing(true)
+        end
+      end
     end
   end
 
@@ -26,8 +26,9 @@ class MessagesController < ApplicationController
 
   def next
     if @message = Message.find_by(id: params[:id])
-      @comment = @message.comments.playing.first
-      NextUpJob.perform_now(@message.id, @comment.id)
+      if @comment = @message.comments.playing.first
+        NextUpJob.perform_now(@message.id, @comment.id)
+      end
     end
   end
 
