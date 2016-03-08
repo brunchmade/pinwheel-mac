@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   def full_name
     name = self.soundcloud_response['full_name'].to_s
 
-    if name.to_s == ''
+    if name == ''
       self.soundcloud_response['username'].to_s
     else
       name

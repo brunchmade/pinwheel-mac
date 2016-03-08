@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       post :auth
     end
   end
-  resources :sessions, only: [:create, :destroy, :new]
+  resources :sessions, only: [:destroy, :new]
 
   get '/soundcloud/callback', to: 'sessions#soundcloud'
   post :login, to: 'sessions#create'

@@ -7,6 +7,7 @@ class Comment < ActiveRecord::Base
   before_create :resolve
 
   scope :enqueued, -> { where(now_playing: false, aired_at: nil).order(created_at: :asc) }
+  scope :playing, -> { where(now_playing: true).order(created_at: :asc) }
 
   def album_art_url
     if self.responses.dig('artwork_url').to_s != ''
@@ -30,26 +31,32 @@ class Comment < ActiveRecord::Base
     update_attributes(aired_at: nil, now_playing: false)
   end
 
+  def start_playing(should_push)
+    now = Time.now.utc
+    update_attributes(now_playing: true, aired_at: now)
+    next_track_at = now + (self.responses['duration'] / 1000).ceil
+    NextUpJob.set(wait_until: next_track_at).perform_later(self.message.id, self.id)
+    PusherService.now_playing_track(self) if should_push
+  end
+
   private
 
   def resolve
     client = SoundCloud.new({
-      :client_id     => 'b59d1f4b68bbc8f2b0064188f210117d',
-      :client_secret => 'bed0d37bd0eed984cb6d30bf4ee3a2e0'
+      client_id:     ENV['SOUNDCLOUD_ID'],
+      client_secret: ENV['SOUNDCLOUD_SECRET']
     })
-    response = client.get('/resolve', :url => self.content)
+    response = client.get('/resolve', url: self.content)
     if response['kind'] == 'playlist'
       first = response['tracks'].first
       self.content = first['permalink_url']
       self.responses = first.to_json
-
-      current_user = self.user
-      message = self.message
       tracks = response['tracks']
       tracks.delete(first)
       tracks.each do |comment|
-        @comment = message.comments.create! content: comment['permalink_url'], user: current_user
-        PusherService.add_track(@comment)
+        if @comment = self.message.comments.create(content: comment['permalink_url'], user: self.user)
+          PusherService.add_track(@comment)
+        end
       end
     else
       self.responses = response.to_json
