@@ -1,11 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_message
 
-  def destroy
-    @comment = Comment.find(params[:id])
-    PusherService.remove_track(@comment) if @comment.destroy
-  end
-
   def create
     @comment = @message.comments.create!(content: params[:comment][:content], user: @current_user)
 
@@ -18,6 +13,11 @@ class CommentsController < ApplicationController
       NextUpJob.set(wait_until: next_track_at).perform_later(@message.id, @comment.id)
       PusherService.now_playing_track(@comment)
     end
+  end
+
+  def destroy
+    @comment = Comment.find(params[:id])
+    PusherService.remove_track(@comment) if @comment.destroy
   end
 
   private

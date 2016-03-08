@@ -249,11 +249,11 @@
   // Initialize Pusher
   var pusher = new Pusher('<%= ENV['PUSHER_KEY'] %>', {
     encrypted: true,
-    authEndpoint: '/pusher/auth',
+    authEndpoint: '<%= auth_pusher_index_path %>',
     channel_name: '1',
     auth: {
       headers: {
-        'X-CSRF-Token': '<%= form_authenticity_token %>'
+        'X-CSRF-Token': "<%= form_authenticity_token %>"
       }
     }
   });
