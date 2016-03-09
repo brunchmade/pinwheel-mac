@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220202815) do
+ActiveRecord::Schema.define(version: 20160309053318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(version: 20160220202815) do
     t.integer  "message_id"
     t.integer  "user_id"
     t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.jsonb    "responses",   default: {},    null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.boolean  "now_playing", default: false, null: false
     t.datetime "aired_at"
     t.index ["message_id"], name: "index_comments_on_message_id", using: :btree
@@ -33,21 +33,19 @@ ActiveRecord::Schema.define(version: 20160220202815) do
     t.integer  "user_id"
     t.string   "title"
     t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "most_users_count", default: 0
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.jsonb    "soundcloud_token"
     t.jsonb    "soundcloud_response"
     t.boolean  "boss",                default: false
   end
 
-  add_foreign_key "comments", "messages"
-  add_foreign_key "comments", "users"
-  add_foreign_key "messages", "users"
 end

@@ -1,7 +1,11 @@
 class MessagesController < ApplicationController
-  def backfill
-    @message = Message.find(params[:id])
+  before_action :set_message, only: [
+    :backfill,
+    :next,
+    :update_user_count
+  ]
 
+  def backfill
     url = "https://api-v2.soundcloud.com/explore/Popular+Music?tag=out-of-experiment&limit=100&client_id=#{ENV['SOUNDCLOUD_ID']}"
     resp = Net::HTTP.get_response(URI.parse(url))
     buffer = resp.body
@@ -20,15 +24,18 @@ class MessagesController < ApplicationController
     end
   end
 
+  def create
+    @message = Message.create message_params
+    redirect_to @message
+  end
+
   def index
     @messages = Message.all.order('lower(title) ASC')
   end
 
   def next
-    if @message = Message.find_by(id: params[:id])
-      if @comment = @message.comments.playing.first
-        NextUpJob.perform_now(@message.id, @comment.id)
-      end
+    if @comment = @message.comments.playing.first
+      NextUpJob.perform_now(@message.id, @comment.id)
     end
   end
 
@@ -60,14 +67,24 @@ class MessagesController < ApplicationController
     end
   end
 
-  def create
-    @message = Message.create message_params
-    redirect_to @message
+  def update_user_count
+    user_count = params[:user_count].presence || 0
+    user_count = user_count.to_i
+    if user_count > @message.most_users_count
+      @message.update_attributes(most_users_count: user_count)
+    end
+    render json: {user_count: @message.most_users_count}, status: :ok
   end
 
   private
 
   def message_params
     params.require(:message).permit(:title)
+  end
+
+  def set_message
+    unless @message = Message.find_by(id: params[:id])
+      render nothing: true, status: :bad_request
+    end
   end
 end

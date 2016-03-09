@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get :backfill
       get :next
       get :reload_all
+      post :update_user_count
     end
   end
   resources :pusher, only: [] do
