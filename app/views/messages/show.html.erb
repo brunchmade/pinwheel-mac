@@ -149,19 +149,19 @@
 
     <table class="my3">
       <tr>
-        <td>Songs played</td><td>9,001</td>
+        <td>Songs played</td><td><%= @message.played_tracks.count %></td>
       </tr>
       <tr>
         <td>Most users in room</td><td>A lot</td>
       </tr>
       <tr>
-        <td>Hours of music queued up</td><td>So many</td>
+        <td>Hours of music queued up</td><td><%= @message.total_played_hours %></td>
       </tr>
       <tr>
         <td>Longest streak</td><td>Like, days</td>
       </tr>
       <tr>
-        <td>MVDJ</td><td>Baldwin</td>
+        <td>MVDJ</td><td><%= @message.mvdj.full_name %></td>
       </tr>
     </table>
 
