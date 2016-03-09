@@ -1,20 +1,8 @@
 class MessagesController < ApplicationController
-  def next
-    @message = Message.find(params[:id])
-    @comment = @message.comments.where(now_playing: true).first
-    NextUpJob.perform_now(@message.id, @comment.id)
-  end
-
-  def reload_all
-    Pusher.trigger('reloadAllSessions', 'reload_all', {
-      message: 'reload_all'
-    })
-  end
-
   def backfill
     @message = Message.find(params[:id])
 
-    url = "https://api-v2.soundcloud.com/explore/Popular+Music?tag=out-of-experiment&limit=100&client_id=b59d1f4b68bbc8f2b0064188f210117d"
+    url = "https://api-v2.soundcloud.com/explore/Popular+Music?tag=out-of-experiment&limit=100&client_id=#{ENV['SOUNDCLOUD_ID']}"
     resp = Net::HTTP.get_response(URI.parse(url))
     buffer = resp.body
     hash = JSON[buffer]
@@ -22,53 +10,54 @@ class MessagesController < ApplicationController
     tracks.delete_if { |t| t['streamable'] == false}
 
     tracks.each do |comment|
-      @comment = @message.comments.create! content: comment['permalink_url'], user: @current_user
-      html = ApplicationController.render(
-        assigns: { comment: @comment },
-        template: 'comments/_comment',
-        layout: false
-      )
-      Pusher.trigger('message_' + @comment.message.id.to_s, 'on_deck', {
-        message: html,
-        count: @message.queue_count
-      })
-    end
-
-    playing = @message.comments.where(now_playing: true).order(created_at: :asc).first
-    unless playing
-      NextUpJob.perform_now(@message.id, @comment.id)
+      if @comment = @message.comments.create(content: comment['permalink_url'], user: current_user)
+        if @message.comments.playing.count > 0
+          PusherService.add_track(@comment)
+        else
+          @comment.start_playing(true)
+        end
+      end
     end
   end
 
   def index
-    @messages = Message.all
+    @messages = Message.all.order('lower(title) ASC')
+  end
+
+  def next
+    if @message = Message.find_by(id: params[:id])
+      if @comment = @message.comments.playing.first
+        NextUpJob.perform_now(@message.id, @comment.id)
+      end
+    end
+  end
+
+  def reload_all
+    PusherService.reload_all_rooms
   end
 
   def show
-    @messages = Message.all
+    @messages = Message.all.order('lower(title) ASC')
 
-    @message = Message.find(params[:id])
-    playing = @message.comments.where(now_playing: true).first
-    if playing
-      @now_playing = playing
-    else
-      now = Time.now.utc
-      if @now_playing = @message.comments.where(aired_at: nil).order(created_at: :asc).first
-        @now_playing.update_attributes(now_playing: true, aired_at: now)
-        next_track_at = now + (@now_playing.responses['duration'] / 1000).ceil
-        NextUpJob.set(wait_until: next_track_at).perform_later(@message.id, @now_playing.id)
+    if @message = Message.find_by(id: params[:id])
+      if playing = @message.comments.playing.first
+        @now_playing = playing
       else
-        @now_playing = Comment.new(responses: {
-          artwork_url: '/default.png',
-          title: 'Add some songs',
-          user: {
-            username: 'Keep the music flowing!'
-          },
-          stream_url: ''
-        })
+        if @now_playing = @message.comments.enqueued.first
+          @now_playing.start_playing(false)
+        else
+          @now_playing = Comment.new(responses: {
+            artwork_url: '/default.png',
+            title: 'Add some songs',
+            user: {
+              username: 'Keep the music flowing!'
+            },
+            stream_url: ''
+          })
+        end
       end
+      @comments = @message.comments.enqueued
     end
-    @comments = @message.comments.where(now_playing: false, aired_at: nil).order(created_at: :asc)
   end
 
   def create

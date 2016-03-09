@@ -7,7 +7,6 @@
   <%= javascript_include_tag 'application' %>
   <script src="//js.pusher.com/3.0/pusher.min.js"></script>
   <%= csrf_meta_tags %>
-  <meta name="current-user" id="<%= @current_user.try(:id) %>">
 </head>
 <body class="m0 flex">
   <%= yield %>
@@ -17,10 +16,8 @@
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
     ga('create', 'UA-4881230-26', 'auto');
     ga('send', 'pageview');
-
   </script>
 </body>
 </html>

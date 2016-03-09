@@ -1,27 +1,19 @@
 class NextUpJob < ApplicationJob
-  include ApplicationHelper
   queue_as :default
 
   def perform(message_id, comment_id)
-    comment = Comment.find(comment_id)
-    message = Message.find(message_id)
-    playing = message.comments.where(now_playing: true).first
+    message = Message.find_by(id: message_id)
+    comment = Comment.find_by(id: comment_id)
+    return unless message && comment
 
-    if comment.id == playing.id
-      playing.now_playing = false
-      playing.save
+    if playing = message.comments.playing.first
+      if comment.id == playing.id
+        playing.now_playing = false
+        playing.save
 
-      if f = message.comments.where(now_playing: false, aired_at: nil).order(created_at: :asc).first
-        now = Time.now.utc
-
-        f.now_playing = true
-        f.aired_at = now
-        f.save
-
-        next_track_at = now + (f.responses['duration'] / 1000).ceil
-        NextUpJob.set(wait_until: next_track_at).perform_later(message.id, f.id)
-
-        push_track(f)
+        if next_comment = message.comments.enqueued.first
+          next_comment.start_playing(true)
+        end
       end
     end
   end

@@ -4,15 +4,18 @@ Rails.application.routes.draw do
   resources :messages do
     resources :comments
     member do
-      get 'backfill'
-      get 'next'
-      get 'reload_all'
+      get :backfill
+      get :next
+      get :reload_all
     end
   end
+  resources :pusher, only: [] do
+    collection do
+      post :auth
+    end
+  end
+  resources :sessions, only: [:destroy, :new]
 
-  resource  :session
-
-  match 'soundcloud/callback', to: 'sessions#soundcloud', via: [:get]
-  post 'pusher/auth'
-  match '/login', to: 'sessions#create', via: [:post]
+  get '/soundcloud/callback', to: 'sessions#soundcloud'
+  post :login, to: 'sessions#create'
 end

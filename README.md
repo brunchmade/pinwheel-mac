@@ -1,38 +1,17 @@
-## Dependencies
+## Running Locally
 
-You must have redis installed and running on the default port:6379 (or configure it in config/redis/cable.yml).
+* Copy `.env.sample` -> `.env` and fill out required keys: `PUSHER_URL`, `PUSHER_KEY`, `SOUNDCLOUD_ID`, `SOUNDCLOUD_SECRET`.
+* Run `bundle install`.
+* Run `bundle exec db:setup`.
+* Start your Redis server, typically by running `redis-server`.
+* Start your Rails server by running `foreman start`.
+* Visit `http://localhost:5000`.
 
-### Installing Redis
-##### On Linux
-* `wget http://download.redis.io/redis-stable.tar.gz`
-* `tar xvzf redis-stable.tar.gz`
-* `cd redis-stable`
-* `make`
-* `make install`
-
-##### On Mac
-* `brew install redis`
-
-###### Note: You must have Ruby 2.2.2 installed in order to use redis
-
-## Starting the servers
-
-1. Run `./bin/setup`
-3. Run: `foreman start`
-4. Visit `http://localhost:5000`
-
-## Live comments example
-
-1. Open two browsers with separate cookie spaces (like a regular session and an incognito session).
-2. Login as different people in each browser.
-3. Go to the same message.
-4. Add comments in either browser and see them appear real-time on the counterpart screen.
-
-## Building the Electron apps
+## Building the Electron Apps
 
 We use [Electron](https://github.com/atom/electron) to build the Mac app wrapper. To compile your own binaries, run the following scripts from the project root:
 
-# Install the `electron` command globally in your $PATH
+### Install the `electron` command globally in your $PATH
 `npm install electron-prebuilt -g`
 
 **Production app**
@@ -42,3 +21,23 @@ We use [Electron](https://github.com/atom/electron) to build the Mac app wrapper
 `cd electron-beta && npm run mac && cd ..`
 
 Your binary will be created in your `/Applications` folder.
+
+## Environment Variables
+
+Key | Required? | Notes
+--- | --------: | -----
+`PUSHER_KEY` | :heavy_check_mark: |
+`PUSHER_URL` | :heavy_check_mark: |
+`SECRET_KEY_BASE` | :heavy_check_mark: |
+`SOUNDCLOUD_ID` | :heavy_check_mark: |
+`SOUNDCLOUD_REDIRECT` | :heavy_check_mark: |
+`SOUNDCLOUD_SECRET` | :heavy_check_mark: |
+`BUGSNAG_AUTHENTICATION` | |
+`BUNDLE_GEMFILE` | |
+`DATABASE_HOST` | |
+`DATABASE_PORT` | |
+`MAX_THREADS` | |
+`PORT` | |
+`SKYLIGHT_AUTHENTICATION` | |
+`RACK_ENV` | |
+`WEB_CONCURRENCY` | |

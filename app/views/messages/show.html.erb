@@ -57,12 +57,12 @@
 
     <div class="m2 flex justify-between">
       <div class="h6 opacity" style="font-weight:700;text-transform:uppercase">Online now (<span class="js-membersOnline">0</span>)</div>
-      <% if @current_user %>
-        <div class="h6 opacity dropdownTrigger" style="font-weight:700"><%= @current_user.full_name %> ▾</div>
+      <% if current_user %>
+        <div class="h6 opacity dropdownTrigger" style="font-weight:700"><%= current_user.full_name %> ▾</div>
         <ul class="dropdownMenu list-reset hide">
           <li onclick="openModal('.userSettings');">Settings</li>
           <li><%= link_to "Log out", session_path, method: :delete %></li>
-          <% if @current_user.boss %>
+          <% if current_user.boss %>
             <li class="divider"></li>
             <li><%= link_to "Reload All Users", controller: 'messages', action: 'reload_all', remote: true  %></li>
           <% end %>
@@ -222,7 +222,7 @@
   atvImg();
 
   // Update the <title> with the song playing on page load
-  document.title = "<%= @now_playing.responses['title'] + " - " + @now_playing.responses['user']['username'] %>";
+  document.title = "<%= @now_playing.responses['title'] %> - <%= @now_playing.responses['user']['username'] %>";
 
   // Initialize the background light/dark detection
   BackgroundCheck.init({
@@ -233,7 +233,7 @@
   // Intialize the audio player
   var player;
   player = new MediaElementPlayer('audio', {features: [], alwaysShowControls: false, enableKeyboard: true});
-  player.setSrc('<%= @now_playing.responses['stream_url'].to_s + '?client_id=b59d1f4b68bbc8f2b0064188f210117d' %>');
+  player.setSrc("<%= @now_playing.responses['stream_url'] %>?client_id=<%= ENV['SOUNDCLOUD_ID'] %>");
   player.load();
 
   // Grab the @now_playing track and play it at the
@@ -249,11 +249,11 @@
   // Initialize Pusher
   var pusher = new Pusher('<%= ENV['PUSHER_KEY'] %>', {
     encrypted: true,
-    authEndpoint: '/pusher/auth',
+    authEndpoint: '<%= auth_pusher_index_path %>',
     channel_name: '1',
     auth: {
       headers: {
-        'X-CSRF-Token': '<%= form_authenticity_token %>'
+        'X-CSRF-Token': "<%= form_authenticity_token %>"
       }
     }
   });
