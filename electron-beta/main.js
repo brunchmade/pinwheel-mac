@@ -1,13 +1,9 @@
 const electron = require('electron');
-const app = electron.app;
+const {app} = electron;
+const {BrowserWindow, Menu} = electron;
 const globalShortcut = electron.globalShortcut;
-const session = require('electron').session;
-var BrowserWindow = require('browser-window');
-var Menu = require('menu');
 
-var force_quit = false;
-
-var menu = Menu.buildFromTemplate([
+const template = [
   {
     label: 'Pinwheel',
     submenu: [
@@ -21,7 +17,7 @@ var menu = Menu.buildFromTemplate([
       {
         label: 'Hide Pinwheel',
         accelerator: 'CmdOrCtrl+H',
-        click: function() {mainWindow.hide();}
+        click: function() {win.hide();}
       },
       {
         type: 'separator'
@@ -77,7 +73,7 @@ var menu = Menu.buildFromTemplate([
       {
         label: 'Reload',
         accelerator: 'CmdOrCtrl+R',
-        click: function() {mainWindow.reload();}
+        click: function() {win.reload();}
       },
       {
         label: 'Toggle Sidebar',
@@ -105,7 +101,7 @@ var menu = Menu.buildFromTemplate([
           else
             return 'Ctrl+Shift+I';
         })(),
-        click: function() {mainWindow.toggleDevTools();}
+        click: function() {win.toggleDevTools();}
       },
     ]
   },
@@ -155,16 +151,15 @@ var menu = Menu.buildFromTemplate([
       },
     ]
   }
-]);
+];
 
-// Report crashes to our server.
-//electron.crashReporter.start();
+const menu = Menu.buildFromTemplate(template);
+Menu.setApplicationMenu(menu);
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-var mainWindow = null;
 
 // Quit when all windows are closed.
+var force_quit = false;
+
 app.on('window-all-closed', function() {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
@@ -173,24 +168,39 @@ app.on('window-all-closed', function() {
   }
 });
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-app.on('ready', function() {
-  Menu.setApplicationMenu(menu);
 
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
+let win;
+
+function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({
+  win = new BrowserWindow({
     width: 1000,
     height: 600,
     minWidth: 900,
     minHeight: 550,
-    'node-integration': false,
-    'title-bar-style': 'hidden-inset',
-    'web-preferences': {'web-security': false}
+    webPreferences: {
+      nodeIntegration: false,
+      scrollBounce: true,
+      webSecurity: false
+    },
+    titleBarStyle: 'hidden-inset'
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL('http://localhost:5000');
+  win.loadURL('http://localhost:5000');
+
+  // Open the DevTools.
+  //win.webContents.openDevTools();
+
+  // Emitted when the window is closed.
+  win.on('closed', () => {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    win = null;
+  });
 
   // Register a 'MediaPlayPause' shortcut listener.
   var ret = globalShortcut.register('MediaPlayPause', function() {
@@ -208,48 +218,51 @@ app.on('ready', function() {
   });
 
   // open _blank links in same window
-  mainWindow.webContents.on('new-window', function(e, url) {
+  win.webContents.on('new-window', function(e, url) {
     e.preventDefault();
-    require('shell').openExternal(url);
+    require('electron').shell.openExternal(url);
   });
 
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
-
-  mainWindow.on('close', function(e){
+  win.on('close', function(e){
     if(!force_quit){
       e.preventDefault();
-      mainWindow.hide();
+      win.hide();
     }
   });
 
-  mainWindow.on('closed', function(){
-    mainWindow = null;
+  win.on('closed', function(){
+    win = null;
     globalShortcut.unregisterAll()
     app.quit();
   });
 
   app.on('activate', function(){
-    mainWindow.show();
+    win.show();
   });
 
-});
+  Menu.setApplicationMenu(menu);
+}
+
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.on('ready', createWindow);
 
 
 // FUNCTIONS FOR WEBAPP
 // ----------------------------------------------------------------------------
 function muteOrUnmute() {
-  mainWindow.webContents.executeJavaScript("muteOrUnmute()");
+  win.webContents.executeJavaScript("muteOrUnmute()");
 }
 
 function nextTrack() {
-  mainWindow.webContents.executeJavaScript("nextTrack()");
+  win.webContents.executeJavaScript("nextTrack()");
 }
 
 function favoriteSong() {
-  mainWindow.webContents.executeJavaScript("favoriteSong()");
+  win.webContents.executeJavaScript("favoriteSong()");
 }
 
 function toggleSidebar() {
-  mainWindow.webContents.executeJavaScript("toggleSidebar()");
+  win.webContents.executeJavaScript("toggleSidebar()");
 }

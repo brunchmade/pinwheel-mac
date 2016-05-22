@@ -4,6 +4,7 @@ body {
   overflow: hidden;
   min-height: 300px;
   background: transparent;
+  -webkit-app-region: drag;
 }
 
 * {

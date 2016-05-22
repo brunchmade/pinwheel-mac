@@ -3,8 +3,8 @@
   "version" : "0.0.4",
   "main"    : "main.js",
   "scripts" : {
-    "mas": "electron-packager . \"Pinwheel\" --platform=mas --arch=x64 --version=0.35.4 --app-version=0.0.4 --icon=pinwheel.icns --app-bundle-id=fm.pinwheel.mac --out=/Applications --ignore=dist --overwrite --asar=true",
-    "mac": "electron-packager . \"Pinwheel\" --platform=darwin --arch=x64 --version=0.35.4 --app-version=0.0.4 --icon=pinwheel.icns --app-bundle-id=fm.pinwheel.mac --out=/Applications --ignore=dist --overwrite --asar=true",
-    "linux": "electron-packager . \"Pinwheel\" --platform=linux --arch=x64 --version=0.35.4 --app-version=0.0.4 --out=/Applications --ignore=dist --overwrite --asar=true"
+    "mas": "electron-packager . \"Pinwheel\" --platform=mas --arch=x64 --version=1.1.1 --app-version=0.0.5 --icon=pinwheel.icns --app-bundle-id=fm.pinwheel.mac --out=/Applications --ignore=dist --overwrite --asar=true",
+    "mac": "electron-packager . \"Pinwheel\" --platform=darwin --arch=x64 --version=1.1.1 --app-version=0.0.5 --icon=pinwheel.icns --app-bundle-id=fm.pinwheel.mac --out=/Applications --ignore=dist --overwrite --asar=true",
+    "linux": "electron-packager . \"Pinwheel\" --platform=linux --arch=x64 --version=1.1.1 --app-version=0.0.5 --out=/Applications --ignore=dist --overwrite --asar=true"
   }
 }

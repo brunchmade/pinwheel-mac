@@ -3,6 +3,6 @@
   "version" : "0.0.4",
   "main"    : "main.js",
   "scripts" : {
-    "pack": "electron-packager . \"Pinwheel Beta\" --platform=darwin --arch=x64 --version=0.35.4 --app-version=0.0.4 --icon=pinwheel-beta.icns --app-bundle-id=fm.pinwheel.mac --out=/Applications --ignore=dist --overwrite --asar=true"
+    "mac": "electron-packager . \"Pinwheel Beta\" --platform=darwin --arch=x64 --version=1.1.1 --app-version=0.0.5 --icon=pinwheel-beta.icns --app-bundle-id=fm.pinwheel.mac --out=/Applications --ignore=dist --overwrite --asar=true"
   }
 }
