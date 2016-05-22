@@ -196,6 +196,11 @@ img {
   min-width: 300px;
 }
 
+.nowPlaying.content-youtube {
+  width: 90%;
+  max-width: none;
+}
+
 .nowPlayingAlbumArt {
   width: calc(90vw - 400px);
   height: calc(90vw - 400px);
@@ -208,6 +213,12 @@ img {
 
 .atvImg-rendered-layer {
   transition: background-image .4s;
+}
+
+.nowPlayingYouTube {
+  width: 100%;
+  max-width: none;
+  height: calc(100vh - 300px);
 }
 
 .progressBar {
