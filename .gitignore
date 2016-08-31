@@ -23,3 +23,6 @@ npn-debug.log
 .env
 dump.rdb
 .byebug_history
+
+/electron/node_modules
+/electron-beta/node_modules

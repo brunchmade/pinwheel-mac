@@ -2,10 +2,17 @@
   "name": "PinwheelBeta",
   "version": "0.0.4",
   "main": "main.js",
+  "description": "Listen to music with friends.",
+  "repository": "https://github.com/brunchmade/pinwheel-mac",
+  "license": "UNLICENSED",
   "scripts": {
     "mac": "electron-packager . \"Pinwheel Beta\" --platform=darwin --arch=x64 --version=1.3.4 --app-version=0.0.5 --icon=pinwheel-beta.icns --app-bundle-id=fm.pinwheel.mac --out=/Applications --ignore=dist --overwrite --asar=true"
   },
   "dependencies": {
+    "electron-packager": "^7.7.0",
     "spotify-node-applescript": "^1.0.0"
+  },
+  "devDependencies": {
+    "electron": "^1.3.4"
   }
 }
