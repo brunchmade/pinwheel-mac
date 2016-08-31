@@ -249,6 +249,54 @@ function createWindow() {
 app.on('ready', createWindow);
 
 
+// Spotify AppleScript API
+// ----------------------------------------------------------------------------
+var spotify = require('spotify-node-applescript');
+const {ipcMain} = require('electron')
+
+// Tell Spotify to play a new track at a specific position.
+ipcMain.on('spotifyPlayTrack', (event, track, second) => {
+  spotify.playTrack(track, function(){
+    spotify.jumpTo(second, function() {
+      spotify.getState(function(err, state){
+        event.returnValue = state
+      })
+    })
+  })
+})
+
+// Spotify. Wut r u doin?
+ipcMain.on('spotifyGetState', (event) => {
+  spotify.getState(function(err, state){
+    event.returnValue = state
+  })
+})
+
+// Tell Spotify to play or pause.
+ipcMain.on('spotifyPlayPause', (event, track, second) => {
+  spotify.getState(function(err, state){
+    if (state.state == "paused") {
+      spotify.playTrack(track, function(){
+        spotify.jumpTo(second, function() {
+          spotify.getState(function(err, state){
+            event.returnValue = state
+          })
+        })
+      })
+    } else {
+      spotify.pause()
+      spotify.getState(function(err, state) {
+        if (err) {
+          event.returnValue = "ERROR: " + err
+        } else {
+          event.returnValue = state
+        }
+      })
+    }
+  })
+})
+
+
 // FUNCTIONS FOR WEBAPP
 // ----------------------------------------------------------------------------
 function muteOrUnmute() {

@@ -1,10 +1,13 @@
 {
-  "name"    : "Pinwheel",
-  "version" : "0.0.4",
-  "main"    : "main.js",
-  "scripts" : {
+  "name": "Pinwheel",
+  "version": "0.0.4",
+  "main": "main.js",
+  "scripts": {
     "mas": "electron-packager . \"Pinwheel\" --platform=mas --arch=x64 --version=1.1.1 --app-version=0.0.5 --icon=pinwheel.icns --app-bundle-id=fm.pinwheel.mac --out=/Applications --ignore=dist --overwrite --asar=true",
     "mac": "electron-packager . \"Pinwheel\" --platform=darwin --arch=x64 --version=1.1.1 --app-version=0.0.5 --icon=pinwheel.icns --app-bundle-id=fm.pinwheel.mac --out=/Applications --ignore=dist --overwrite --asar=true",
     "linux": "electron-packager . \"Pinwheel\" --platform=linux --arch=x64 --version=1.1.1 --app-version=0.0.5 --out=/Applications --ignore=dist --overwrite --asar=true"
+  },
+  "dependencies": {
+    "spotify-node-applescript": "^1.0.0"
   }
 }
