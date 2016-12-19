@@ -23,6 +23,10 @@ class Comment < ActiveRecord::Base
     ix_image_url(album_art_url, { blur: 200 })
   end
 
+  def duration
+    (self.responses['duration'] / 1000).ceil
+  end
+
   def palette_url
     ix_image_url(album_art_url, { palette: 'css', colors: 4, class: 'album', zoom: 100 })
   end
@@ -34,7 +38,7 @@ class Comment < ActiveRecord::Base
   def start_playing(should_push)
     now = Time.now.utc
     update_attributes(now_playing: true, aired_at: now)
-    next_track_at = now + (self.responses['duration'] / 1000).ceil
+    next_track_at = now + duration
     NextUpJob.set(wait_until: next_track_at).perform_later(self.message.id, self.id)
     PusherService.now_playing_track(self) if should_push
   end
