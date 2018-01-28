@@ -147,7 +147,7 @@ const template = [
     submenu: [
       {
         label: 'Pinwheel on GitHub',
-        click: function() { require('electron').shell.openExternal('https://github.com/brunchmade/pinwheel.fm') }
+        click: function() { require('electron').shell.openExternal('https://github.com/brunchmade/pinwheel.pw') }
       },
     ]
   }
@@ -189,7 +189,7 @@ function createWindow() {
   });
 
   // and load the index.html of the app.
-  win.loadURL('https://app.pinwheel.fm');
+  win.loadURL('https://app.pinwheel.pw');
 
   // Open the DevTools.
   //win.webContents.openDevTools();

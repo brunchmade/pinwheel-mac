@@ -24,5 +24,6 @@ npn-debug.log
 dump.rdb
 .byebug_history
 
+node_modules
 electron/node_modules
 electron-beta/node_modules

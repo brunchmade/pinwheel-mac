@@ -13,6 +13,7 @@ We use [Electron](https://github.com/atom/electron) to build the Mac app wrapper
 
 ### Install the `electron` command globally in your $PATH
 `npm install electron-prebuilt -g`
+`npm install electron-packager --save-dev`
 
 **Production app**
 `cd electron && npm run mac && cd ..`

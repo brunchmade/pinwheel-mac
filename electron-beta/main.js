@@ -147,7 +147,7 @@ const template = [
     submenu: [
       {
         label: 'Pinwheel on GitHub',
-        click: function() { require('electron').shell.openExternal('https://github.com/brunchmade/pinwheel.fm') }
+        click: function() { require('electron').shell.openExternal('https://github.com/brunchmade/pinwheel.pw') }
       },
     ]
   }
