@@ -6,9 +6,9 @@
   "repository": "https://github.com/brunchmade/pinwheel-mac",
   "license": "UNLICENSED",
   "scripts": {
-    "mas": "electron-packager . \"Pinwheel\" --platform=mas --arch=x64 --version=1.4.13 --app-version=0.0.6 --icon=pinwheel.icns --app-bundle-id=pw.pinwheel.mac --out=/Applications --ignore=dist --overwrite --asar=true",
-    "mac": "electron-packager . \"Pinwheel\" --platform=darwin --arch=x64 --version=1.4.13 --app-version=0.0.6 --icon=pinwheel.icns --app-bundle-id=pw.pinwheel.mac --out=/Applications --ignore=dist --overwrite --asar=true",
-    "linux": "electron-packager . \"Pinwheel\" --platform=linux --arch=x64 --version=1.4.13 --app-version=0.0.6 --out=/Applications --ignore=dist --overwrite --asar=true"
+    "mas": "electron-packager . \"Pinwheel\" --platform=mas --arch=x64 --version=1.4.13 --app-version=0.0.6 --icon=pinwheel.icns --app-bundle-id=pw.pinwheel.mac --out=/Applications --ignore=dist --overwrite --asar",
+    "mac": "electron-packager . \"Pinwheel\" --platform=darwin --arch=x64 --version=1.4.13 --app-version=0.0.6 --icon=pinwheel.icns --app-bundle-id=pw.pinwheel.mac --out=/Applications --ignore=dist --overwrite --asar",
+    "linux": "electron-packager . \"Pinwheel\" --platform=linux --arch=x64 --version=1.4.13 --app-version=0.0.6 --out=/Applications --ignore=dist --overwrite --asar"
   },
   "dependencies": {
     "electron-packager": "^10.1.2",
